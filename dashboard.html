@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Core Learning Intermediate — Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --navy: #1b2a3a; --navy-soft: #25394d; --teal: #3a8a8c; --teal-soft: #e8f2f2; --terracotta: #d9764a; --terracotta-soft: #fbe8dd; --cream: #f7f5f1; --ink: #2a2f35; --ink-mute: #6b7480; --line: #e2e0da; --white: #ffffff; --radius: 14px; --shadow: 0 1px 2px rgba(27,42,58,0.06), 0 8px 24px rgba(27,42,58,0.08); }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--cream); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; font-weight: 600; letter-spacing: -0.01em; color: var(--navy); }
+  a { color: inherit; }
+  .site-nav { background: var(--navy); padding: 0 24px; }
+  .site-nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .site-logo { color: var(--white); font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: 19px; text-decoration: none; }
+  .site-logo span { color: var(--terracotta); }
+  .nav-right { display: flex; align-items: center; gap: 20px; }
+  .nav-user { font-size: 13.5px; color: rgba(255,255,255,0.6); }
+  .nav-btn { color: rgba(255,255,255,0.75); font-size: 14px; font-weight: 500; background: none; border: none; cursor: pointer; font-family: inherit; }
+  .nav-btn:hover { color: var(--white); }
+  .shell { max-width: 1100px; margin: 0 auto; padding: 36px 24px 80px; }
+  .loading-state { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--ink-mute); padding: 60px 0; justify-content: center; }
+  .spinner { width: 16px; height: 16px; border: 2px solid var(--line); border-top-color: var(--teal); border-radius: 50%; animation: spin 0.7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  #dashboard-content { display: none; }
+  .dashboard-head { margin-bottom: 32px; }
+  .dashboard-head h1 { font-size: 28px; margin: 0 0 4px; }
+  .dashboard-head p { color: var(--ink-mute); font-size: 14.5px; margin: 0; }
+  .progress-bar-wrap { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px 24px; margin-bottom: 28px; display: flex; align-items: center; gap: 20px; }
+  .progress-label { font-size: 13.5px; color: var(--ink-mute); min-width: 80px; }
+  .progress-track { flex: 1; height: 8px; background: var(--line); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--teal); border-radius: 999px; transition: width 0.4s ease; }
+  .progress-pct { font-size: 13.5px; font-weight: 600; color: var(--navy); min-width: 36px; text-align: right; }
+  .module-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .module-card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; display: flex; flex-direction: column; transition: box-shadow 0.15s; }
+  .module-card:hover:not(.locked) { box-shadow: 0 4px 8px rgba(27,42,58,0.08), 0 16px 40px rgba(27,42,58,0.14); }
+  .module-card.locked { opacity: 0.65; }
+  .module-banner { width: 100%; height: 130px; display: block; }
+  .module-body { padding: 18px 20px 20px; flex: 1; display: flex; flex-direction: column; }
+  .module-eyebrow { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal); font-weight: 700; margin: 0 0 6px; }
+  .module-body h3 { font-size: 16px; margin: 0 0 8px; line-height: 1.3; }
+  .module-body p { font-size: 13px; color: var(--ink-mute); line-height: 1.55; margin: 0 0 16px; flex: 1; }
+  .module-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .module-btn { display: inline-flex; align-items: center; gap: 7px; padding: 9px 18px; border-radius: 999px; font-size: 13px; font-weight: 600; text-decoration: none; }
+  .module-btn-primary { background: var(--navy); color: var(--white); }
+  .module-btn-secondary { background: var(--cream); color: var(--navy); border: 1px solid var(--line); }
+  .module-btn-complete { background: var(--teal-soft); color: #205c5d; }
+  .module-status { font-size: 12px; font-weight: 600; color: var(--teal); margin-left: auto; }
+  .module-status.locked-status { color: var(--ink-mute); }
+  .site-footer { background: var(--navy); color: rgba(255,255,255,0.55); padding: 32px 24px; text-align: center; font-size: 13px; }
+  .site-footer a { color: rgba(255,255,255,0.75); text-decoration: none; }
+  @media (max-width: 900px) { .module-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .module-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <a class="site-logo" href="dashboard.html">Core <span>Learning</span></a>
+    <div class="nav-right">
+      <span class="nav-user" id="nav-user"></span>
+      <button class="nav-btn" id="logout-btn">Log out</button>
+    </div>
+  </div>
+</nav>
+
+<div class="shell">
+  <div class="loading-state" id="loading-state"><div class="spinner"></div><span>Loading your progress…</span></div>
+  <div id="dashboard-content">
+    <div class="dashboard-head">
+      <h1>Intermediate Course</h1>
+      <p>Coaching Methodology, Assessment, Movement, Programming, Communication, Youth Development &amp; Mental Performance</p>
+    </div>
+    <div class="progress-bar-wrap">
+      <span class="progress-label">Progress</span>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+      <span class="progress-pct" id="progress-pct">0%</span>
+    </div>
+    <div class="module-grid" id="module-grid">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <p>Core Learning — part of the Core brand family. <a href="mailto:info@corelearning.co.za">info@corelearning.co.za</a></p>
+</footer>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+
+  const firebaseConfig = { apiKey: "AIzaSyAN9BVXDo15Mav2zketm5jhKRoBjs2yYX8", authDomain: "core-coaching-login.firebaseapp.com", projectId: "core-coaching-login", storageBucket: "core-coaching-login.firebasestorage.app", messagingSenderId: "184932860937", appId: "1:184932860937:web:83da63f1453eff8ca824d8", measurementId: "G-N7WNPL47WQ" };
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  const MODULES = [
+    { num: 1, id: "01", title: "Advanced Coaching Methodology", desc: "Evidence-based coaching, motor learning theory, implicit vs explicit instruction, constraints-led approach, and reflective practice.", gradient: "linear-gradient(135deg, #1b2a3a 0%, #3a8a8c 100%)" },
+    { num: 2, id: "02", title: "Athlete Assessment & Data Interpretation", desc: "Running a full testing battery, interpreting results relative to climbing limiter profiles, and writing athlete reports.", gradient: "linear-gradient(135deg, #1b2a3a 0%, #d9764a 100%)" },
+    { num: 3, id: "03", title: "Movement Analysis & Video Coaching", desc: "Filming setup, joint-by-joint analysis framework, common compensation patterns, and delivering video feedback.", gradient: "linear-gradient(135deg, #25394d 0%, #205c5d 100%)" },
+    { num: 4, id: "04", title: "Programme Design, Load Management & Periodisation", desc: "ACWR, mesocycle structure, integrating training qualities, and a full drills and workouts library.", gradient: "linear-gradient(135deg, #1b2a3a 0%, #8c3a3a 100%)" },
+    { num: 5, id: "05", title: "Coaching Communication & Athlete Management", desc: "Feedback frameworks, cueing language, athlete-coach dynamics, goal-setting conversations, and difficult discussions.", gradient: "linear-gradient(135deg, #25394d 0%, #4a7a3a 100%)" },
+    { num: 6, id: "06", title: "Youth Athlete Development", desc: "Growth plates, peak height velocity, windows of trainability, mastery climate, parents, and safeguarding.", gradient: "linear-gradient(135deg, #1b2a3a 0%, #3a5a8c 100%)" },
+    { num: 7, id: "07", title: "Introduction to Mental Performance", desc: "Arousal regulation, fear of falling, focus and concentration skills, pre-performance routines, and self-talk.", gradient: "linear-gradient(135deg, #25394d 0%, #6a3a8c 100%)" },
+  ];
+
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) { window.location.href = "index.html"; return; }
+
+    const navUser = document.getElementById("nav-user");
+    if (navUser) navUser.textContent = user.email || "";
+
+    let data = {};
+    try { const snap = await getDoc(doc(db, "users", user.uid)); if (snap.exists()) data = snap.data(); } catch(e) {}
+
+    const unlocked = Array.isArray(data.unlockedModules) ? data.unlockedModules : [];
+    const progress = data.moduleProgress || {};
+
+    let completedCount = 0;
+    const grid = document.getElementById("module-grid");
+    grid.innerHTML = "";
+
+    MODULES.forEach(m => {
+      const isUnlocked = unlocked.includes(m.num);
+      const mp = progress[`module${m.id}`] || {};
+      const isComplete = !!mp.completed;
+      if (isComplete) completedCount++;
+
+      const card = document.createElement("div");
+      card.className = "module-card" + (isUnlocked ? "" : " locked");
+
+      const bannerDiv = document.createElement("div");
+      bannerDiv.className = "module-banner";
+      bannerDiv.style.background = m.gradient;
+
+      card.innerHTML = `
+        <div class="module-banner" style="background:${m.gradient}"></div>
+        <div class="module-body">
+          <p class="module-eyebrow">Module ${m.id}</p>
+          <h3>${m.title}</h3>
+          <p>${m.desc}</p>
+          <div class="module-actions">
+            ${isUnlocked
+              ? `<a class="module-btn module-btn-primary" href="module-${m.id}.html">${isComplete ? 'Review' : 'Start'}</a>
+                 <a class="module-btn module-btn-secondary" href="lessons/module-${m.id}.html">Lesson</a>
+                 ${isComplete ? '<span class="module-status">✓ Complete</span>' : ''}`
+              : `<span class="module-btn module-btn-secondary" style="cursor:default;">🔒 Locked</span>
+                 <span class="module-status locked-status">Complete previous module</span>`
+            }
+          </div>
+        </div>`;
+      grid.appendChild(card);
+    });
+
+    const pct = Math.round((completedCount / MODULES.length) * 100);
+    document.getElementById("progress-fill").style.width = pct + "%";
+    document.getElementById("progress-pct").textContent = pct + "%";
+
+    document.getElementById("loading-state").style.display = "none";
+    document.getElementById("dashboard-content").style.display = "block";
+  });
+
+  document.getElementById("logout-btn").addEventListener("click", () => signOut(auth).then(() => window.location.href = "index.html"));
+</script>
+</body>
+</html>

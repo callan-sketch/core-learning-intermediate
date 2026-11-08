@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 06 — Youth Athlete Development | Core Learning Intermediate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --navy: #1b2a3a; --teal: #3a8a8c; --teal-soft: #e8f2f2; --terracotta: #d9764a; --terracotta-soft: #fbe8dd; --cream: #f7f5f1; --ink: #2a2f35; --ink-mute: #6b7480; --line: #e2e0da; --white: #ffffff; --radius: 14px; --shadow: 0 1px 2px rgba(27,42,58,0.06), 0 8px 24px rgba(27,42,58,0.08); }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--cream); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; line-height: 1.65; }
+  h1, h2, h3, h4 { font-family: 'Fraunces', Georgia, serif; font-weight: 600; letter-spacing: -0.01em; color: var(--navy); }
+  a { color: var(--teal); }
+  .loading-state { display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 14px; color: var(--ink-mute); padding: 100px 24px; }
+  .spinner { width: 16px; height: 16px; border: 2px solid var(--line); border-top-color: var(--teal); border-radius: 50%; animation: spin 0.7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  #page-content { display: none; }
+  .site-nav { background: var(--navy); padding: 0 24px; }
+  .site-nav-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .site-logo { color: var(--white); font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: 19px; text-decoration: none; }
+  .site-logo span { color: var(--terracotta); }
+  .nav-link { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; font-weight: 500; background: none; border: none; cursor: pointer; font-family: inherit; }
+  .shell { max-width: 780px; margin: 0 auto; padding: 36px 24px 90px; }
+  .back-links { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-bottom: 24px; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 600; color: var(--ink-mute); text-decoration: none; }
+  .back-link:hover { color: var(--navy); }
+  .lesson-eyebrow { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); font-weight: 700; margin: 0 0 8px; }
+  .lesson-head h1 { font-size: 28px; margin: 0 0 6px; line-height: 1.2; }
+  .lesson-sub { color: var(--ink-mute); font-size: 14.5px; margin: 0 0 32px; }
+  .content-card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 36px 40px; }
+  .why-box { background: var(--teal-soft); border-radius: 10px; padding: 18px 20px; margin-bottom: 28px; }
+  .why-box p { color: #205c5d; margin: 0; font-size: 14px; }
+  .why-box .label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #205c5d; margin: 0 0 8px; }
+  .objectives-list { margin: 0 0 28px; padding-left: 22px; }
+  .objectives-list li { font-size: 14.5px; margin-bottom: 6px; }
+  .section-block { margin-bottom: 40px; }
+  .section-title { font-size: 20px; padding-bottom: 10px; margin: 0 0 20px; border-bottom: 2px solid var(--teal); }
+  .subsection-title { font-size: 16px; margin: 24px 0 10px; }
+  .content-card p { font-size: 14.5px; color: var(--ink); margin: 0 0 14px; }
+  .content-card ul, .content-card ol { margin: 0 0 14px; padding-left: 22px; }
+  .content-card li { font-size: 14.5px; margin-bottom: 6px; }
+  .content-card li strong { color: var(--navy); }
+  .lesson-table-wrap { overflow-x: auto; margin: 0 0 20px; border-radius: 10px; border: 1px solid var(--line); }
+  table.lesson-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  table.lesson-table th { background: var(--navy); color: var(--white); text-align: left; padding: 10px 14px; font-weight: 600; font-size: 12.5px; }
+  table.lesson-table td { padding: 10px 14px; border-bottom: 1px solid var(--line); color: var(--ink); vertical-align: top; }
+  table.lesson-table tr:last-child td { border-bottom: none; }
+  table.lesson-table tr:nth-child(even) td { background: var(--cream); }
+  table.lesson-table td:first-child { font-weight: 600; color: var(--navy); }
+  .callout { border-radius: 10px; padding: 18px 20px; margin: 20px 0; }
+  .callout-teal { background: var(--teal-soft); }
+  .callout-terracotta { background: var(--terracotta-soft); }
+  .callout-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 8px; }
+  .callout-teal .callout-label { color: #205c5d; }
+  .callout-terracotta .callout-label { color: #a24e2a; }
+  .callout p { margin: 0; font-size: 14px; }
+  .callout-teal p { color: #205c5d; }
+  .callout-terracotta p { color: #712b13; }
+  .summary-block { background: var(--navy); border-radius: var(--radius); padding: 32px 36px; margin-top: 44px; }
+  .summary-block h2 { color: var(--white); font-size: 22px; margin: 0 0 4px; }
+  .summary-block .summary-sub { color: rgba(255,255,255,0.6); font-size: 13px; margin: 0 0 22px; }
+  .summary-block h3 { color: var(--white); font-size: 15px; margin: 26px 0 12px; }
+  .takeaway-list { margin: 0; padding-left: 20px; }
+  .takeaway-list li { color: rgba(255,255,255,0.85); font-size: 13.5px; line-height: 1.6; margin-bottom: 10px; }
+  .looking-ahead { background: rgba(255,255,255,0.08); border-radius: 10px; padding: 16px 20px; margin-top: 24px; }
+  .looking-ahead .label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--terracotta); margin: 0 0 8px; }
+  .looking-ahead p { color: rgba(255,255,255,0.85); margin: 0; font-size: 13.5px; }
+  .glossary-wrap { border-radius: 10px; overflow: hidden; margin-bottom: 8px; background: rgba(255,255,255,0.04); }
+  table.glossary-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.glossary-table td { padding: 9px 14px; vertical-align: top; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  table.glossary-table tr:last-child td { border-bottom: none; }
+  table.glossary-table tr:nth-child(even) td { background: rgba(255,255,255,0.04); }
+  table.glossary-table td:first-child { font-weight: 700; color: var(--terracotta); white-space: nowrap; width: 200px; }
+  table.glossary-table td:last-child { color: rgba(255,255,255,0.82); }
+  .quiz-footer { margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--line); text-align: center; }
+  .quiz-footer p { font-size: 13.5px; color: var(--ink-mute); margin: 0 0 16px; }
+  .quiz-btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px; border-radius: 999px; background: var(--terracotta); color: var(--white); font-size: 14.5px; font-weight: 600; text-decoration: none; box-shadow: 0 4px 14px rgba(217,118,74,0.3); }
+  .quiz-note { font-size: 12.5px; color: var(--ink-mute); margin-top: 14px; }
+  @media (max-width: 560px) { .content-card { padding: 26px 20px; } .summary-block { padding: 24px 20px; } }
+</style>
+</head>
+<body>
+<nav class="site-nav"><div class="site-nav-inner"><a class="site-logo" href="../dashboard.html">Core <span>Learning</span></a><button class="nav-link" id="logout-btn">Log out</button></div></nav>
+<div class="loading-state" id="loading-state"><div class="spinner"></div><span>Loading…</span></div>
+<div id="page-content">
+<div class="shell">
+  <div class="back-links"><a class="back-link" href="../module-06.html">← Back to Module 06</a><a class="back-link" href="../dashboard.html">← Back to Dashboard</a></div>
+  <div class="lesson-head">
+    <p class="lesson-eyebrow">Module 06 — Intermediate</p>
+    <h1>Youth Athlete Development</h1>
+    <p class="lesson-sub">Written Guide + Quiz</p>
+  </div>
+  <div class="content-card">
+
+    <div class="why-box">
+      <p class="label">Why It Matters</p>
+      <p>Youth athletes are not small adults. Their physiology, psychology, and social contexts differ in ways that have direct implications for how training should be designed and how coaching should be delivered. Getting this wrong has real consequences — physical injury, burnout, and dropout. Getting it right creates lifelong climbers and, for elite-track athletes, the foundation for performance at 25 and beyond.</p>
+    </div>
+
+    <h2 class="section-title">Learning Objectives</h2>
+    <ul class="objectives-list">
+      <li>Understand growth and development stages and their relevance to climbing training</li>
+      <li>Identify the injury risks specific to youth climbers — particularly growth plate issues</li>
+      <li>Apply the concept of windows of trainability in programme design</li>
+      <li>Adapt coaching communication for children and adolescents</li>
+      <li>Navigate parent relationships effectively and professionally</li>
+      <li>Understand safeguarding principles and your duty of care</li>
+    </ul>
+
+    <div class="section-block">
+      <h2 class="section-title">Section 1: Growth, Development &amp; Physiology</h2>
+
+      <h3 class="subsection-title">1.1 Growth Stages Relevant to Coaching</h3>
+      <p>Youth athletes do not develop in a linear, age-matched way. The same calendar age can mask enormous biological variation. Two 14-year-olds may differ by several years in biological maturity. Training programmes based solely on chronological age are therefore a poor fit for most athletes in the group.</p>
+
+      <div class="lesson-table-wrap">
+        <table class="lesson-table">
+          <tr><th>Stage</th><th>Approx. Age (varies widely)</th><th>Key Characteristics</th><th>Coaching Implications</th></tr>
+          <tr><td>Pre-pubescent</td><td>Under 11–12 (girls), under 12–13 (boys)</td><td>Low hormone levels; strength gains from neural adaptation only; bones still forming</td><td>Emphasise skill, movement variety, fun. Avoid heavy loaded training.</td></tr>
+          <tr><td>Early puberty / PHV</td><td>11–14 (girls), 12–16 (boys)</td><td>Peak Height Velocity — fastest growth. Coordination temporarily disrupted. Growth plates highly vulnerable.</td><td>Reduce high-impact, high-load training. Monitor for pain. Expect temporary performance dips.</td></tr>
+          <tr><td>Late puberty / post-PHV</td><td>14–17 (girls), 15–18 (boys)</td><td>Hormone levels rise; strength and power adaptable; coordination recovering</td><td>Begin progressive strength work. Increase training load carefully.</td></tr>
+          <tr><td>Young adult</td><td>17–21+</td><td>Growth largely complete; full training load tolerable</td><td>Standard adult programming principles apply with ongoing recovery emphasis</td></tr>
+        </table>
+      </div>
+
+      <p>Peak Height Velocity (PHV) — the period of fastest height gain during puberty — is a critical marker. Athletes going through PHV are at their highest risk of growth plate injury, experience temporary coordination disruption (the limb lengths change faster than the nervous system adapts), and should not be subjected to high training loads.</p>
+
+      <h3 class="subsection-title">1.2 Growth Plate Injury in Climbers</h3>
+      <p>The epiphyseal growth plates (cartilaginous zones near bone ends) are the weakest point in a young athlete's skeleton. During growth, they are significantly weaker than the surrounding ligaments and tendons — meaning forces that would cause a ligament sprain in an adult cause a growth plate fracture or apophyseal avulsion in a child.</p>
+
+      <p>In climbing, the most significant youth injury risk is <strong>finger growth plate fracture</strong> — specifically at the base of the middle phalanx (the proximal interphalangeal joint's growth plate), caused by crimping forces and dynamic loading. The classic presentation is:</p>
+      <ul>
+        <li>Pain at the base of a finger (typically ring or middle) during or after hard crimping</li>
+        <li>Swelling over the PIP joint</li>
+        <li>Pain on passive extension of the finger</li>
+      </ul>
+
+      <div class="callout callout-terracotta">
+        <p class="callout-label">Critical Point</p>
+        <p>A young climber reporting finger pain that is at or near a joint should be treated as a potential growth plate injury until proven otherwise. This is not a soft tissue issue to train through. It requires medical assessment. The growth plate closes at different ages for different fingers and individuals — typically between 14 and 20. Until then, treat crimping and dynamic loading with caution in all youth athletes.</p>
+      </div>
+
+      <p>Other common overuse injuries in youth climbers include Sever's disease (heel growth plate), Osgood-Schlatter (knee), and shoulder apophyseal irritation. These share the same underlying mechanism: repetitive load on a growth plate that hasn't yet ossified.</p>
+
+      <h3 class="subsection-title">1.3 Training Load Guidance for Youth Athletes</h3>
+      <p>As a general framework:</p>
+      <ul>
+        <li><strong>Under 12:</strong> No targeted fingerboard or weight training. Focus on movement, games, bouldering on volume (not intensity). Maximum 3 climbing sessions per week.</li>
+        <li><strong>12–14 (pre-PHV confirmed):</strong> Can begin structured climbing training but avoid max-intensity hangs, heavy loading, or dynamic contact moves. Emphasis on body-weight pulling, skill work, antagonist training.</li>
+        <li><strong>14–17 (post-PHV):</strong> Progressive introduction of structured strength work. Begin fingerboard with large edge sizes (20mm+) and sub-maximal loads. Increase load no faster than adult guidelines.</li>
+        <li><strong>17+:</strong> Adult programming principles apply, with continued growth monitoring for late developers.</li>
+      </ul>
+      <p>The athlete's biological maturity matters more than their age. If in doubt, err toward less load and more skill work.</p>
+    </div>
+
+    <div class="section-block">
+      <h2 class="section-title">Section 2: Windows of Trainability</h2>
+
+      <h3 class="subsection-title">2.1 The Concept</h3>
+      <p>Certain physical capacities have sensitive periods during development — windows where they respond more readily to training stimulus than at other times. Training these capacities within their windows produces greater long-term returns than training them after the window closes. Missing a window is not catastrophic, but it typically means working harder for smaller gains later.</p>
+
+      <div class="lesson-table-wrap">
+        <table class="lesson-table">
+          <tr><th>Capacity</th><th>Window</th><th>Application for Climbers</th></tr>
+          <tr><td>Fundamental movement skills (agility, balance, coordination)</td><td>5–9 (girls), 6–10 (boys)</td><td>Broad athletic play, games, unstructured climbing — not climbing-specific drills</td></tr>
+          <tr><td>Speed / neural activation</td><td>7–11 (girls), 7–12 (boys)</td><td>Dynamic moves, quick footwork games, reaction-based movement challenges</td></tr>
+          <tr><td>Aerobic base</td><td>Peri-pubertal — during and shortly after PHV</td><td>Moderate-intensity endurance climbing, ARC work, easy volume</td></tr>
+          <tr><td>Strength / anaerobic power</td><td>Post-PHV, once growth plates consolidating</td><td>Fingerboard, weighted exercises, bouldering intensity</td></tr>
+          <tr><td>Flexibility</td><td>Pre-pubescent and during puberty</td><td>Mobility work, hip flexibility — sets the ceiling for adult flexibility</td></tr>
+        </table>
+      </div>
+
+      <p>The practical implication for youth climbing coaches is that the emphasis before and during puberty should be heavily weighted toward movement variety, agility, coordination, and aerobic capacity — not climbing-specific strength. Many youth climbers arrive with years of sport-specialised training but have never developed fundamental athletic capacities that underpin long-term performance.</p>
+
+      <h3 class="subsection-title">2.2 Early Specialisation Risk</h3>
+      <p>Early specialisation in climbing — dropping all other sports before 12 or 13 — is associated with increased overuse injury, burnout, and dropout, even in climbers who perform well as juniors. The evidence from multiple youth sports strongly supports sport sampling (participating in multiple sports) until at least 12–13, and ideally 14–15 for most athletes. Youth climbers who also play team sports, swim, or do gymnastics tend to arrive at adulthood with better movement literacy and fewer overuse injuries than those who climbed exclusively from a young age.</p>
+    </div>
+
+    <div class="section-block">
+      <h2 class="section-title">Section 3: Coaching Communication with Youth Athletes</h2>
+
+      <h3 class="subsection-title">3.1 Developmental Differences in Learning</h3>
+      <p>Children and adolescents differ from adults in key ways that affect coaching:</p>
+      <ul>
+        <li><strong>Attention span:</strong> Shorter and more variable. Keep instructions brief. Use frequent activities rather than long explanations.</li>
+        <li><strong>Abstract reasoning:</strong> Develops through adolescence. Younger athletes respond better to concrete, immediate instructions than to long-term reasoning ('this helps your grade target in 18 months').</li>
+        <li><strong>Social sensitivity:</strong> Adolescents are acutely aware of peer perception. Avoid corrective feedback in front of peers where possible. Public criticism in this age group is particularly damaging to motivation and trust.</li>
+        <li><strong>Intrinsic vs. extrinsic motivation:</strong> Younger children are often intrinsically motivated (they climb because it's fun). Over-emphasising grades and competition too early shifts this toward extrinsic motivation and reduces long-term engagement.</li>
+        <li><strong>Emotional regulation:</strong> Still developing, particularly in early adolescence. A bad session can feel catastrophic. Keep perspective without dismissing feelings.</li>
+      </ul>
+
+      <h3 class="subsection-title">3.2 Maintaining a Mastery Climate</h3>
+      <p>A mastery climate (also called a task-involving climate) focuses athletes on personal improvement, effort, and skill development rather than outcome comparison with peers. Research consistently shows that mastery climates produce better long-term engagement, psychological wellbeing, and performance development in youth sport. An ego climate (outcome-focused, comparative, grade-obsessive) produces short-term performance but long-term dropout.</p>
+      <p>Practical mastery climate strategies:</p>
+      <ul>
+        <li>Celebrate effort and process explicitly ('the way you stayed focused on your feet on that problem was really good') rather than outcome ('well done, you got it')</li>
+        <li>Set personal improvement targets, not grade targets</li>
+        <li>Avoid public leaderboards or constant grade comparisons between athletes</li>
+        <li>Make trying hard problems and failing a normal, positive part of training culture</li>
+        <li>Acknowledge good technique on a fail ('that footwork was much better — that's the stuff that will make the difference')</li>
+      </ul>
+    </div>
+
+    <div class="section-block">
+      <h2 class="section-title">Section 4: Parents &amp; Safeguarding</h2>
+
+      <h3 class="subsection-title">4.1 Working with Parents</h3>
+      <p>For youth athletes, the parent relationship is part of the coaching relationship. Parents vary enormously in their involvement level and their understanding of athletic development. Common parent dynamics and how to handle them:</p>
+      <div class="lesson-table-wrap">
+        <table class="lesson-table">
+          <tr><th>Parent Type</th><th>Signs</th><th>Recommended Approach</th></tr>
+          <tr><td>Supportive &amp; informed</td><td>Asks good questions, respects the coaching process, celebrates effort</td><td>Keep informed, involve in goal-setting conversations with athlete present</td></tr>
+          <tr><td>Over-involved / grade-focused</td><td>Tracks grades obsessively, pushes athlete to train when injured or tired, undermines coaching decisions with athlete</td><td>Set clear expectations early; agree communication norms; have a direct conversation about development models vs. short-term performance</td></tr>
+          <tr><td>Absent or disengaged</td><td>Athlete arrives without adequate kit/nutrition; parents uncontactable</td><td>Build a relationship of reliability with the athlete; keep trying to establish basic communication with parents</td></tr>
+          <tr><td>Conflicting with athlete's own goals</td><td>Athlete wants to do other sports; parent insists on full commitment to climbing</td><td>Advocate for the athlete; explain the early specialisation evidence; keep athlete's voice central</td></tr>
+        </table>
+      </div>
+      <p>A useful norm: conduct goal-setting and progress conversations with both the athlete and parent present, but ensure the athlete speaks first and is not overridden. The athlete is your primary client.</p>
+
+      <h3 class="subsection-title">4.2 Safeguarding Principles</h3>
+      <p>Safeguarding is the set of practices and duties that protect children and vulnerable people from harm. As a coach of youth athletes, you have both a moral and (in most jurisdictions) a legal duty of care. Core principles:</p>
+      <ul>
+        <li><strong>Appropriate physical contact:</strong> Any physical contact with a youth athlete should be purposeful, minimal, and in a public setting. Always ask permission first ('can I show you where I mean by moving your hip?'). Never have physical contact with a youth athlete when you are alone with them in a private space.</li>
+        <li><strong>Appropriate communication:</strong> All communication with youth athletes should ideally go through parents (for under-13s) or include parents in a group message thread. Direct private messaging with youth athletes is generally inappropriate and should be avoided.</li>
+        <li><strong>Alone time:</strong> Never be alone with a single youth athlete in a closed or non-public space. This protects both the athlete and you as a coach.</li>
+        <li><strong>Disclosure procedures:</strong> If a youth athlete discloses abuse, neglect, or safeguarding concern to you, your role is to listen without judgment, not to investigate. Record what was said, verbatim if possible, and report it to your organisation's designated safeguarding lead or directly to relevant authorities. Do not promise confidentiality to a youth athlete who is disclosing harm.</li>
+      </ul>
+
+      <div class="callout callout-terracotta">
+        <p class="callout-label">Important</p>
+        <p>Safeguarding training is a minimum requirement for anyone coaching youth athletes professionally. If you have not completed a recognised safeguarding certification appropriate to your country, do so before working with youth athletes. This module provides a framework; it does not substitute for formal safeguarding certification.</p>
+      </div>
+    </div>
+
+    <div class="summary-block">
+      <h2>Module Summary</h2>
+      <p class="summary-sub">Youth Athlete Development</p>
+      <h3>Key Takeaways</h3>
+      <ul class="takeaway-list">
+        <li>Youth athletes are not small adults. Biological maturity varies enormously at the same calendar age and must drive training decisions more than chronological age.</li>
+        <li>Growth plates are the most vulnerable structure in a young climber's body. Finger pain near a joint should be treated as a potential growth plate injury until medically assessed.</li>
+        <li>Peak Height Velocity is the period of highest injury risk. Reduce load, avoid high-intensity finger training, and expect temporary coordination disruption during this phase.</li>
+        <li>Windows of trainability mean that early childhood and puberty are the right time for movement skills, agility, aerobic base, and flexibility — not strength. Strength work should wait until post-PHV.</li>
+        <li>A mastery climate — focused on effort, process, and personal improvement — produces better long-term youth athlete outcomes than an ego/grade-focused environment.</li>
+        <li>Safeguarding is a non-negotiable professional responsibility. Know your duty of care and your organisation's procedures.</li>
+      </ul>
+      <div class="looking-ahead">
+        <p class="label">Coming Up — Module 07</p>
+        <p>Module 07 introduces mental performance — focus, arousal regulation, managing fear and doubt, and building mental skills into coaching practice.</p>
+      </div>
+      <h3>Glossary</h3>
+      <div class="glossary-wrap">
+        <table class="glossary-table">
+          <tr><td>Peak Height Velocity (PHV)</td><td>The period of fastest height gain during puberty — the highest-risk period for growth plate injury</td></tr>
+          <tr><td>Growth Plate (Epiphysis)</td><td>Cartilaginous zone near bone ends in developing athletes; weaker than ligaments and highly vulnerable to overload</td></tr>
+          <tr><td>Windows of Trainability</td><td>Sensitive developmental periods when specific physical capacities respond most readily to training stimulus</td></tr>
+          <tr><td>Early Specialisation</td><td>Focusing exclusively on one sport before 12–13; associated with increased injury, burnout, and dropout rates</td></tr>
+          <tr><td>Mastery Climate</td><td>A coaching environment that focuses athletes on personal improvement and effort rather than outcome comparison with peers</td></tr>
+          <tr><td>Safeguarding</td><td>Practices and duties that protect children and vulnerable people from harm; a legal and professional requirement for youth coaches</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="quiz-footer">
+      <p>When you're ready, complete the quiz to progress to Module 07. You need 80% to unlock the next module.</p>
+      <a class="quiz-btn" href="../module-06-quiz.html">Take the Quiz →</a>
+      <p class="quiz-note">The quiz covers all four sections of this lesson.</p>
+    </div>
+
+  </div>
+</div>
+</div>
+<footer style="background: var(--navy); color: rgba(255,255,255,0.55); padding: 32px 24px; text-align: center; font-size: 13px;"><p>Core Learning — part of the Core brand family. <a href="mailto:info@corelearning.co.za" style="color: rgba(255,255,255,0.75);">info@corelearning.co.za</a></p></footer>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+  const firebaseConfig = { apiKey: "AIzaSyAN9BVXDo15Mav2zketm5jhKRoBjs2yYX8", authDomain: "core-coaching-login.firebaseapp.com", projectId: "core-coaching-login", storageBucket: "core-coaching-login.firebasestorage.app", messagingSenderId: "184932860937", appId: "1:184932860937:web:83da63f1453eff8ca824d8", measurementId: "G-N7WNPL47WQ" };
+  const app = initializeApp(firebaseConfig); const auth = getAuth(app); const db = getFirestore(app);
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) { window.location.href = "../index.html"; return; }
+    let data = {};
+    try { const snap = await getDoc(doc(db, "users", user.uid)); if (snap.exists()) data = snap.data(); } catch(e) {}
+    if (!(Array.isArray(data.unlockedModules) && data.unlockedModules.includes(6))) { window.location.href = "../dashboard.html"; return; }
+    document.getElementById("loading-state").style.display = "none";
+    document.getElementById("page-content").style.display = "block";
+  });
+  document.getElementById("logout-btn").addEventListener("click", () => signOut(auth).then(() => window.location.href = "../index.html"));
+</script>
+</body>
+</html>

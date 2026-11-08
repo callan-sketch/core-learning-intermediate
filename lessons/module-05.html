@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 05 — Coaching Communication &amp; Athlete Management | Core Learning Intermediate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --navy: #1b2a3a; --teal: #3a8a8c; --teal-soft: #e8f2f2; --terracotta: #d9764a; --terracotta-soft: #fbe8dd; --cream: #f7f5f1; --ink: #2a2f35; --ink-mute: #6b7480; --line: #e2e0da; --white: #ffffff; --radius: 14px; --shadow: 0 1px 2px rgba(27,42,58,0.06), 0 8px 24px rgba(27,42,58,0.08); }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--cream); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; line-height: 1.65; }
+  h1, h2, h3, h4 { font-family: 'Fraunces', Georgia, serif; font-weight: 600; letter-spacing: -0.01em; color: var(--navy); }
+  a { color: var(--teal); }
+  .loading-state { display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 14px; color: var(--ink-mute); padding: 100px 24px; }
+  .spinner { width: 16px; height: 16px; border: 2px solid var(--line); border-top-color: var(--teal); border-radius: 50%; animation: spin 0.7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  #page-content { display: none; }
+  .site-nav { background: var(--navy); padding: 0 24px; }
+  .site-nav-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .site-logo { color: var(--white); font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: 19px; text-decoration: none; }
+  .site-logo span { color: var(--terracotta); }
+  .nav-link { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; font-weight: 500; background: none; border: none; cursor: pointer; font-family: inherit; }
+  .shell { max-width: 780px; margin: 0 auto; padding: 36px 24px 90px; }
+  .back-links { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-bottom: 24px; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 600; color: var(--ink-mute); text-decoration: none; }
+  .back-link:hover { color: var(--navy); }
+  .lesson-eyebrow { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); font-weight: 700; margin: 0 0 8px; }
+  .lesson-head h1 { font-size: 28px; margin: 0 0 6px; line-height: 1.2; }
+  .lesson-sub { color: var(--ink-mute); font-size: 14.5px; margin: 0 0 32px; }
+  .content-card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 36px 40px; }
+  .why-box { background: var(--teal-soft); border-radius: 10px; padding: 18px 20px; margin-bottom: 28px; }
+  .why-box p { color: #205c5d; margin: 0; font-size: 14px; }
+  .why-box .label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #205c5d; margin: 0 0 8px; }
+  .objectives-list { margin: 0 0 28px; padding-left: 22px; }
+  .objectives-list li { font-size: 14.5px; margin-bottom: 6px; }
+  .section-block { margin-bottom: 40px; }
+  .section-title { font-size: 20px; padding-bottom: 10px; margin: 0 0 20px; border-bottom: 2px solid var(--teal); }
+  .subsection-title { font-size: 16px; margin: 24px 0 10px; }
+  .content-card p { font-size: 14.5px; color: var(--ink); margin: 0 0 14px; }
+  .content-card ul, .content-card ol { margin: 0 0 14px; padding-left: 22px; }
+  .content-card li { font-size: 14.5px; margin-bottom: 6px; }
+  .content-card li strong { color: var(--navy); }
+  .lesson-table-wrap { overflow-x: auto; margin: 0 0 20px; border-radius: 10px; border: 1px solid var(--line); }
+  table.lesson-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  table.lesson-table th { background: var(--navy); color: var(--white); text-align: left; padding: 10px 14px; font-weight: 600; font-size: 12.5px; }
+  table.lesson-table td { padding: 10px 14px; border-bottom: 1px solid var(--line); color: var(--ink); vertical-align: top; }
+  table.lesson-table tr:last-child td { border-bottom: none; }
+  table.lesson-table tr:nth-child(even) td { background: var(--cream); }
+  table.lesson-table td:first-child { font-weight: 600; color: var(--navy); }
+  .callout { border-radius: 10px; padding: 18px 20px; margin: 20px 0; }
+  .callout-teal { background: var(--teal-soft); }
+  .callout-terracotta { background: var(--terracotta-soft); }
+  .callout-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 8px; }
+  .callout-teal .callout-label { color: #205c5d; }
+  .callout-terracotta .callout-label { color: #a24e2a; }
+  .callout p { margin: 0; font-size: 14px; }
+  .callout-teal p { color: #205c5d; }
+  .callout-terracotta p { color: #712b13; }
+  .summary-block { background: var(--navy); border-radius: var(--radius); padding: 32px 36px; margin-top: 44px; }
+  .summary-block h2 { color: var(--white); font-size: 22px; margin: 0 0 4px; }
+  .summary-block .summary-sub { color: rgba(255,255,255,0.6); font-size: 13px; margin: 0 0 22px; }
+  .summary-block h3 { color: var(--white); font-size: 15px; margin: 26px 0 12px; }
+  .takeaway-list { margin: 0; padding-left: 20px; }
+  .takeaway-list li { color: rgba(255,255,255,0.85); font-size: 13.5px; line-height: 1.6; margin-bottom: 10px; }
+  .looking-ahead { background: rgba(255,255,255,0.08); border-radius: 10px; padding: 16px 20px; margin-top: 24px; }
+  .looking-ahead .label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--terracotta); margin: 0 0 8px; }
+  .looking-ahead p { color: rgba(255,255,255,0.85); margin: 0; font-size: 13.5px; }
+  .glossary-wrap { border-radius: 10px; overflow: hidden; margin-bottom: 8px; background: rgba(255,255,255,0.04); }
+  table.glossary-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.glossary-table td { padding: 9px 14px; vertical-align: top; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  table.glossary-table tr:last-child td { border-bottom: none; }
+  table.glossary-table tr:nth-child(even) td { background: rgba(255,255,255,0.04); }
+  table.glossary-table td:first-child { font-weight: 700; color: var(--terracotta); white-space: nowrap; width: 180px; }
+  table.glossary-table td:last-child { color: rgba(255,255,255,0.82); }
+  .quiz-footer { margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--line); text-align: center; }
+  .quiz-footer p { font-size: 13.5px; color: var(--ink-mute); margin: 0 0 16px; }
+  .quiz-btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px; border-radius: 999px; background: var(--terracotta); color: var(--white); font-size: 14.5px; font-weight: 600; text-decoration: none; box-shadow: 0 4px 14px rgba(217,118,74,0.3); }
+  .quiz-note { font-size: 12.5px; color: var(--ink-mute); margin-top: 14px; }
+  @media (max-width: 560px) { .content-card { padding: 26px 20px; } .summary-block { padding: 24px 20px; } }
+</style>
+</head>
+<body>
+<nav class="site-nav"><div class="site-nav-inner"><a class="site-logo" href="../dashboard.html">Core <span>Learning</span></a><button class="nav-link" id="logout-btn">Log out</button></div></nav>
+<div class="loading-state" id="loading-state"><div class="spinner"></div><span>Loading…</span></div>
+<div id="page-content">
+<div class="shell">
+  <div class="back-links"><a class="back-link" href="../module-05.html">← Back to Module 05</a><a class="back-link" href="../dashboard.html">← Back to Dashboard</a></div>
+  <div class="lesson-head">
+    <p class="lesson-eyebrow">Module 05 — Intermediate</p>
+    <h1>Coaching Communication &amp; Athlete Management</h1>
+    <p class="lesson-sub">Written Guide + Quiz</p>
+  </div>
+  <div class="content-card">
+
+    <div class="why-box">
+      <p class="label">Why It Matters</p>
+      <p>Technical knowledge is necessary but not sufficient. The most precisely designed programme fails if the athlete does not understand it, does not trust it, or does not feel heard by the coach prescribing it. How you communicate — the words you choose, the questions you ask, the conversations you're willing to have — determines whether your athletes stay, improve, and develop a healthy relationship with their sport and their coach.</p>
+    </div>
+
+    <h2 class="section-title">Learning Objectives</h2>
+    <ul class="objectives-list">
+      <li>Give effective performance feedback using established frameworks</li>
+      <li>Select and apply the right cueing language for different athletes and situations</li>
+      <li>Manage the athlete-coach relationship across different stages and contexts</li>
+      <li>Conduct goal-setting conversations that are genuinely useful</li>
+      <li>Navigate plateau management, injury conversations, and other difficult discussions</li>
+      <li>Manage groups effectively alongside individual athletes</li>
+    </ul>
+
+    <div class="section-block">
+      <h2 class="section-title">Section 1: Giving Effective Feedback</h2>
+
+      <h3 class="subsection-title">1.1 Feedback Frameworks</h3>
+      <p>Unstructured feedback tends to be inconsistent, disproportionately negative (we notice what goes wrong), and difficult for athletes to act on. Frameworks provide structure without making feedback feel scripted.</p>
+
+      <p class="sub-label" style="font-size:14px;font-weight:700;color:var(--navy);margin:18px 0 6px;">The SBI Model (Situation–Behaviour–Impact)</p>
+      <p>Describe the specific <strong>situation</strong> (when, where, what move), the observable <strong>behaviour</strong> (what you saw), and its <strong>impact</strong> (what happened as a result). Avoid inference or judgment about why.</p>
+      <p>Example: 'On the third clip of that route [situation], your left foot drifted off the foothold before you reached for the next draw [behaviour], which left you with no base support and you barn-doored off [impact].' This is more usable than 'your footwork let you down on that route.'</p>
+
+      <p class="sub-label" style="font-size:14px;font-weight:700;color:var(--navy);margin:18px 0 6px;">Ask First</p>
+      <p>Before giving feedback, ask what the athlete noticed. 'What happened at that move?' 'What did that feel like?' This activates self-monitoring, tells you what the athlete already knows, and prevents you from repeating what they already understand. When an athlete correctly identifies their own error, affirm it and ask what they want to try next — that is better than any feedback you could give.</p>
+
+      <h3 class="subsection-title">1.2 Feedback Timing</h3>
+      <ul>
+        <li><strong>Concurrent feedback</strong> (during the movement) — almost never useful in climbing. Calling cues while someone is on the wall splits attention and usually helps neither the movement nor the learning. The exception: calling out holds in a situation where the athlete cannot see the next move.</li>
+        <li><strong>Terminal feedback</strong> (immediately after) — useful for safety issues, corrections to prevent injury pattern repetition, or when the athlete asks. Otherwise, give them a moment first.</li>
+        <li><strong>Delayed feedback</strong> (some minutes after, or at review) — often produces better learning, especially for less explicit corrections. 'When you review the video later, notice your hip position on the crux' versus correcting immediately.</li>
+      </ul>
+
+      <h3 class="subsection-title">1.3 The Positive:Corrective Ratio</h3>
+      <p>Research in sport coaching consistently shows that coaches underestimate the proportion of negative/corrective feedback they give. Aim for a ratio of approximately 3:1 (positive or instructional to corrective). This is not about false praise — it is about making the feedback environment feel safe enough for athletes to take risks, make mistakes, and try new things without fear of constant criticism.</p>
+
+      <div class="callout callout-teal">
+        <p class="callout-label">Practical Test</p>
+        <p>Record audio of one of your sessions and count the ratio of positive/neutral to corrective statements. Most coaches discover a significant gap between what they think they do and what they actually do. The data is usually more corrective-heavy than expected. Awareness is the first step.</p>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <h2 class="section-title">Section 2: Cueing Language in Depth</h2>
+
+      <h3 class="subsection-title">2.1 Internal vs. External Cues</h3>
+      <p>As established in Module 01, external cues (attention directed to effect or environment) produce better movement learning than internal cues (attention directed to body parts). In coaching practice, this means framing cues in terms of what the athlete is trying to do <em>to</em> something, not what they are doing <em>with</em> their body.</p>
+      <div class="lesson-table-wrap">
+        <table class="lesson-table">
+          <tr><th>Internal Cue</th><th>External Alternative</th><th>Why It's Better</th></tr>
+          <tr><td>'Bend your knees more'</td><td>'Press into that foothold harder'</td><td>Focusing on the hold generates the knee bend naturally</td></tr>
+          <tr><td>'Keep your elbow in'</td><td>'Pull the hold into your hip'</td><td>Direction of pull achieves elbow position without conscious thought</td></tr>
+          <tr><td>'Rotate your hip'</td><td>'Touch your hip to the wall'</td><td>Tactile goal produces the rotation</td></tr>
+          <tr><td>'Don't look down'</td><td>'Find your next foothold with your eyes before you move'</td><td>Gives a positive action rather than a prohibition</td></tr>
+        </table>
+      </div>
+
+      <h3 class="subsection-title">2.2 Analogies in Coaching</h3>
+      <p>Analogy instruction — describing movement in terms of something the athlete already knows — promotes implicit learning and reduces conscious movement monitoring. Effective analogies share the essential feature of the target movement without describing the body parts:</p>
+      <ul>
+        <li>'Move like you're climbing a ladder' → upright body position, weight over feet</li>
+        <li>'Like standing up from a chair' → driving through the legs on a high footstep</li>
+        <li>'Like pushing a shopping trolley' → maintaining contact with the wall during a traverse</li>
+        <li>'Imagine the wall is a window you don't want to leave fingerprints on' → open-hand grip, gentle contact</li>
+      </ul>
+      <p>Test an analogy by asking whether a person with no climbing knowledge could follow the instruction and produce approximately the right movement. If yes, it's a good analogy.</p>
+
+      <h3 class="subsection-title">2.3 Individual Cueing Preferences</h3>
+      <p>Not all athletes respond to the same type of cue. Some are strongly visual (they respond to demonstration or seeing their own video). Some are kinaesthetic (they need to feel the movement). Some are auditory (they respond best to verbal instruction). Some prefer positive framing ('do this'), others respond better to negative framing ('avoid this'). Over time, learn which approach produces the fastest response in each athlete. Record it somewhere if you coach multiple athletes.</p>
+    </div>
+
+    <div class="section-block">
+      <h2 class="section-title">Section 3: Managing the Athlete-Coach Relationship</h2>
+
+      <h3 class="subsection-title">3.1 Autonomy vs. Direction</h3>
+      <p>The appropriate level of coach direction varies by athlete experience, personality, and training context. Beginning coaches often default to high direction because it feels productive. Research suggests that athletes in high-autonomy coaching environments (where they have input into decisions, can ask questions, and are given reasons) show better long-term adherence and intrinsic motivation. High-direction coaching may produce faster short-term results but poorer long-term development.</p>
+      <p>In practice:</p>
+      <ul>
+        <li>Give the athlete the rationale for what you are asking them to do</li>
+        <li>Invite questions and uncertainty — 'Does this make sense to you? Any questions about why?'</li>
+        <li>Where possible, give choices: 'We could do 4×4s or volume repeaters today — which feels right given how you slept?'</li>
+        <li>Allow athletes to express disagreement with your approach — and take it seriously</li>
+      </ul>
+
+      <h3 class="subsection-title">3.2 Goal-Setting Conversations</h3>
+      <p>Effective goal-setting is a conversation, not a form. The SMART framework (Specific, Measurable, Achievable, Relevant, Time-bound) is a useful structure but not a substitute for genuinely understanding what an athlete wants and why they want it.</p>
+      <p>Questions worth asking in a goal-setting conversation:</p>
+      <ul>
+        <li>'What does climbing give you that nothing else does?'</li>
+        <li>'What would success look like for you in six months? What about five years?'</li>
+        <li>'What is getting in the way most right now?'</li>
+        <li>'Is there anything you're afraid of that we haven't talked about?'</li>
+        <li>'What do you need from me as your coach?'</li>
+      </ul>
+      <p>These questions often reveal more than 'what grade do you want to climb?' The answers should inform both programme design and how you manage the relationship.</p>
+
+      <h3 class="subsection-title">3.3 When to Push and When to Hold Back</h3>
+      <p>One of the hardest coaching judgments is knowing when to increase challenge and when to reduce it. Some signals:</p>
+      <div class="lesson-table-wrap">
+        <table class="lesson-table">
+          <tr><th>Signal</th><th>Likely Meaning</th><th>Response</th></tr>
+          <tr><td>Athlete is physically underperforming relative to recent baseline, appears flat</td><td>Accumulated fatigue or life stress</td><td>Reduce load; check in on life outside climbing</td></tr>
+          <tr><td>Athlete avoids certain move types or settings</td><td>Fear or confidence issue, not physical limitation</td><td>Gradual exposure, process focus, psychological support</td></tr>
+          <tr><td>Athlete pushes through pain or refuses to report soreness</td><td>Fear of being held back; culture of toughness over health</td><td>Create a safe environment for honesty; explain the injury costs of non-disclosure</td></tr>
+          <tr><td>Athlete is enthusiastic, energetic, wants more</td><td>May be appropriate to increase load — or may be overconfidence after a good week</td><td>Check the ACWR before increasing; enthusiasm is not a training load metric</td></tr>
+          <tr><td>Athlete regularly misses sessions, loses motivation</td><td>Programme-life mismatch, burnout signal, or relationship issue</td><td>Open conversation; revisit goals; consider reducing frequency not just intensity</td></tr>
+        </table>
+      </div>
+
+      <h3 class="subsection-title">3.4 Difficult Conversations</h3>
+      <p>The conversations coaches avoid are often the most important ones. Common difficult conversations in climbing coaching:</p>
+      <ul>
+        <li><strong>Plateau talk:</strong> 'You haven't progressed in grade in six months — let's talk about why.' Be direct, data-driven, and solution-oriented. Avoid false reassurance.</li>
+        <li><strong>Injury response:</strong> 'You need to stop training the way you've been training, or this will become a serious injury.' Be clear and firm. Athletes often need explicit medical-sounding framing to take injury seriously.</li>
+        <li><strong>Expectation mismatch:</strong> 'I think your grade target for this season is too ambitious given your starting point. Here's what I think is realistic and why.' This requires courage. Saying nothing avoids discomfort now and creates disappointment later.</li>
+        <li><strong>Programme non-compliance:</strong> 'I notice you've missed three sessions in the last two weeks. Is everything okay?' Ask before assuming. Life happens.</li>
+      </ul>
+    </div>
+
+    <div class="section-block">
+      <h2 class="section-title">Section 4: Group Coaching Dynamics</h2>
+
+      <h3 class="subsection-title">4.1 Managing Individuals in a Group</h3>
+      <p>Group sessions create a tension between group efficiency and individual needs. Strategies for managing this:</p>
+      <ul>
+        <li>Know each athlete's individual limiter profile — not every athlete does the same drill for the same reason</li>
+        <li>Brief the group together, then give individual targets ('today we're doing 4×4s — for you, focus on foot precision; for you, focus on staying off your arms on the rests')</li>
+        <li>Use peer observation — athletes watching each other reduces the burden on the coach and builds self-monitoring skills</li>
+        <li>Check in privately during sessions with athletes who you know are struggling with something they may not raise in front of the group</li>
+      </ul>
+
+      <h3 class="subsection-title">4.2 Group Dynamics and Culture</h3>
+      <p>The coaching culture you create in a group is set by what you model, what you tolerate, and what you reward. Groups develop norms — shared expectations about how members behave. Healthy group norms in a climbing team:</p>
+      <ul>
+        <li>It is safe to try things and fail</li>
+        <li>Injury and soreness are reported honestly</li>
+        <li>Athletes support rather than compete with each other in training</li>
+        <li>Questions are welcomed, not seen as challenging the coach</li>
+        <li>Progress is celebrated beyond grade numbers alone</li>
+      </ul>
+      <p>Unhealthy norms — excessive grade-focus, athletes pushing through injury to appear tough, fear of asking questions — are usually a reflection of the coach's own behaviour, whether the coach realises it or not.</p>
+    </div>
+
+    <div class="summary-block">
+      <h2>Module Summary</h2>
+      <p class="summary-sub">Coaching Communication &amp; Athlete Management</p>
+      <h3>Key Takeaways</h3>
+      <ul class="takeaway-list">
+        <li>Effective feedback is specific, observable, and timed appropriately. The SBI model gives you structure without making feedback feel scripted.</li>
+        <li>Ask before you tell. The athlete's self-assessment is data — and acting on it produces better learning than correction alone.</li>
+        <li>External cues beat internal cues. Direct attention to effect, not body parts.</li>
+        <li>Autonomy-supportive coaching produces better long-term adherence and intrinsic motivation than directive coaching. Give reasons; invite questions.</li>
+        <li>Goal-setting conversations reveal more than grade targets. Ask about what climbing gives the athlete, not just what they want to achieve.</li>
+        <li>The coaching culture you create is set by what you model and what you tolerate. Groups reflect their coaches.</li>
+      </ul>
+      <div class="looking-ahead">
+        <p class="label">Coming Up — Module 06</p>
+        <p>Module 06 addresses youth athletes specifically — where development differs from adult athletes and what that means for training, communication, and safeguarding.</p>
+      </div>
+      <h3>Glossary</h3>
+      <div class="glossary-wrap">
+        <table class="glossary-table">
+          <tr><td>SBI Model</td><td>Situation–Behaviour–Impact — a feedback framework that keeps observations specific and observable without judgment</td></tr>
+          <tr><td>Autonomy-Supportive Coaching</td><td>A coaching style that gives athletes input into decisions, explains rationales, and welcomes questions — associated with better long-term motivation</td></tr>
+          <tr><td>Positive:Corrective Ratio</td><td>The balance of affirming to corrective feedback statements; research suggests 3:1 or higher supports a productive learning environment</td></tr>
+          <tr><td>Analogy Instruction</td><td>Describing movement in terms of a familiar non-climbing action to promote implicit learning and reduce conscious monitoring</td></tr>
+          <tr><td>Group Norm</td><td>A shared, often unspoken expectation about how members of a group behave — set by what the coach models, tolerates, and rewards</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="quiz-footer">
+      <p>When you're ready, complete the quiz to progress to Module 06. You need 80% to unlock the next module.</p>
+      <a class="quiz-btn" href="../module-05-quiz.html">Take the Quiz →</a>
+      <p class="quiz-note">The quiz covers all four sections of this lesson.</p>
+    </div>
+
+  </div>
+</div>
+</div>
+<footer style="background: var(--navy); color: rgba(255,255,255,0.55); padding: 32px 24px; text-align: center; font-size: 13px;"><p>Core Learning — part of the Core brand family. <a href="mailto:info@corelearning.co.za" style="color: rgba(255,255,255,0.75);">info@corelearning.co.za</a></p></footer>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+  const firebaseConfig = { apiKey: "AIzaSyAN9BVXDo15Mav2zketm5jhKRoBjs2yYX8", authDomain: "core-coaching-login.firebaseapp.com", projectId: "core-coaching-login", storageBucket: "core-coaching-login.firebasestorage.app", messagingSenderId: "184932860937", appId: "1:184932860937:web:83da63f1453eff8ca824d8", measurementId: "G-N7WNPL47WQ" };
+  const app = initializeApp(firebaseConfig); const auth = getAuth(app); const db = getFirestore(app);
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) { window.location.href = "../index.html"; return; }
+    let data = {};
+    try { const snap = await getDoc(doc(db, "users", user.uid)); if (snap.exists()) data = snap.data(); } catch(e) {}
+    if (!(Array.isArray(data.unlockedModules) && data.unlockedModules.includes(5))) { window.location.href = "../dashboard.html"; return; }
+    document.getElementById("loading-state").style.display = "none";
+    document.getElementById("page-content").style.display = "block";
+  });
+  document.getElementById("logout-btn").addEventListener("click", () => signOut(auth).then(() => window.location.href = "../index.html"));
+</script>
+</body>
+</html>

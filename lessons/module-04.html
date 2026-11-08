@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 04 — Programme Design, Load Management &amp; Periodisation | Core Learning Intermediate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --navy: #1b2a3a; --teal: #3a8a8c; --teal-soft: #e8f2f2; --terracotta: #d9764a; --terracotta-soft: #fbe8dd; --cream: #f7f5f1; --ink: #2a2f35; --ink-mute: #6b7480; --line: #e2e0da; --white: #ffffff; --radius: 14px; --shadow: 0 1px 2px rgba(27,42,58,0.06), 0 8px 24px rgba(27,42,58,0.08); }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--cream); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; line-height: 1.65; }
+  h1, h2, h3, h4 { font-family: 'Fraunces', Georgia, serif; font-weight: 600; letter-spacing: -0.01em; color: var(--navy); }
+  a { color: var(--teal); }
+  .loading-state { display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 14px; color: var(--ink-mute); padding: 100px 24px; }
+  .spinner { width: 16px; height: 16px; border: 2px solid var(--line); border-top-color: var(--teal); border-radius: 50%; animation: spin 0.7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  #page-content { display: none; }
+  .site-nav { background: var(--navy); padding: 0 24px; }
+  .site-nav-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .site-logo { color: var(--white); font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: 19px; text-decoration: none; }
+  .site-logo span { color: var(--terracotta); }
+  .nav-link { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; font-weight: 500; background: none; border: none; cursor: pointer; font-family: inherit; }
+  .shell { max-width: 780px; margin: 0 auto; padding: 36px 24px 90px; }
+  .back-links { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-bottom: 24px; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 600; color: var(--ink-mute); text-decoration: none; }
+  .back-link:hover { color: var(--navy); }
+  .lesson-eyebrow { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); font-weight: 700; margin: 0 0 8px; }
+  .lesson-head h1 { font-size: 28px; margin: 0 0 6px; line-height: 1.2; }
+  .lesson-sub { color: var(--ink-mute); font-size: 14.5px; margin: 0 0 32px; }
+  .content-card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 36px 40px; }
+  .why-box { background: var(--teal-soft); border-radius: 10px; padding: 18px 20px; margin-bottom: 28px; }
+  .why-box p { color: #205c5d; margin: 0; font-size: 14px; }
+  .why-box .label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #205c5d; margin: 0 0 8px; }
+  .objectives-list { margin: 0 0 28px; padding-left: 22px; }
+  .objectives-list li { font-size: 14.5px; margin-bottom: 6px; }
+  .section-block { margin-bottom: 40px; }
+  .section-title { font-size: 20px; padding-bottom: 10px; margin: 0 0 20px; border-bottom: 2px solid var(--teal); }
+  .subsection-title { font-size: 16px; margin: 24px 0 10px; }
+  .sub-label { font-size: 14px; font-weight: 700; color: var(--navy); margin: 18px 0 6px; }
+  .content-card p { font-size: 14.5px; color: var(--ink); margin: 0 0 14px; }
+  .content-card ul, .content-card ol { margin: 0 0 14px; padding-left: 22px; }
+  .content-card li { font-size: 14.5px; margin-bottom: 6px; }
+  .content-card li strong { color: var(--navy); }
+  .lesson-table-wrap { overflow-x: auto; margin: 0 0 20px; border-radius: 10px; border: 1px solid var(--line); }
+  table.lesson-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  table.lesson-table th { background: var(--navy); color: var(--white); text-align: left; padding: 10px 14px; font-weight: 600; font-size: 12.5px; }
+  table.lesson-table td { padding: 10px 14px; border-bottom: 1px solid var(--line); color: var(--ink); vertical-align: top; }
+  table.lesson-table tr:last-child td { border-bottom: none; }
+  table.lesson-table tr:nth-child(even) td { background: var(--cream); }
+  table.lesson-table td:first-child { font-weight: 600; color: var(--navy); }
+  .callout { border-radius: 10px; padding: 18px 20px; margin: 20px 0; }
+  .callout-teal { background: var(--teal-soft); }
+  .callout-terracotta { background: var(--terracotta-soft); }
+  .callout-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 8px; }
+  .callout-teal .callout-label { color: #205c5d; }
+  .callout-terracotta .callout-label { color: #a24e2a; }
+  .callout p { margin: 0; font-size: 14px; }
+  .callout-teal p { color: #205c5d; }
+  .callout-terracotta p { color: #712b13; }
+  .drill-card { background: var(--cream); border-radius: 10px; border: 1px solid var(--line); padding: 18px 22px; margin-bottom: 16px; }
+  .drill-card h4 { font-size: 15px; margin: 0 0 4px; color: var(--navy); }
+  .drill-card .drill-meta { font-size: 12px; font-weight: 700; color: var(--teal); letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 10px; }
+  .drill-card p { font-size: 13.5px; color: var(--ink); margin: 0; }
+  .summary-block { background: var(--navy); border-radius: var(--radius); padding: 32px 36px; margin-top: 44px; }
+  .summary-block h2 { color: var(--white); font-size: 22px; margin: 0 0 4px; }
+  .summary-block .summary-sub { color: rgba(255,255,255,0.6); font-size: 13px; margin: 0 0 22px; }
+  .summary-block h3 { color: var(--white); font-size: 15px; margin: 26px 0 12px; }
+  .takeaway-list li { color: rgba(255,255,255,0.85); font-size: 13.5px; line-height: 1.6; margin-bottom: 10px; }
+  .looking-ahead { background: rgba(255,255,255,0.08); border-radius: 10px; padding: 16px 20px; margin-top: 24px; }
+  .looking-ahead .label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--terracotta); margin: 0 0 8px; }
+  .looking-ahead p { color: rgba(255,255,255,0.85); margin: 0; font-size: 13.5px; }
+  .glossary-wrap { border-radius: 10px; overflow: hidden; margin-bottom: 8px; background: rgba(255,255,255,0.04); }
+  table.glossary-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.glossary-table td { padding: 9px 14px; vertical-align: top; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  table.glossary-table tr:last-child td { border-bottom: none; }
+  table.glossary-table tr:nth-child(even) td { background: rgba(255,255,255,0.04); }
+  table.glossary-table td:first-child { font-weight: 700; color: var(--terracotta); white-space: nowrap; width: 180px; }
+  table.glossary-table td:last-child { color: rgba(255,255,255,0.82); }
+  .quiz-footer { margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--line); text-align: center; }
+  .quiz-footer p { font-size: 13.5px; color: var(--ink-mute); margin: 0 0 16px; }
+  .quiz-btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px; border-radius: 999px; background: var(--terracotta); color: var(--white); font-size: 14.5px; font-weight: 600; text-decoration: none; box-shadow: 0 4px 14px rgba(217,118,74,0.3); }
+  .quiz-note { font-size: 12.5px; color: var(--ink-mute); margin-top: 14px; }
+  @media (max-width: 560px) { .content-card { padding: 26px 20px; } .summary-block { padding: 24px 20px; } }
+</style>
+</head>
+<body>
+<nav class="site-nav"><div class="site-nav-inner"><a class="site-logo" href="../dashboard.html">Core <span>Learning</span></a><button class="nav-link" id="logout-btn">Log out</button></div></nav>
+<div class="loading-state" id="loading-state"><div class="spinner"></div><span>Loading…</span></div>
+<div id="page-content">
+<div class="shell">
+  <div class="back-links"><a class="back-link" href="../module-04.html">← Back to Module 04</a><a class="back-link" href="../dashboard.html">← Back to Dashboard</a></div>
+  <div class="lesson-head">
+    <p class="lesson-eyebrow">Module 04 — Intermediate</p>
+    <h1>Programme Design, Load Management &amp; Periodisation</h1>
+    <p class="lesson-sub">Written Guide + Drills Library + Quiz</p>
+  </div>
+  <div class="content-card">
+
+    <div class="why-box">
+      <p class="label">Why It Matters</p>
+      <p>Programme design is where your assessment knowledge, coaching methodology, and understanding of physiology converge into something tangible: a training plan that moves an athlete from where they are to where they want to be. Done well, it is the most direct application of everything you have learned so far. Done poorly — usually through excessive volume, insufficient recovery, or mismatched training priorities — it produces injury, stagnation, or burnout.</p>
+    </div>
+
+    <h2 class="section-title">Learning Objectives</h2>
+    <ul class="objectives-list">
+      <li>Design a full mesocycle for an intermediate climber, integrating climbing volume and supplementary training</li>
+      <li>Apply load management principles to prevent overreaching and training injuries</li>
+      <li>Understand and apply the main periodisation models relevant to intermediate climbers</li>
+      <li>Balance multiple training qualities simultaneously without compromising recovery</li>
+      <li>Select appropriate drills and workouts for specific performance targets, with understanding of what each develops</li>
+    </ul>
+
+    <div class="section-block">
+      <h2 class="section-title">Section 1: Load Management Principles</h2>
+
+      <h3 class="subsection-title">1.1 The Acute:Chronic Workload Ratio</h3>
+      <p>The acute:chronic workload ratio (ACWR) compares the training load of the past week (acute load) to the average load of the past 4 weeks (chronic load). The ratio indicates how prepared the athlete is for their current training demand:</p>
+      <ul>
+        <li><strong>ACWR 0.8–1.3:</strong> The 'sweet spot' — training is appropriately challenging relative to the athlete's prepared capacity</li>
+        <li><strong>ACWR &gt;1.5:</strong> Spike zone — the athlete is doing significantly more than their recent average. Injury risk increases sharply above this threshold</li>
+        <li><strong>ACWR &lt;0.8:</strong> Under-training relative to capacity — the athlete may be under-stimulated</li>
+      </ul>
+      <p>In climbing, training load is harder to quantify than in sports with clear external metrics (running distance, barbell load). Useful proxies: session RPE × duration (session load), number of hard routes/problems, hangboard volume (sets × reps × load). Whatever metric you choose, use it consistently.</p>
+
+      <div class="callout callout-terracotta">
+        <p class="callout-label">Spikes Are the Biggest Risk</p>
+        <p>Most training injuries in climbers are not caused by high chronic load — they are caused by rapid spikes above chronic load. A weekend climbing trip after a week off, a training camp after a deload, an enthusiastic surge at the start of a new training block. The tissue did not fail because it was trained — it failed because it was asked to do far more than it had been prepared for. Manage spikes first.</p>
+      </div>
+
+      <h3 class="subsection-title">1.2 Finger Load Specifics</h3>
+      <p>Finger pulleys and tendons adapt more slowly than muscle. The rule of thumb: allow 3–4 weeks for significant muscular adaptation, but 12+ weeks for tendon adaptation to the same level of stimulus. This means an athlete can feel physically capable of more work before their connective tissue has adapted to handle it.</p>
+      <p>Practical guidelines:</p>
+      <ul>
+        <li>Increase finger load by no more than 10% per week</li>
+        <li>Deload every 4th week (reduce volume to 50-60% of peak week)</li>
+        <li>Never increase both intensity and volume simultaneously on fingerboard work</li>
+        <li>At the first sign of finger soreness (not ache from climbing, but localised tendon pain), reduce load immediately — do not train through it</li>
+      </ul>
+    </div>
+
+    <div class="section-block">
+      <h2 class="section-title">Section 2: Periodisation for Intermediate Climbers</h2>
+
+      <h3 class="subsection-title">2.1 The Mesocycle</h3>
+      <p>A mesocycle is a training block typically lasting 4–8 weeks, with a specific training emphasis. For intermediate climbers, most mesocycles follow a 3+1 structure: 3 weeks of progressive loading followed by 1 deload week. This balances stimulus and recovery over a medium timeframe.</p>
+
+      <h3 class="subsection-title">2.2 Sequential vs. Concurrent Training</h3>
+      <div class="lesson-table-wrap">
+        <table class="lesson-table">
+          <tr><th>Model</th><th>Structure</th><th>Best Used When</th></tr>
+          <tr><td>Sequential (Block Periodisation)</td><td>Focus on one or two qualities per block. Strength block → Endurance block → Performance block.</td><td>Athlete has a clear primary limiter, has adequate time (12+ weeks), is experienced enough to tolerate single-quality blocks</td></tr>
+          <tr><td>Concurrent (Mixed Periodisation)</td><td>Multiple qualities trained in every week, with varied emphasis. Most intermediate programmes use this.</td><td>Athlete cannot afford to let any quality decline significantly, recreational climbers, those with under 2 years structured training</td></tr>
+          <tr><td>Undulating</td><td>Intensity and volume alternate within the week or week-to-week (not long blocks).</td><td>Athlete with limited training time or high day-to-day variability in energy/availability</td></tr>
+        </table>
+      </div>
+
+      <h3 class="subsection-title">2.3 Sample 4-Week Intermediate Mesocycle (Concurrent)</h3>
+      <div class="lesson-table-wrap">
+        <table class="lesson-table">
+          <tr><th>Week</th><th>Climbing Sessions</th><th>Fingerboard</th><th>S&amp;C</th><th>Intensity</th></tr>
+          <tr><td>Week 1 (Intro)</td><td>3 × 90 min (1 skills, 2 volume)</td><td>2 × repeaters @ 60% max</td><td>2 × antagonist + core</td><td>Moderate</td></tr>
+          <tr><td>Week 2 (Build)</td><td>3 × 90 min (1 skills, 2 volume)</td><td>2 × repeaters @ 65% max</td><td>2 × antagonist + core</td><td>Moderate-High</td></tr>
+          <tr><td>Week 3 (Peak)</td><td>4 × 90 min (1 quality, 3 volume)</td><td>2 × max hangs or 3 × repeaters</td><td>2 × antagonist + core</td><td>High</td></tr>
+          <tr><td>Week 4 (Deload)</td><td>2 × 60 min (easy, skill focus)</td><td>1 × repeaters @ 50% max</td><td>1 × light antagonist</td><td>Low</td></tr>
+        </table>
+      </div>
+
+      <div class="callout callout-teal">
+        <p class="callout-label">The Most Common Intermediate Mistake</p>
+        <p>Skipping the deload week. Athletes feel good at the end of week 3 and cannot see the point of an easy week. The adaptation from weeks 1–3 consolidates during the deload. Skipping it means the athlete starts the next block already in a mild state of fatigue — they grind through, never fully recovering, and wonder why they plateau. The deload is not optional.</p>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <h2 class="section-title">Section 3: Integrating Training Qualities</h2>
+
+      <h3 class="subsection-title">3.1 Order of Training Within a Session</h3>
+      <p>When combining qualities in one session, sequence matters for both effectiveness and injury risk:</p>
+      <ol>
+        <li><strong>Warm-up</strong> — 10–15 min easy movement, specific warm-up for planned training</li>
+        <li><strong>Skill work / technique drills</strong> — requires cognitive freshness; do first</li>
+        <li><strong>Maximum strength / power</strong> — max hangs, campus work, limit bouldering; requires neurological freshness</li>
+        <li><strong>Strength-endurance</strong> — repeaters, 4x4s, volume bouldering; can follow strength work</li>
+        <li><strong>Supplementary S&amp;C</strong> — antagonist work, core; end of session</li>
+        <li><strong>Cool-down and mobility</strong> — 10 min easy movement, targeted stretching</li>
+      </ol>
+
+      <h3 class="subsection-title">3.2 Weekly Training Balance</h3>
+      <div class="lesson-table-wrap">
+        <table class="lesson-table">
+          <tr><th>Training Quality</th><th>Frequency per Week</th><th>Notes</th></tr>
+          <tr><td>Climbing volume (easy–moderate)</td><td>2–4 sessions</td><td>The base — do not compress all sessions into consecutive days without recovery</td></tr>
+          <tr><td>Fingerboard (max strength)</td><td>1–2 sessions</td><td>48h minimum between fingerboard sessions; never on consecutive days</td></tr>
+          <tr><td>Fingerboard (endurance)</td><td>1–2 sessions</td><td>Can follow strength or climbing sessions if load is appropriate</td></tr>
+          <tr><td>Antagonist strength</td><td>2–3 sessions</td><td>Can pair with any climbing session; push-ups, shoulder ER, finger extension</td></tr>
+          <tr><td>Core</td><td>2–3 sessions</td><td>Integrate into sessions or add as brief add-on after climbing</td></tr>
+          <tr><td>Rest/Recovery</td><td>At least 2 full rest days</td><td>Non-negotiable — adaptation happens during rest</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <h2 class="section-title">Section 4: Climbing Drills &amp; Workouts Library</h2>
+      <p>The following drills and workouts are categorised by what they develop. Use this as a reference when designing sessions — select the tool that matches your training target, not the one you are most familiar with.</p>
+
+      <h3 class="subsection-title">Footwork &amp; Precision</h3>
+
+      <div class="drill-card">
+        <h4>Silent Feet</h4>
+        <div class="drill-meta">Develops → Foot precision, proprioception, weight placement</div>
+        <p>Climb any route or problem with the rule that your feet must be completely silent — no scraping, no adjusting, no sound on contact. Requires precise placement and genuine weight transfer before the foot lands. Can be applied to any climb at any grade. Best done on routes 3-4 grades below maximum.</p>
+      </div>
+
+      <div class="drill-card">
+        <h4>Spot-Stepping</h4>
+        <div class="drill-meta">Develops → Visual targeting, deliberate foot placement, reducing foot drift</div>
+        <p>Before placing each foot, pick an exact spot on the hold — a specific rubber mark, a texture point — and aim for that precise spot with your shoe tip. Hold the placement for 2 seconds before moving. Slows movement down significantly, which is the point. Exaggerated precision at slow speed transfers to better placement at full speed.</p>
+      </div>
+
+      <div class="drill-card">
+        <h4>No-Hands Traverses</h4>
+        <div class="drill-meta">Develops → Lower body strength, balance, weight over feet confidence</div>
+        <p>Traverse a low section of wall using only feet and balance — no hands on holds (use wall surface for balance only if needed). Grade this by wall angle and foothold size. Builds both physical capability (calf, ankle stability, hip strength) and psychological comfort with weight over feet.</p>
+      </div>
+
+      <h3 class="subsection-title">Movement Pattern Development</h3>
+
+      <div class="drill-card">
+        <h4>Hip-Turn Exaggeration Drill</h4>
+        <div class="drill-meta">Develops → Hip rotation range, body position on steep terrain, reach extension</div>
+        <p>On a slab or vertical wall, every move requires an exaggerated hip turn — turn the hip at least twice as far as feels natural. The climber should feel their hip almost touching the wall on every reach. This breaks the pattern of square-on climbing and trains the nervous system to include rotation as a default movement component.</p>
+      </div>
+
+      <div class="drill-card">
+        <h4>Drop-Knee Traverse</h4>
+        <div class="drill-meta">Develops → Drop-knee mechanics, hip external rotation, reach extension on overhangs</div>
+        <p>Traverse an overhang or steep wall using drop-knee on every move — no step without a drop-knee. Exaggerates the technique beyond normal use but ingrains the movement pattern and builds the hip external rotation range required to execute it well. Combine with cuing: 'back knee to wall' to get the full position.</p>
+      </div>
+
+      <div class="drill-card">
+        <h4>Flagging Drill</h4>
+        <div class="drill-meta">Develops → Balance, counter-rotation, reducing barn-door tendency</div>
+        <p>On a problem with barn-door potential (single foot on, body wants to swing out), practise flagging the free leg deliberately before the problem dictates it. Flag inside, flag outside, flag in front — three different solutions to the same problem. This builds an instinct for proactive balance rather than reactive rescue.</p>
+      </div>
+
+      <h3 class="subsection-title">Endurance</h3>
+
+      <div class="drill-card">
+        <h4>ARC Climbing (Aerobic Restoration and Capillarisation)</h4>
+        <div class="drill-meta">Develops → Aerobic base, forearm blood flow, recovery capacity between hard efforts</div>
+        <p>Continuous climbing at 40–50% effort for 20–30 minutes without stopping. Grade should be easy enough to maintain a conversation. If the forearms are pumping, the grade is too high. This is not about challenge — it is about sustained blood flow and capillary adaptation. Done consistently (2× per week), it dramatically improves an athlete's ability to recover on the wall mid-route.</p>
+      </div>
+
+      <div class="drill-card">
+        <h4>4×4s</h4>
+        <div class="drill-meta">Develops → Local muscular endurance, power-endurance, tolerance of pump</div>
+        <p>4 boulder problems in sequence, as fast as possible (or with minimal rest), repeated 4 times with 4 minutes rest between sets. Problems at 50–70% of max grade. The goal is to maintain quality movement while accumulating significant fatigue. This is high-intensity endurance work — save it for athletes with a solid aerobic base and no current finger issues.</p>
+      </div>
+
+      <div class="drill-card">
+        <h4>System Wall Volume Blocks</h4>
+        <div class="drill-meta">Develops → Movement automatisation, climbing-specific endurance, volume tolerance</div>
+        <p>On a system/symmetry board, perform 20–30 moves per set at moderate intensity (60–70% effort), with 2:1 rest:work ratio. The fixed hold positions allow volume to be accumulated without the cognitive load of route-reading — useful for athletes whose movement quality degrades at the end of longer training sessions.</p>
+      </div>
+
+      <h3 class="subsection-title">Strength &amp; Power</h3>
+
+      <div class="drill-card">
+        <h4>Max Hangs</h4>
+        <div class="drill-meta">Develops → Maximum finger strength, neural recruitment, rate of force development</div>
+        <p>10-second maximum-effort hang on a 20mm edge (half-crimp), with added load if body weight alone is insufficient for a true maximum effort. 3–5 sets per session, 3–5 minutes rest between sets. This is the most direct stimulus for increasing maximum finger force production. Requires thorough warm-up and meticulous load management — do not introduce to an athlete with any current finger symptoms.</p>
+      </div>
+
+      <div class="drill-card">
+        <h4>Limit Bouldering</h4>
+        <div class="drill-meta">Develops → Power, maximal recruitment, movement complexity under high load</div>
+        <p>Climbing at or very near maximum boulder grade — problems the athlete can barely do, or cannot yet do. Low volume (5–10 quality attempts per session), long rest (3–5 minutes), focused execution. The goal is maximum recruitment and skill development at the edge of capability, not volume or pump. This is different from hard bouldering for fitness — it is strength and skill training.</p>
+      </div>
+
+      <div class="drill-card">
+        <h4>Deadhangs / Repeaters</h4>
+        <div class="drill-meta">Develops → Finger strength (max hangs) OR force-endurance (repeaters)</div>
+        <p><strong>Max hang:</strong> Single 10s hang, maximal load, full rest between sets. <strong>Repeaters:</strong> 7s on / 3s off × 6 reps = 1 set, at 60–65% of max hang load. These two variations of the same equipment produce very different adaptations — maximum strength vs. endurance. Choose based on the athlete's limiter profile from assessment.</p>
+      </div>
+
+      <div class="drill-card">
+        <h4>Weighted Pull-Ups</h4>
+        <div class="drill-meta">Develops → Pulling strength, pulling power, back and bicep hypertrophy</div>
+        <p>Pull-ups with added load (weight belt, vest, or dumbbell between legs). 3–5 sets of 3–6 reps at 80–90% of 1RM, with 3–4 minutes rest. Distinct from pull-up endurance work (bodyweight, high reps). The added load forces maximum recruitment and produces significant strength adaptation. Essential for athletes whose pull-to-bodyweight ratio is limiting their climbing.</p>
+      </div>
+    </div>
+
+    <div class="summary-block">
+      <h2>Module Summary</h2>
+      <p class="summary-sub">Programme Design, Load Management &amp; Periodisation</p>
+      <h3>Key Takeaways</h3>
+      <ul class="takeaway-list">
+        <li>Load management is the most important injury prevention tool. Spikes above chronic load cause most climbing injuries — not chronic high load.</li>
+        <li>Fingers adapt more slowly than muscles. Never increase finger load faster than the connective tissue can adapt, regardless of how the muscles feel.</li>
+        <li>Most intermediate climbers benefit from concurrent training — multiple qualities per week — rather than strict sequential blocks.</li>
+        <li>The deload week is not optional. Adaptations consolidate during recovery, not during loading.</li>
+        <li>Programme drills and workouts based on the athlete's limiter, not on what you enjoy coaching or what is most popular.</li>
+        <li>Sequence training within a session: skill first, strength second, endurance third, supplementary last.</li>
+      </ul>
+      <div class="looking-ahead">
+        <p class="label">Coming Up — Module 05</p>
+        <p>Module 05 moves to the interpersonal side of coaching — giving feedback, managing athlete relationships, navigating difficult conversations, and knowing when to push and when to hold back.</p>
+      </div>
+      <h3>Glossary</h3>
+      <div class="glossary-wrap">
+        <table class="glossary-table">
+          <tr><td>ACWR</td><td>Acute:Chronic Workload Ratio — compares last week's load to the 4-week rolling average as an injury risk indicator</td></tr>
+          <tr><td>Mesocycle</td><td>A training block of 4–8 weeks with a specific training emphasis; the medium-term unit of periodisation</td></tr>
+          <tr><td>Deload</td><td>A planned reduction in training volume (not intensity) to allow accumulated fatigue to dissipate and adaptation to consolidate</td></tr>
+          <tr><td>Concurrent Training</td><td>Training multiple physical qualities within the same training block or week</td></tr>
+          <tr><td>Block Periodisation</td><td>Sequential training blocks each focused on a single quality; suited to advanced athletes with clear limiters</td></tr>
+          <tr><td>ARC</td><td>Aerobic Restoration and Capillarisation — low-intensity continuous climbing to build aerobic base</td></tr>
+          <tr><td>4×4s</td><td>Four boulder problems in sequence, repeated four times; a classic climbing endurance training format</td></tr>
+          <tr><td>Limit Bouldering</td><td>Climbing at or near maximum grade for maximum neural recruitment; strength and skill training, not fitness</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="quiz-footer">
+      <p>When you're ready, complete the quiz to progress to Module 05. You need 80% to unlock the next module.</p>
+      <a class="quiz-btn" href="../module-04-quiz.html">Take the Quiz →</a>
+      <p class="quiz-note">The quiz covers all four sections of this lesson.</p>
+    </div>
+
+  </div>
+</div>
+</div>
+<footer style="background: var(--navy); color: rgba(255,255,255,0.55); padding: 32px 24px; text-align: center; font-size: 13px;"><p>Core Learning — part of the Core brand family. <a href="mailto:info@corelearning.co.za" style="color: rgba(255,255,255,0.75);">info@corelearning.co.za</a></p></footer>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+  const firebaseConfig = { apiKey: "AIzaSyAN9BVXDo15Mav2zketm5jhKRoBjs2yYX8", authDomain: "core-coaching-login.firebaseapp.com", projectId: "core-coaching-login", storageBucket: "core-coaching-login.firebasestorage.app", messagingSenderId: "184932860937", appId: "1:184932860937:web:83da63f1453eff8ca824d8", measurementId: "G-N7WNPL47WQ" };
+  const app = initializeApp(firebaseConfig); const auth = getAuth(app); const db = getFirestore(app);
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) { window.location.href = "../index.html"; return; }
+    let data = {};
+    try { const snap = await getDoc(doc(db, "users", user.uid)); if (snap.exists()) data = snap.data(); } catch(e) {}
+    if (!(Array.isArray(data.unlockedModules) && data.unlockedModules.includes(4))) { window.location.href = "../dashboard.html"; return; }
+    document.getElementById("loading-state").style.display = "none";
+    document.getElementById("page-content").style.display = "block";
+  });
+  document.getElementById("logout-btn").addEventListener("click", () => signOut(auth).then(() => window.location.href = "../index.html"));
+</script>
+</body>
+</html>

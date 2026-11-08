@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 01 — Advanced Coaching Methodology | Core Learning Intermediate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1b2a3a; --navy-soft: #25394d; --teal: #3a8a8c; --teal-soft: #e8f2f2;
+    --terracotta: #d9764a; --terracotta-soft: #fbe8dd; --cream: #f7f5f1;
+    --ink: #2a2f35; --ink-mute: #6b7480; --line: #e2e0da; --white: #ffffff;
+    --radius: 14px; --shadow: 0 1px 2px rgba(27,42,58,0.06), 0 8px 24px rgba(27,42,58,0.08);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--cream); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; line-height: 1.65; }
+  h1, h2, h3, h4 { font-family: 'Fraunces', Georgia, serif; font-weight: 600; letter-spacing: -0.01em; color: var(--navy); }
+  a { color: var(--teal); }
+  .loading-state { display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 14px; color: var(--ink-mute); padding: 100px 24px; }
+  .spinner { width: 16px; height: 16px; border: 2px solid var(--line); border-top-color: var(--teal); border-radius: 50%; animation: spin 0.7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  #page-content { display: none; }
+  .site-nav { background: var(--navy); padding: 0 24px; }
+  .site-nav-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .site-logo { color: var(--white); font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: 19px; text-decoration: none; }
+  .site-logo span { color: var(--terracotta); }
+  .nav-link { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; font-weight: 500; background: none; border: none; cursor: pointer; font-family: inherit; }
+  .nav-link:hover { color: var(--white); }
+  .shell { max-width: 780px; margin: 0 auto; padding: 36px 24px 90px; }
+  .back-links { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-bottom: 24px; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 600; color: var(--ink-mute); text-decoration: none; }
+  .back-link:hover { color: var(--navy); }
+  .lesson-head { margin-bottom: 8px; }
+  .lesson-eyebrow { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); font-weight: 700; margin: 0 0 8px; }
+  .lesson-head h1 { font-size: 28px; margin: 0 0 6px; line-height: 1.2; }
+  .lesson-sub { color: var(--ink-mute); font-size: 14.5px; margin: 0 0 32px; }
+  .content-card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 36px 40px; }
+  .why-box { background: var(--teal-soft); border-radius: 10px; padding: 18px 20px; margin-bottom: 28px; }
+  .why-box p { color: #205c5d; margin: 0; font-size: 14px; }
+  .why-box .label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #205c5d; margin: 0 0 8px; }
+  .objectives-list { margin: 0 0 28px; padding-left: 22px; }
+  .objectives-list li { font-size: 14.5px; margin-bottom: 6px; }
+  .section-block { margin-bottom: 40px; }
+  .section-block:last-child { margin-bottom: 0; }
+  .section-title { font-size: 20px; padding-bottom: 10px; margin: 0 0 20px; border-bottom: 2px solid var(--teal); }
+  .subsection-title { font-size: 16px; margin: 24px 0 10px; }
+  .subsection-title:first-child { margin-top: 0; }
+  .sub-label { font-size: 14px; font-weight: 700; color: var(--navy); margin: 18px 0 6px; }
+  .content-card p { font-size: 14.5px; color: var(--ink); margin: 0 0 14px; }
+  .content-card ul, .content-card ol { margin: 0 0 14px; padding-left: 22px; }
+  .content-card li { font-size: 14.5px; margin-bottom: 6px; }
+  .content-card ul li strong, .content-card ol li strong { color: var(--navy); }
+  .lesson-table-wrap { overflow-x: auto; margin: 0 0 20px; border-radius: 10px; border: 1px solid var(--line); }
+  table.lesson-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  table.lesson-table th { background: var(--navy); color: var(--white); text-align: left; padding: 10px 14px; font-weight: 600; font-size: 12.5px; letter-spacing: 0.02em; }
+  table.lesson-table td { padding: 10px 14px; border-bottom: 1px solid var(--line); color: var(--ink); vertical-align: top; }
+  table.lesson-table tr:last-child td { border-bottom: none; }
+  table.lesson-table tr:nth-child(even) td { background: var(--cream); }
+  table.lesson-table td:first-child { font-weight: 600; color: var(--navy); }
+  .callout { border-radius: 10px; padding: 18px 20px; margin: 20px 0; }
+  .callout-teal { background: var(--teal-soft); }
+  .callout-terracotta { background: var(--terracotta-soft); }
+  .callout-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 8px; }
+  .callout-teal .callout-label { color: #205c5d; }
+  .callout-terracotta .callout-label { color: #a24e2a; }
+  .callout p { margin: 0; font-size: 14px; }
+  .callout-teal p { color: #205c5d; }
+  .callout-terracotta p { color: #712b13; }
+  .summary-block { background: var(--navy); border-radius: var(--radius); padding: 32px 36px; margin-top: 44px; }
+  .summary-block h2 { color: var(--white); font-size: 22px; margin: 0 0 4px; border: none; padding: 0; }
+  .summary-block .summary-sub { color: rgba(255,255,255,0.6); font-size: 13px; margin: 0 0 22px; }
+  .summary-block h3 { color: var(--white); font-size: 15px; margin: 26px 0 12px; }
+  .takeaway-list { margin: 0; padding-left: 20px; }
+  .takeaway-list li { color: rgba(255,255,255,0.85); font-size: 13.5px; line-height: 1.6; margin-bottom: 10px; }
+  .looking-ahead { background: rgba(255,255,255,0.08); border-radius: 10px; padding: 16px 20px; margin-top: 24px; }
+  .looking-ahead .label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--terracotta); margin: 0 0 8px; }
+  .looking-ahead p { color: rgba(255,255,255,0.85); margin: 0; font-size: 13.5px; }
+  .glossary-wrap { border-radius: 10px; overflow: hidden; margin-bottom: 8px; background: rgba(255,255,255,0.04); }
+  table.glossary-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.glossary-table td { padding: 9px 14px; vertical-align: top; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  table.glossary-table tr:last-child td { border-bottom: none; }
+  table.glossary-table tr:nth-child(even) td { background: rgba(255,255,255,0.04); }
+  table.glossary-table td:first-child { font-weight: 700; color: var(--terracotta); white-space: nowrap; width: 180px; }
+  table.glossary-table td:last-child { color: rgba(255,255,255,0.82); }
+  .quiz-footer { margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--line); text-align: center; }
+  .quiz-footer p { font-size: 13.5px; color: var(--ink-mute); margin: 0 0 16px; }
+  .quiz-btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px; border-radius: 999px; background: var(--terracotta); color: var(--white); font-size: 14.5px; font-weight: 600; text-decoration: none; box-shadow: 0 4px 14px rgba(217,118,74,0.3); }
+  .quiz-note { font-size: 12.5px; color: var(--ink-mute); margin-top: 14px; }
+  @media (max-width: 560px) { .content-card { padding: 26px 20px; } .summary-block { padding: 24px 20px; } }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <a class="site-logo" href="../dashboard.html">Core <span>Learning</span></a>
+    <button class="nav-link" id="logout-btn">Log out</button>
+  </div>
+</nav>
+
+<div class="loading-state" id="loading-state">
+  <div class="spinner"></div>
+  <span>Loading…</span>
+</div>
+
+<div id="page-content">
+<div class="shell">
+
+  <div class="back-links">
+    <a class="back-link" href="../module-01.html">← Back to Module 01</a>
+    <a class="back-link" href="../dashboard.html">← Back to Dashboard</a>
+  </div>
+
+  <div class="lesson-head">
+    <p class="lesson-eyebrow">Module 01 — Intermediate</p>
+    <h1>Advanced Coaching Methodology</h1>
+    <p class="lesson-sub">Written Guide + Quiz</p>
+  </div>
+
+  <div class="content-card">
+
+    <div class="why-box">
+      <p class="label">Why It Matters</p>
+      <p>Completing the Foundations course gave you the content knowledge — anatomy, biomechanics, physiology, training principles. This module is about shifting how you use that knowledge. Great coaches aren't defined by what they know; they're defined by how they translate knowledge into athlete change. That translation is a skill set of its own, one grounded in learning science, coaching philosophy, and evidence-based practice.</p>
+    </div>
+
+    <h2 class="section-title">Learning Objectives</h2>
+    <p>By the end of this module, you will be able to:</p>
+    <ul class="objectives-list">
+      <li>Distinguish between evidence-based coaching and intuition-based coaching, and describe how to integrate both</li>
+      <li>Explain the core principles of motor learning theory and apply them to climbing instruction</li>
+      <li>Compare implicit and explicit instruction and select the appropriate approach for a given coaching scenario</li>
+      <li>Describe the constraints-led approach (CLA) and design a constraint-based coaching session</li>
+      <li>Apply a structured reflective practice framework to your own coaching</li>
+      <li>Articulate the foundations of your personal coaching philosophy</li>
+    </ul>
+
+    <!-- SECTION 1 -->
+    <div class="section-block">
+      <h2 class="section-title">Section 1: Evidence-Based Coaching in Practice</h2>
+
+      <p>Evidence-based coaching (EBC) is not about replacing your coaching instincts with research papers. It is about disciplined integration — using the best available evidence alongside your professional expertise and your athlete's individual needs and preferences to make better coaching decisions.</p>
+
+      <h3 class="subsection-title">1.1 The Three Pillars of EBC</h3>
+      <div class="lesson-table-wrap">
+        <table class="lesson-table">
+          <tr><th>Pillar</th><th>What It Means in Practice</th></tr>
+          <tr><td>Best Available Evidence</td><td>Peer-reviewed research, systematic reviews, and high-quality case studies relevant to your coaching question. Sport science journals, physiology literature, motor learning research.</td></tr>
+          <tr><td>Professional Expertise</td><td>Your accumulated coaching experience, pattern recognition, and contextual judgment. Research can't replace time on the wall watching athletes.</td></tr>
+          <tr><td>Athlete Values &amp; Context</td><td>The individual athlete's goals, preferences, life situation, and what matters to them. The best programme is the one the athlete will actually follow.</td></tr>
+        </table>
+      </div>
+
+      <p>In climbing coaching, EBC means being able to explain <em>why</em> you're prescribing a protocol — not just 'this is what worked for me' but 'here's the rationale, here's the evidence, and here's how I've adapted it to your situation.' That level of professional clarity builds trust with athletes and sets you apart.</p>
+
+      <h3 class="subsection-title">1.2 Common Coaching Myths Worth Questioning</h3>
+      <ul>
+        <li><strong>"More volume always builds more fitness."</strong> Volume without recovery degrades rather than improves performance. The dose-response relationship depends heavily on training history and individual recovery capacity.</li>
+        <li><strong>"Pain during training is a sign of hard work."</strong> Discomfort and productive overload are distinct from injury-generating stress. Coaches who cannot distinguish these create chronically injured athletes.</li>
+        <li><strong>"Technique must be perfect before adding intensity."</strong> Some technical refinement happens best under moderate load. Waiting for perfect technique before challenging an athlete can itself prevent development.</li>
+        <li><strong>"Mental toughness is a fixed trait."</strong> Psychological skills are trainable. Framing mental toughness as fixed removes the coach's agency — and the athlete's.</li>
+      </ul>
+
+      <div class="callout callout-teal">
+        <p class="callout-label">Reflection Point</p>
+        <p>Think of one coaching decision you make regularly — a drill you use, a cue you default to, a protocol you prescribe. What is the evidence base for it? Could you explain it to a sceptical colleague? Could you explain it to a scientist? Both tests are worth running.</p>
+      </div>
+
+      <h3 class="subsection-title">1.3 Hierarchy of Evidence</h3>
+      <p>Not all evidence is equal. When evaluating research relevant to climbing coaching, it helps to understand the hierarchy:</p>
+      <div class="lesson-table-wrap">
+        <table class="lesson-table">
+          <tr><th>Level</th><th>Type</th><th>Strength</th></tr>
+          <tr><td>1</td><td>Systematic reviews and meta-analyses</td><td>Highest — synthesise many studies</td></tr>
+          <tr><td>2</td><td>Randomised controlled trials (RCTs)</td><td>High — controlled conditions</td></tr>
+          <tr><td>3</td><td>Cohort and case-control studies</td><td>Moderate — observational</td></tr>
+          <tr><td>4</td><td>Case studies and expert opinion</td><td>Lower — but often most accessible in climbing</td></tr>
+          <tr><td>5</td><td>Anecdote and tradition</td><td>Lowest — but historically dominant in climbing coaching</td></tr>
+        </table>
+      </div>
+      <p>Climbing-specific research is still developing. Much foundational sport science comes from adjacent disciplines (gymnastics, tennis, weightlifting). Your job is to bridge the gap — taking high-quality general evidence and applying it intelligently to the specific demands of climbing.</p>
+    </div>
+
+    <!-- SECTION 2 -->
+    <div class="section-block">
+      <h2 class="section-title">Section 2: Motor Learning Theory Applied</h2>
+
+      <p>Motor learning is the study of how movement skills are acquired, retained, and transferred. It is arguably the most practically relevant field of science for a climbing coach, because climbing is fundamentally a movement skill domain. Understanding how learning actually works changes what you do in every session.</p>
+
+      <h3 class="subsection-title">2.1 Stages of Motor Learning</h3>
+      <p>Fitts and Posner's three-stage model remains the most useful framework for coaches:</p>
+      <div class="lesson-table-wrap">
+        <table class="lesson-table">
+          <tr><th>Stage</th><th>Characteristics</th><th>Coaching Implications</th></tr>
+          <tr><td>Cognitive (Beginner)</td><td>High cognitive load, inconsistent performance, frequent errors, thinking through each movement consciously</td><td>Explicit instruction appropriate here. Clear verbal cues, demonstrations, error correction. Keep the task simple. Expect high variability.</td></tr>
+          <tr><td>Associative (Intermediate)</td><td>Reduced errors, more consistent, beginning to self-detect errors, less conscious effort required</td><td>Shift from external error-correction to guiding self-evaluation. Use questioning over telling. Begin introducing variability.</td></tr>
+          <tr><td>Autonomous (Advanced)</td><td>Movement largely automatic, low conscious demand, stable performance under pressure</td><td>Explicit instruction can disrupt automaticity. Use task constraints and variability rather than verbal instruction. Focus on tactical and contextual elements.</td></tr>
+        </table>
+      </div>
+
+      <div class="callout callout-terracotta">
+        <p class="callout-label">Common Error</p>
+        <p>Coaches often apply cognitive-stage interventions (explicit correction, verbal instruction) to autonomous-stage athletes. Telling an experienced climber exactly what to do with their feet can actually interfere with their automated movement — a phenomenon called 'reinvestment'. The more skilled the athlete, the less explicit instruction is usually warranted.</p>
+      </div>
+
+      <h3 class="subsection-title">2.2 Practice Design: Massed vs. Distributed</h3>
+      <p><strong>Massed practice</strong> involves extended repetition of a skill with minimal rest. Performance during massed practice often looks better than it actually is — fatigue and repetition artificially inflate short-term performance while reducing long-term retention.</p>
+      <p><strong>Distributed practice</strong> spaces repetitions with rest periods or different tasks between them. It tends to feel slower — the athlete appears to forget and relearn — but produces better long-term retention and transfer.</p>
+      <p>For climbing coaching, this means that drilling a movement repeatedly in one session may feel productive but yields less durable learning than returning to the same movement across multiple sessions with other work in between.</p>
+
+      <h3 class="subsection-title">2.3 Blocked vs. Variable Practice</h3>
+      <ul>
+        <li><strong>Blocked practice</strong> — repeat the same movement/task until it is reliable, then move on. Good for early-stage learning where consistency is the goal.</li>
+        <li><strong>Variable practice</strong> — mix movement types, hold types, sequences. Creates interference, which slows short-term acquisition but dramatically improves transfer to novel situations.</li>
+      </ul>
+      <p>The implication for route-setting and session design: for beginners, some blocked repetition on specific movement patterns makes sense. For intermediate and advanced athletes, variable practice that challenges them to solve novel problems is more effective at building real-world climbing skill.</p>
+
+      <h3 class="subsection-title">2.4 Feedback: Timing, Frequency, and Type</h3>
+      <div class="lesson-table-wrap">
+        <table class="lesson-table">
+          <tr><th>Feedback Variable</th><th>Research Finding</th><th>Practical Application</th></tr>
+          <tr><td>Frequency</td><td>Less is often more. High-frequency feedback creates dependency and reduces self-monitoring.</td><td>Fade feedback over time. Ask athletes what they noticed before giving your observation.</td></tr>
+          <tr><td>Timing</td><td>Immediate feedback aids performance; slightly delayed feedback aids learning.</td><td>Allow a moment of athlete self-reflection after a movement before providing feedback.</td></tr>
+          <tr><td>Focus (internal vs external)</td><td>External focus (effect on the environment) produces better learning than internal focus (body position).</td><td>'Push through that foothold' beats 'straighten your knee'. 'Stay light on the wall' beats 'don't bend your arms'.</td></tr>
+          <tr><td>Type (KP vs KR)</td><td>Knowledge of performance (how) complements knowledge of results (outcome).</td><td>'Your hips swung out' (KP) gives more learning value than 'you fell off' (KR) alone.</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- SECTION 3 -->
+    <div class="section-block">
+      <h2 class="section-title">Section 3: Implicit vs. Explicit Instruction</h2>
+
+      <p>One of the most consequential decisions a coach makes is whether to tell an athlete what to do or to design an environment in which they discover it themselves. This is the implicit–explicit spectrum.</p>
+
+      <h3 class="subsection-title">3.1 Explicit Instruction</h3>
+      <p>Explicit instruction involves directly communicating rules, techniques, or movement patterns to the athlete. It is efficient for early-stage learning, works well under low-pressure conditions, and allows rapid correction of dangerous errors. The limitation: explicitly learned skills are more susceptible to breakdown under pressure, fatigue, and anxiety — because they depend on conscious attention, which is compromised in competition.</p>
+
+      <h3 class="subsection-title">3.2 Implicit Instruction</h3>
+      <p>Implicit learning occurs when athletes acquire movement patterns without conscious awareness of the rules governing them. It happens through trial, error, and task constraints rather than verbal instruction. Implicitly acquired skills are more robust under pressure — the athlete does not have to 'think' about what they are doing, so fatigue and anxiety have less impact.</p>
+
+      <p>Techniques for promoting implicit learning in climbing coaching include:</p>
+      <ul>
+        <li>Analogy instruction — 'move like you're walking up stairs' rather than 'flex your knee to 90 degrees before stepping'</li>
+        <li>Errorless learning — grading tasks so the athlete succeeds at the movement without being told how</li>
+        <li>Directing attention externally — to the hold, the wall, the effect — rather than to body parts</li>
+        <li>Discovery learning — 'find three ways to do this move' rather than 'do it this way'</li>
+      </ul>
+
+      <h3 class="subsection-title">3.3 Choosing Your Approach</h3>
+      <div class="lesson-table-wrap">
+        <table class="lesson-table">
+          <tr><th>Situation</th><th>Preferred Approach</th></tr>
+          <tr><td>New climber learning basic footwork</td><td>Explicit — they need to know what to look for and what to aim for</td></tr>
+          <tr><td>Intermediate athlete in a training session</td><td>Mix — some explicit framing, mostly implicit/discovery-based practice</td></tr>
+          <tr><td>Advanced athlete preparing for competition</td><td>Primarily implicit — minimise verbal instruction, use constraints and representative tasks</td></tr>
+          <tr><td>Athlete under high stress or anxiety</td><td>Implicit — explicit instruction competes with attentional resources already under stress</td></tr>
+          <tr><td>Athlete learning a new move type (e.g. heel hook)</td><td>Explicit first, then fade toward implicit as the pattern establishes</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- SECTION 4 -->
+    <div class="section-block">
+      <h2 class="section-title">Section 4: The Constraints-Led Approach</h2>
+
+      <p>The constraints-led approach (CLA) draws from ecological dynamics and Newell's model of constraints. Rather than prescribing technique, the coach manipulates the task, environment, and athlete constraints to guide emergent movement solutions. The climber solves the problem; the coach designs the problem.</p>
+
+      <h3 class="subsection-title">4.1 Newell's Three Constraint Categories</h3>
+      <div class="lesson-table-wrap">
+        <table class="lesson-table">
+          <tr><th>Constraint Type</th><th>Definition</th><th>Climbing Examples</th></tr>
+          <tr><td>Organism (Athlete)</td><td>Physical, psychological, and information-processing characteristics of the athlete</td><td>Wingspan, strength, fear level, fatigue, experience, attention</td></tr>
+          <tr><td>Task</td><td>The goal, rules, or requirements of the movement task</td><td>Hold type, angle, sequence requirements, time pressure, feet-on rules</td></tr>
+          <tr><td>Environment</td><td>Physical and social context surrounding the task</td><td>Wall angle, hold spacing, ambient noise, presence of others watching</td></tr>
+        </table>
+      </div>
+
+      <h3 class="subsection-title">4.2 Designing Constraints-Led Sessions</h3>
+      <p>Instead of telling an athlete 'keep your hips close to the wall', a CLA coach might:</p>
+      <ul>
+        <li>Remove footholds that allow the climber to push away from the wall</li>
+        <li>Set a problem where the solution only works if the hips are close</li>
+        <li>Use a physical marker (a foam pad taped to the wall at hip height) that acts as tactile feedback</li>
+        <li>Apply a rule: 'your stomach cannot touch this tape line'</li>
+      </ul>
+      <p>All of these achieve the same coaching goal — hip positioning — without a single verbal instruction about hips. The athlete discovers the solution through the constraint.</p>
+
+      <div class="callout callout-teal">
+        <p class="callout-label">CLA Design Principle</p>
+        <p>A well-designed constraint makes the desired movement the path of least resistance. The athlete does not need to be told what to do — the environment makes it obvious. When you find yourself correcting the same thing repeatedly, the cue is not the problem. The environment is. Redesign the task.</p>
+      </div>
+
+      <h3 class="subsection-title">4.3 Representative Learning Design</h3>
+      <p>One of CLA's key principles is representative practice — training tasks should share the information-movement couplings of the performance environment. For climbing, this means:</p>
+      <ul>
+        <li>Training on routes or problems that match the style of competition or target goals</li>
+        <li>Practising route-reading in conditions that match competition (timed, one look, chalk on)</li>
+        <li>Simulating fatigue and pressure during skill work, not just during conditioning</li>
+        <li>Avoiding over-use of artificial environments (hyper-perfect conditions) that don't transfer</li>
+      </ul>
+    </div>
+
+    <!-- SECTION 5 -->
+    <div class="section-block">
+      <h2 class="section-title">Section 5: Reflective Practice &amp; Coaching Philosophy</h2>
+
+      <h3 class="subsection-title">5.1 Why Reflective Practice Matters</h3>
+      <p>Coaching experience alone does not produce coaching expertise. What produces expertise is <em>deliberate reflection on experience</em> — the structured process of examining what happened, why it happened, and what you would do differently. Coaches who do not reflect tend to repeat the same patterns regardless of their effectiveness.</p>
+
+      <p>Schön's model distinguishes two forms of reflection:</p>
+      <ul>
+        <li><strong>Reflection-in-action</strong> — adjusting in real time during a session. Reading an athlete's body language, recognising a cue isn't working, shifting approach mid-drill.</li>
+        <li><strong>Reflection-on-action</strong> — deliberate review after the session. Journalling, reviewing video, debriefing with a co-coach.</li>
+      </ul>
+
+      <h3 class="subsection-title">5.2 A Simple Reflective Framework</h3>
+      <p>After each significant coaching session, work through these questions:</p>
+      <ol>
+        <li><strong>What happened?</strong> (Factual description — what did I do, what did the athlete do?)</li>
+        <li><strong>What worked?</strong> (What produced the response I wanted?)</li>
+        <li><strong>What didn't work?</strong> (What produced a different or no response?)</li>
+        <li><strong>Why?</strong> (What is my hypothesis for the difference?)</li>
+        <li><strong>What will I try next time?</strong> (Specific, actionable change)</li>
+      </ol>
+      <p>This does not need to be a lengthy process. Five minutes of focused reflection after a session, documented in a coaching journal, compounds dramatically over time.</p>
+
+      <h3 class="subsection-title">5.3 Building Your Coaching Philosophy</h3>
+      <p>A coaching philosophy is not a mission statement. It is a set of deeply held beliefs about athletes, learning, and performance that guide your decisions — particularly when things are ambiguous or difficult. It answers questions like:</p>
+      <ul>
+        <li>What is my primary role as a coach?</li>
+        <li>What do I believe about how athletes learn?</li>
+        <li>How do I think about athlete autonomy vs. coach direction?</li>
+        <li>What does success look like for the athletes I coach?</li>
+        <li>What won't I compromise, regardless of pressure?</li>
+      </ul>
+
+      <div class="callout callout-terracotta">
+        <p class="callout-label">Practical Task</p>
+        <p>Write a one-page coaching philosophy statement. It does not need to be polished. It needs to be honest. What do you actually believe about coaching? Where do you draw your lines? Return to it in six months and see what has changed. The evolution of that document is a record of your development as a coach.</p>
+      </div>
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="summary-block">
+      <h2>Module Summary</h2>
+      <p class="summary-sub">Advanced Coaching Methodology</p>
+
+      <h3>Key Takeaways</h3>
+      <ul class="takeaway-list">
+        <li>Evidence-based coaching integrates research, professional expertise, and athlete context — it does not replace judgment with research.</li>
+        <li>Motor learning theory shows that how you structure practice matters as much as what you practise. Variability, distribution, and appropriate feedback designs produce more durable skill.</li>
+        <li>Implicit instruction builds robust, pressure-resistant skill. Explicit instruction is a tool for early learning, not a default mode.</li>
+        <li>The constraints-led approach shifts the coach's role from instructor to environment designer — make the right movement the natural solution rather than the instructed one.</li>
+        <li>Reflective practice is the engine of coaching expertise. Experience without reflection does not compound.</li>
+        <li>A coaching philosophy gives you a decision-making compass for ambiguous situations — and it evolves as you grow.</li>
+      </ul>
+
+      <div class="looking-ahead">
+        <p class="label">Coming Up — Module 02</p>
+        <p>Module 02 applies your coaching eye to data: running a full athlete assessment battery, interpreting results relative to climbing limiter profiles, and writing reports that drive programme decisions.</p>
+      </div>
+
+      <h3>Glossary</h3>
+      <div class="glossary-wrap">
+        <table class="glossary-table">
+          <tr><td>Evidence-Based Coaching</td><td>Integration of best available research, professional expertise, and athlete values to guide coaching decisions</td></tr>
+          <tr><td>Motor Learning</td><td>Study of how movement skills are acquired, retained, and transferred to new contexts</td></tr>
+          <tr><td>Implicit Learning</td><td>Skill acquisition without conscious awareness of the rules governing performance; more robust under pressure</td></tr>
+          <tr><td>Explicit Instruction</td><td>Direct communication of rules or techniques; efficient for early learning, vulnerable to pressure disruption</td></tr>
+          <tr><td>Constraints-Led Approach</td><td>Coaching methodology that manipulates task, environment, and athlete constraints to guide emergent movement solutions</td></tr>
+          <tr><td>Variable Practice</td><td>Practice structure that mixes tasks; slower initial acquisition but better long-term transfer</td></tr>
+          <tr><td>External Focus</td><td>Directing athlete attention to the effect of movement (hold, wall) rather than body parts; superior for learning</td></tr>
+          <tr><td>Representative Practice</td><td>Training designs that share information-movement couplings with the target performance environment</td></tr>
+          <tr><td>Reflective Practice</td><td>Structured examination of coaching experience to drive development and expertise</td></tr>
+          <tr><td>Coaching Philosophy</td><td>A personal set of beliefs about athletes, learning, and performance that guides coaching decisions</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="quiz-footer">
+      <p>When you're ready, complete the quiz to progress to Module 02. You need 80% to unlock the next module.</p>
+      <a class="quiz-btn" href="../module-01-quiz.html">Take the Quiz →</a>
+      <p class="quiz-note">The quiz covers all five sections of this lesson.</p>
+    </div>
+
+  </div><!-- end content-card -->
+</div><!-- end shell -->
+</div><!-- end page-content -->
+
+<footer class="site-footer" style="background: var(--navy); color: rgba(255,255,255,0.55); padding: 32px 24px; text-align: center; font-size: 13px;">
+  <p>Core Learning — part of the Core brand family. <a href="mailto:info@corelearning.co.za" style="color: rgba(255,255,255,0.75);">info@corelearning.co.za</a></p>
+</footer>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAN9BVXDo15Mav2zketm5jhKRoBjs2yYX8",
+    authDomain: "core-coaching-login.firebaseapp.com",
+    projectId: "core-coaching-login",
+    storageBucket: "core-coaching-login.firebasestorage.app",
+    messagingSenderId: "184932860937",
+    appId: "1:184932860937:web:83da63f1453eff8ca824d8",
+    measurementId: "G-N7WNPL47WQ"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) { window.location.href = "../index.html"; return; }
+    let data = {};
+    try {
+      const snap = await getDoc(doc(db, "users", user.uid));
+      if (snap.exists()) data = snap.data();
+    } catch(e) {}
+    const unlockedModules = Array.isArray(data.unlockedModules) ? data.unlockedModules : [];
+    if (!unlockedModules.includes(1)) { window.location.href = "../dashboard.html"; return; }
+    document.getElementById("loading-state").style.display = "none";
+    document.getElementById("page-content").style.display = "block";
+  });
+
+  document.getElementById("logout-btn").addEventListener("click", () => {
+    const auth2 = getAuth();
+    signOut(auth2).then(() => { window.location.href = "../index.html"; });
+  });
+</script>
+</body>
+</html>

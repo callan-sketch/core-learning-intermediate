@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 07 — Introduction to Mental Performance | Core Learning Intermediate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --navy: #1b2a3a; --teal: #3a8a8c; --teal-soft: #e8f2f2; --terracotta: #d9764a; --terracotta-soft: #fbe8dd; --cream: #f7f5f1; --ink: #2a2f35; --ink-mute: #6b7480; --line: #e2e0da; --white: #ffffff; --radius: 14px; --shadow: 0 1px 2px rgba(27,42,58,0.06), 0 8px 24px rgba(27,42,58,0.08); }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--cream); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; line-height: 1.65; }
+  h1, h2, h3, h4 { font-family: 'Fraunces', Georgia, serif; font-weight: 600; letter-spacing: -0.01em; color: var(--navy); }
+  a { color: var(--teal); }
+  .loading-state { display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 14px; color: var(--ink-mute); padding: 100px 24px; }
+  .spinner { width: 16px; height: 16px; border: 2px solid var(--line); border-top-color: var(--teal); border-radius: 50%; animation: spin 0.7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  #page-content { display: none; }
+  .site-nav { background: var(--navy); padding: 0 24px; }
+  .site-nav-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .site-logo { color: var(--white); font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: 19px; text-decoration: none; }
+  .site-logo span { color: var(--terracotta); }
+  .nav-link { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; font-weight: 500; background: none; border: none; cursor: pointer; font-family: inherit; }
+  .shell { max-width: 780px; margin: 0 auto; padding: 36px 24px 90px; }
+  .back-links { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-bottom: 24px; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 600; color: var(--ink-mute); text-decoration: none; }
+  .back-link:hover { color: var(--navy); }
+  .lesson-eyebrow { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); font-weight: 700; margin: 0 0 8px; }
+  .lesson-head h1 { font-size: 28px; margin: 0 0 6px; line-height: 1.2; }
+  .lesson-sub { color: var(--ink-mute); font-size: 14.5px; margin: 0 0 32px; }
+  .content-card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 36px 40px; }
+  .why-box { background: var(--teal-soft); border-radius: 10px; padding: 18px 20px; margin-bottom: 28px; }
+  .why-box p { color: #205c5d; margin: 0; font-size: 14px; }
+  .why-box .label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #205c5d; margin: 0 0 8px; }
+  .objectives-list { margin: 0 0 28px; padding-left: 22px; }
+  .objectives-list li { font-size: 14.5px; margin-bottom: 6px; }
+  .section-block { margin-bottom: 40px; }
+  .section-title { font-size: 20px; padding-bottom: 10px; margin: 0 0 20px; border-bottom: 2px solid var(--teal); }
+  .subsection-title { font-size: 16px; margin: 24px 0 10px; }
+  .content-card p { font-size: 14.5px; color: var(--ink); margin: 0 0 14px; }
+  .content-card ul, .content-card ol { margin: 0 0 14px; padding-left: 22px; }
+  .content-card li { font-size: 14.5px; margin-bottom: 6px; }
+  .content-card li strong { color: var(--navy); }
+  .lesson-table-wrap { overflow-x: auto; margin: 0 0 20px; border-radius: 10px; border: 1px solid var(--line); }
+  table.lesson-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  table.lesson-table th { background: var(--navy); color: var(--white); text-align: left; padding: 10px 14px; font-weight: 600; font-size: 12.5px; }
+  table.lesson-table td { padding: 10px 14px; border-bottom: 1px solid var(--line); color: var(--ink); vertical-align: top; }
+  table.lesson-table tr:last-child td { border-bottom: none; }
+  table.lesson-table tr:nth-child(even) td { background: var(--cream); }
+  table.lesson-table td:first-child { font-weight: 600; color: var(--navy); }
+  .callout { border-radius: 10px; padding: 18px 20px; margin: 20px 0; }
+  .callout-teal { background: var(--teal-soft); }
+  .callout-terracotta { background: var(--terracotta-soft); }
+  .callout-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 8px; }
+  .callout-teal .callout-label { color: #205c5d; }
+  .callout-terracotta .callout-label { color: #a24e2a; }
+  .callout p { margin: 0; font-size: 14px; }
+  .callout-teal p { color: #205c5d; }
+  .callout-terracotta p { color: #712b13; }
+  .summary-block { background: var(--navy); border-radius: var(--radius); padding: 32px 36px; margin-top: 44px; }
+  .summary-block h2 { color: var(--white); font-size: 22px; margin: 0 0 4px; }
+  .summary-block .summary-sub { color: rgba(255,255,255,0.6); font-size: 13px; margin: 0 0 22px; }
+  .summary-block h3 { color: var(--white); font-size: 15px; margin: 26px 0 12px; }
+  .takeaway-list { margin: 0; padding-left: 20px; }
+  .takeaway-list li { color: rgba(255,255,255,0.85); font-size: 13.5px; line-height: 1.6; margin-bottom: 10px; }
+  .looking-ahead { background: rgba(255,255,255,0.08); border-radius: 10px; padding: 16px 20px; margin-top: 24px; }
+  .looking-ahead .label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--terracotta); margin: 0 0 8px; }
+  .looking-ahead p { color: rgba(255,255,255,0.85); margin: 0; font-size: 13.5px; }
+  .glossary-wrap { border-radius: 10px; overflow: hidden; margin-bottom: 8px; background: rgba(255,255,255,0.04); }
+  table.glossary-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.glossary-table td { padding: 9px 14px; vertical-align: top; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  table.glossary-table tr:last-child td { border-bottom: none; }
+  table.glossary-table tr:nth-child(even) td { background: rgba(255,255,255,0.04); }
+  table.glossary-table td:first-child { font-weight: 700; color: var(--terracotta); white-space: nowrap; width: 200px; }
+  table.glossary-table td:last-child { color: rgba(255,255,255,0.82); }
+  .quiz-footer { margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--line); text-align: center; }
+  .quiz-footer p { font-size: 13.5px; color: var(--ink-mute); margin: 0 0 16px; }
+  .quiz-btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px; border-radius: 999px; background: var(--terracotta); color: var(--white); font-size: 14.5px; font-weight: 600; text-decoration: none; box-shadow: 0 4px 14px rgba(217,118,74,0.3); }
+  .quiz-note { font-size: 12.5px; color: var(--ink-mute); margin-top: 14px; }
+  @media (max-width: 560px) { .content-card { padding: 26px 20px; } .summary-block { padding: 24px 20px; } }
+</style>
+</head>
+<body>
+<nav class="site-nav"><div class="site-nav-inner"><a class="site-logo" href="../dashboard.html">Core <span>Learning</span></a><button class="nav-link" id="logout-btn">Log out</button></div></nav>
+<div class="loading-state" id="loading-state"><div class="spinner"></div><span>Loading…</span></div>
+<div id="page-content">
+<div class="shell">
+  <div class="back-links"><a class="back-link" href="../module-07.html">← Back to Module 07</a><a class="back-link" href="../dashboard.html">← Back to Dashboard</a></div>
+  <div class="lesson-head">
+    <p class="lesson-eyebrow">Module 07 — Intermediate</p>
+    <h1>Introduction to Mental Performance</h1>
+    <p class="lesson-sub">Written Guide + Quiz</p>
+  </div>
+  <div class="content-card">
+
+    <div class="why-box">
+      <p class="label">Why It Matters</p>
+      <p>At intermediate and advanced levels of climbing performance, the gap between athletes of similar physical capacity is often explained by mental skills — or the lack of them. Fear management, focus, pre-performance routines, and self-talk patterns are trainable skills. Coaches who can identify mental performance limiters and introduce basic tools are significantly more effective than those who treat the mental side of climbing as outside their scope.</p>
+    </div>
+
+    <h2 class="section-title">Learning Objectives</h2>
+    <ul class="objectives-list">
+      <li>Understand the relationship between arousal, anxiety, and performance</li>
+      <li>Identify common fear and anxiety patterns in climbing athletes</li>
+      <li>Introduce and teach basic focus and concentration skills</li>
+      <li>Help athletes build pre-performance routines</li>
+      <li>Understand the role of self-talk and thought patterns in performance</li>
+      <li>Know when mental performance concerns exceed your scope as a coach</li>
+    </ul>
+
+    <div class="section-block">
+      <h2 class="section-title">Section 1: Arousal, Anxiety &amp; Performance</h2>
+
+      <h3 class="subsection-title">1.1 The Arousal-Performance Relationship</h3>
+      <p>Arousal refers to the physiological and psychological state of alertness and activation — it encompasses heart rate, muscle tension, breathing, attention and cognitive activation. The relationship between arousal and performance is not linear; it follows an inverted-U shape (the Yerkes-Dodson curve): too little arousal produces flat, disengaged performance; too much produces overactivation, panic, and breakdown. The optimal zone sits between these extremes.</p>
+      <p>Crucially, the optimal arousal level differs by task type and by individual:</p>
+      <ul>
+        <li>Technical, precision-dependent tasks (delicate slab, precise footwork) require lower arousal — the athlete needs calm and control</li>
+        <li>Power-dependent, explosive tasks (dynamic moves, power bouldering) tolerate higher arousal</li>
+        <li>An athlete who regularly performs well in training but underperforms in competition is often over-aroused (too activated in competition contexts)</li>
+        <li>An athlete who goes 'flat' in competition is often under-aroused — they need activation strategies, not calming ones</li>
+      </ul>
+
+      <h3 class="subsection-title">1.2 Anxiety in Climbing</h3>
+      <p>Anxiety is not the same as arousal. Anxiety is the cognitive and emotional component — the worry, the anticipation of negative outcomes, the self-doubt. It can occur with or without high physiological arousal, and it has its own relationship with performance. <strong>Cognitive anxiety</strong> (the mental worry) tends to impair performance consistently. <strong>Somatic anxiety</strong> (the physical symptoms — sweaty hands, elevated heart rate) is less consistently harmful and can be reinterpreted as readiness ('I'm activated and ready') rather than threat ('I'm panicking').</p>
+      <p>In climbing specifically, anxiety manifests as:</p>
+      <ul>
+        <li>Fear of falling — a primary limiter for many intermediate climbers moving toward lead climbing</li>
+        <li>Performance anxiety in competition — 'freezing', over-gripping, losing technique</li>
+        <li>Fear of embarrassment — avoiding hard problems or routes when others can see</li>
+        <li>Perfectionism — not wanting to try things until guaranteed success, leading to under-challenge</li>
+        <li>Injury anxiety — hypervigilance about pain signals, fear of re-injury after a layoff</li>
+      </ul>
+
+      <h3 class="subsection-title">1.3 Identifying the Athlete's Anxiety Pattern</h3>
+      <p>Before intervening, understand what kind of anxiety is present and when. Ask:</p>
+      <ul>
+        <li>'When does this tend to come up? In training? Only in competition? On certain route types?'</li>
+        <li>'What does it feel like for you? More thoughts and worries, or more physical symptoms?'</li>
+        <li>'Does it affect what you decide to try, or how you perform once you're on the wall?'</li>
+        <li>'Does it get better or worse as a session goes on?'</li>
+      </ul>
+      <p>These questions help distinguish between avoidance anxiety (affecting what the athlete chooses to try) and performance anxiety (affecting how they perform once committed).</p>
+    </div>
+
+    <div class="section-block">
+      <h2 class="section-title">Section 2: Fear of Falling</h2>
+
+      <h3 class="subsection-title">2.1 Why Fear of Falling Is Normal — and Sometimes Useful</h3>
+      <p>Fear of falling is not a weakness or a training problem to eliminate. It is a healthy self-protective instinct. The goal is not fearlessness but <strong>appropriate fear calibration</strong> — being able to assess actual risk accurately, make decisions based on that assessment, and not be limited by fear that is disproportionate to actual danger. Many climbers are limited by fear of safe falls while ignoring genuinely risky situations; a small number are under-fearful in ways that increase injury risk.</p>
+
+      <h3 class="subsection-title">2.2 Graduated Exposure for Fall Fear</h3>
+      <p>Graduated exposure — systematically and progressively exposing an athlete to the feared stimulus in a controlled way — is the evidence-based approach to reducing disproportionate fall fear. The key principles:</p>
+      <ul>
+        <li><strong>Start below the anxiety threshold</strong> — begin with falls the athlete describes as feeling completely safe, even if they seem trivially easy to you</li>
+        <li><strong>Progress gradually</strong> — increase exposure in small steps (a little higher, a little more dynamic, a little more unexpected) rather than sudden jumps</li>
+        <li><strong>Athlete controls the pace</strong> — do not push an athlete to progress faster than they feel ready; that is likely to entrench fear rather than reduce it</li>
+        <li><strong>Debrief after</strong> — 'How did that feel compared to what you expected?' Often the fall felt less bad than the anticipation suggested, and naming that is important</li>
+      </ul>
+      <p>A sample progression for indoor lead fall practice:</p>
+      <ol>
+        <li>Hang on the rope clipped to the first bolt — feel the rope holding you</li>
+        <li>Lower slowly off the first bolt, feeling the belayer's control</li>
+        <li>Short falls (30 cm) with bolt at waist height</li>
+        <li>Short falls with bolt at chest height</li>
+        <li>Stepping off holds into the fall (not jumping)</li>
+        <li>Letting go dynamically from a move</li>
+        <li>Falling unexpectedly from a planned movement sequence</li>
+      </ol>
+
+      <div class="callout callout-teal">
+        <p class="callout-label">Coach Note</p>
+        <p>Fall practice is a specific training activity. It needs a competent belayer, appropriate equipment checks, and a clear communication protocol with the athlete. Never conduct fall practice casually. Brief the athlete on the fall mechanics (relax, spread force, avoid grabbing the rope) before beginning, and ensure the belayer is experienced in giving dynamic catches.</p>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <h2 class="section-title">Section 3: Focus &amp; Concentration</h2>
+
+      <h3 class="subsection-title">3.1 Types of Attentional Focus</h3>
+      <p>Nideffer's model of attentional focus describes attention along two dimensions: width (broad to narrow) and direction (internal to external). Different tasks demand different attentional styles:</p>
+
+      <div class="lesson-table-wrap">
+        <table class="lesson-table">
+          <tr><th>Focus Type</th><th>When Useful in Climbing</th></tr>
+          <tr><td>Broad-external (scanning the environment)</td><td>Reading a route from the ground; assessing the whole problem before starting</td></tr>
+          <tr><td>Narrow-external (focused on one point)</td><td>Locking onto a specific foothold target; reading the next move while hanging on</td></tr>
+          <tr><td>Broad-internal (awareness of body state)</td><td>Checking in with energy levels, tension, breathing before attempting the crux</td></tr>
+          <tr><td>Narrow-internal (single body cue)</td><td>Focusing on one movement — relaxing grip on a rest, initiating a hip twist</td></tr>
+        </table>
+      </div>
+
+      <p>Many climbers default to one attentional style and lack the ability to shift. A climber who is always broad-external (scanning everything) may become overwhelmed on complex routes. A climber who is always narrow-internal (body-focused) may miss critical hold information. Part of mental performance coaching is developing attentional flexibility.</p>
+
+      <h3 class="subsection-title">3.2 The Pre-Performance Routine</h3>
+      <p>A pre-performance routine is a consistent sequence of actions and thought processes that an athlete performs before a significant attempt. Its value is in directing attention, standardising arousal levels, and triggering learned associations with good performance. It is not superstition — it is deliberate attention management.</p>
+      <p>Components of an effective climbing pre-performance routine:</p>
+      <ol>
+        <li><strong>Route/problem reading</strong> — a structured observation with a specific end point (not endless re-reading)</li>
+        <li><strong>Breathing reset</strong> — 2–3 slow, deep breaths to bring arousal to the target level</li>
+        <li><strong>Intention setting</strong> — one specific thing to focus on ('feet first', 'trust the smear', 'move before I think about it')</li>
+        <li><strong>Transition statement</strong> — a brief internal signal that the preparation is complete ('ready to go', 'now')</li>
+      </ol>
+      <p>The routine should be short (under 60–90 seconds), repeatable, and developed by the athlete, not imposed by the coach. Help athletes identify what they already do that works, and formalise it rather than replacing it with a template.</p>
+
+      <h3 class="subsection-title">3.3 Dealing with Distraction</h3>
+      <p>Athletes are distracted in two main ways: external (crowd noise, other athletes, environmental changes) and internal (worry thoughts, physical sensations, self-criticism). The most effective response to distraction is a practised refocusing cue — a specific word, gesture, or thought sequence that returns attention to the task-relevant focus.</p>
+      <p>Help athletes identify:</p>
+      <ul>
+        <li>What typically distracts them (internal vs. external; in training vs. competition)</li>
+        <li>A personal refocusing cue that reliably works for them</li>
+        <li>Practice scenarios where they deliberately introduce distractions and practise refocusing</li>
+      </ul>
+    </div>
+
+    <div class="section-block">
+      <h2 class="section-title">Section 4: Self-Talk &amp; Thought Management</h2>
+
+      <h3 class="subsection-title">4.1 Self-Talk Patterns in Athletes</h3>
+      <p>Self-talk — the internal monologue athletes experience during training and competition — has measurable effects on performance. Negative self-talk ('I can't do this', 'I always fall here', 'I'm rubbish at overhang') is associated with reduced performance, increased anxiety, and lower confidence. Instructional self-talk ('step left first', 'breathe', 'one move at a time') is associated with improved technical execution. Motivational self-talk ('you've got this', 'keep going') supports effort and confidence.</p>
+      <p>The first step is awareness. Many athletes do not notice their own self-talk patterns until asked to pay attention to them. A useful coaching exercise: ask athletes to describe their internal monologue during a hard attempt immediately after the attempt while it is fresh. The patterns they report are often surprising to them.</p>
+
+      <h3 class="subsection-title">4.2 Thought Reframing</h3>
+      <p>Thought reframing is the process of identifying an unhelpful thought and consciously replacing it with one that is more accurate and performance-enabling. It is not about toxic positivity or denying real challenges — it is about generating a more useful perspective.</p>
+
+      <div class="lesson-table-wrap">
+        <table class="lesson-table">
+          <tr><th>Unhelpful Thought</th><th>What It Does</th><th>Reframe</th></tr>
+          <tr><td>'I always fall off at this grade'</td><td>Generalises past failures; predicts failure; drains effort</td><td>'I haven't sent one of these yet — this is where the progress happens'</td></tr>
+          <tr><td>'Everyone is watching me fail'</td><td>Externalises attention; triggers social anxiety</td><td>'My job right now is to focus on this move, not on other people'</td></tr>
+          <tr><td>'I need to do this perfectly'</td><td>Perfectionism; raises stakes unnecessarily; triggers freeze</td><td>'I'm here to try — trying well is enough'</td></tr>
+          <tr><td>'My arms are pumped, I'm going to fall'</td><td>Catastrophises physical sensation; diverts attention to failure prediction</td><td>'I'm pumped — where can I rest? What's the next move?'</td></tr>
+        </table>
+      </div>
+
+      <h3 class="subsection-title">4.3 Knowing Your Scope as a Coach</h3>
+      <p>Mental performance skills — focus, arousal regulation, self-talk, pre-performance routines — are within the scope of a climbing coach. Clinical psychology, anxiety disorders, depression, trauma, and eating disorders are not. As a coach you will encounter athletes whose mental health affects their climbing, but your role is to support their performance and their relationship with the sport, not to provide therapy.</p>
+      <p>Signs that a referral is needed rather than coaching intervention:</p>
+      <ul>
+        <li>Anxiety or fear that significantly disrupts daily life outside of climbing</li>
+        <li>Perfectionism, restriction, or body image concerns that suggest a clinical presentation</li>
+        <li>Mood that the athlete describes as significantly impacting quality of life over an extended period</li>
+        <li>An athlete who describes using climbing to cope with significant emotional pain or trauma</li>
+      </ul>
+      <p>Know how to signpost athletes to appropriate professional support — a GP, psychologist, or sport psychologist — and do so without judgment. Saying 'I think this might benefit from more specialist support than I can offer as a coach' is not a failure; it is good professional practice.</p>
+    </div>
+
+    <div class="summary-block">
+      <h2>Module Summary</h2>
+      <p class="summary-sub">Introduction to Mental Performance</p>
+      <h3>Key Takeaways</h3>
+      <ul class="takeaway-list">
+        <li>Arousal follows an inverted-U relationship with performance. Too little activation produces flat performance; too much produces breakdown. The optimal zone is task- and individual-specific.</li>
+        <li>Cognitive anxiety (the worry) is more consistently harmful than somatic anxiety (physical symptoms). Physical activation can be reinterpreted as readiness rather than threat.</li>
+        <li>Fear of falling is normal and not to be eliminated — but graduated exposure can reduce disproportionate fear and expand the climber's performance range.</li>
+        <li>Attentional flexibility — the ability to shift between broad/narrow and external/internal focus — is a trainable skill that separates advanced performers from intermediates.</li>
+        <li>Pre-performance routines direct attention, standardise arousal, and trigger associations with good performance. They should be developed with the athlete, not imposed.</li>
+        <li>Negative self-talk impairs performance. Instructional and motivational self-talk support it. Awareness is the first step — most athletes don't notice their own patterns until asked.</li>
+        <li>Know your scope. Mental performance coaching is within your remit. Clinical mental health is not.</li>
+      </ul>
+      <div class="looking-ahead">
+        <p class="label">Course Complete</p>
+        <p>You've completed all 7 modules of the Intermediate course. Continue building on this foundation by applying these concepts in your coaching practice, seeking supervision, and moving toward the Advanced level when you're ready.</p>
+      </div>
+      <h3>Glossary</h3>
+      <div class="glossary-wrap">
+        <table class="glossary-table">
+          <tr><td>Arousal</td><td>The physiological and psychological state of alertness and activation; too low produces flat performance, too high produces breakdown</td></tr>
+          <tr><td>Cognitive Anxiety</td><td>The mental/worry component of anxiety — anticipation of negative outcomes, self-doubt; consistently harmful to performance</td></tr>
+          <tr><td>Somatic Anxiety</td><td>The physical symptoms of anxiety — elevated heart rate, sweaty hands, tension; can be reinterpreted as readiness</td></tr>
+          <tr><td>Graduated Exposure</td><td>Systematic, progressive exposure to a feared stimulus in controlled conditions; the evidence-based approach to reducing fear of falling</td></tr>
+          <tr><td>Attentional Flexibility</td><td>The ability to shift between broad/narrow and external/internal focus as the task demands</td></tr>
+          <tr><td>Pre-Performance Routine</td><td>A consistent sequence of actions and thoughts performed before a significant attempt to standardise arousal and direct attention</td></tr>
+          <tr><td>Self-Talk</td><td>An athlete's internal monologue during performance; negative self-talk impairs performance, instructional and motivational self-talk support it</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="quiz-footer">
+      <p>Complete the quiz to finish the Intermediate course. You need 80% to mark Module 07 as complete.</p>
+      <a class="quiz-btn" href="../module-07-quiz.html">Take the Final Quiz →</a>
+      <p class="quiz-note">The quiz covers all four sections of this lesson.</p>
+    </div>
+
+  </div>
+</div>
+</div>
+<footer style="background: var(--navy); color: rgba(255,255,255,0.55); padding: 32px 24px; text-align: center; font-size: 13px;"><p>Core Learning — part of the Core brand family. <a href="mailto:info@corelearning.co.za" style="color: rgba(255,255,255,0.75);">info@corelearning.co.za</a></p></footer>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+  const firebaseConfig = { apiKey: "AIzaSyAN9BVXDo15Mav2zketm5jhKRoBjs2yYX8", authDomain: "core-coaching-login.firebaseapp.com", projectId: "core-coaching-login", storageBucket: "core-coaching-login.firebasestorage.app", messagingSenderId: "184932860937", appId: "1:184932860937:web:83da63f1453eff8ca824d8", measurementId: "G-N7WNPL47WQ" };
+  const app = initializeApp(firebaseConfig); const auth = getAuth(app); const db = getFirestore(app);
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) { window.location.href = "../index.html"; return; }
+    let data = {};
+    try { const snap = await getDoc(doc(db, "users", user.uid)); if (snap.exists()) data = snap.data(); } catch(e) {}
+    if (!(Array.isArray(data.unlockedModules) && data.unlockedModules.includes(7))) { window.location.href = "../dashboard.html"; return; }
+    document.getElementById("loading-state").style.display = "none";
+    document.getElementById("page-content").style.display = "block";
+  });
+  document.getElementById("logout-btn").addEventListener("click", () => signOut(auth).then(() => window.location.href = "../index.html"));
+</script>
+</body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 02 — Athlete Assessment &amp; Data Interpretation | Core Learning Intermediate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --navy: #1b2a3a; --navy-soft: #25394d; --teal: #3a8a8c; --teal-soft: #e8f2f2; --terracotta: #d9764a; --terracotta-soft: #fbe8dd; --cream: #f7f5f1; --ink: #2a2f35; --ink-mute: #6b7480; --line: #e2e0da; --white: #ffffff; --radius: 14px; --shadow: 0 1px 2px rgba(27,42,58,0.06), 0 8px 24px rgba(27,42,58,0.08); }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--cream); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; line-height: 1.65; }
+  h1, h2, h3, h4 { font-family: 'Fraunces', Georgia, serif; font-weight: 600; letter-spacing: -0.01em; color: var(--navy); }
+  a { color: var(--teal); }
+  .loading-state { display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 14px; color: var(--ink-mute); padding: 100px 24px; }
+  .spinner { width: 16px; height: 16px; border: 2px solid var(--line); border-top-color: var(--teal); border-radius: 50%; animation: spin 0.7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  #page-content { display: none; }
+  .site-nav { background: var(--navy); padding: 0 24px; }
+  .site-nav-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .site-logo { color: var(--white); font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: 19px; text-decoration: none; }
+  .site-logo span { color: var(--terracotta); }
+  .nav-link { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; font-weight: 500; background: none; border: none; cursor: pointer; font-family: inherit; }
+  .shell { max-width: 780px; margin: 0 auto; padding: 36px 24px 90px; }
+  .back-links { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-bottom: 24px; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 600; color: var(--ink-mute); text-decoration: none; }
+  .back-link:hover { color: var(--navy); }
+  .lesson-head { margin-bottom: 8px; }
+  .lesson-eyebrow { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); font-weight: 700; margin: 0 0 8px; }
+  .lesson-head h1 { font-size: 28px; margin: 0 0 6px; line-height: 1.2; }
+  .lesson-sub { color: var(--ink-mute); font-size: 14.5px; margin: 0 0 32px; }
+  .content-card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 36px 40px; }
+  .why-box { background: var(--teal-soft); border-radius: 10px; padding: 18px 20px; margin-bottom: 28px; }
+  .why-box p { color: #205c5d; margin: 0; font-size: 14px; }
+  .why-box .label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #205c5d; margin: 0 0 8px; }
+  .objectives-list { margin: 0 0 28px; padding-left: 22px; }
+  .objectives-list li { font-size: 14.5px; margin-bottom: 6px; }
+  .section-block { margin-bottom: 40px; }
+  .section-title { font-size: 20px; padding-bottom: 10px; margin: 0 0 20px; border-bottom: 2px solid var(--teal); }
+  .subsection-title { font-size: 16px; margin: 24px 0 10px; }
+  .sub-label { font-size: 14px; font-weight: 700; color: var(--navy); margin: 18px 0 6px; }
+  .content-card p { font-size: 14.5px; color: var(--ink); margin: 0 0 14px; }
+  .content-card ul, .content-card ol { margin: 0 0 14px; padding-left: 22px; }
+  .content-card li { font-size: 14.5px; margin-bottom: 6px; }
+  .content-card ul li strong { color: var(--navy); }
+  .lesson-table-wrap { overflow-x: auto; margin: 0 0 20px; border-radius: 10px; border: 1px solid var(--line); }
+  table.lesson-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  table.lesson-table th { background: var(--navy); color: var(--white); text-align: left; padding: 10px 14px; font-weight: 600; font-size: 12.5px; }
+  table.lesson-table td { padding: 10px 14px; border-bottom: 1px solid var(--line); color: var(--ink); vertical-align: top; }
+  table.lesson-table tr:last-child td { border-bottom: none; }
+  table.lesson-table tr:nth-child(even) td { background: var(--cream); }
+  table.lesson-table td:first-child { font-weight: 600; color: var(--navy); }
+  .callout { border-radius: 10px; padding: 18px 20px; margin: 20px 0; }
+  .callout-teal { background: var(--teal-soft); }
+  .callout-terracotta { background: var(--terracotta-soft); }
+  .callout-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 8px; }
+  .callout-teal .callout-label { color: #205c5d; }
+  .callout-terracotta .callout-label { color: #a24e2a; }
+  .callout p { margin: 0; font-size: 14px; }
+  .callout-teal p { color: #205c5d; }
+  .callout-terracotta p { color: #712b13; }
+  .summary-block { background: var(--navy); border-radius: var(--radius); padding: 32px 36px; margin-top: 44px; }
+  .summary-block h2 { color: var(--white); font-size: 22px; margin: 0 0 4px; }
+  .summary-block .summary-sub { color: rgba(255,255,255,0.6); font-size: 13px; margin: 0 0 22px; }
+  .summary-block h3 { color: var(--white); font-size: 15px; margin: 26px 0 12px; }
+  .takeaway-list { margin: 0; padding-left: 20px; }
+  .takeaway-list li { color: rgba(255,255,255,0.85); font-size: 13.5px; line-height: 1.6; margin-bottom: 10px; }
+  .looking-ahead { background: rgba(255,255,255,0.08); border-radius: 10px; padding: 16px 20px; margin-top: 24px; }
+  .looking-ahead .label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--terracotta); margin: 0 0 8px; }
+  .looking-ahead p { color: rgba(255,255,255,0.85); margin: 0; font-size: 13.5px; }
+  .glossary-wrap { border-radius: 10px; overflow: hidden; margin-bottom: 8px; background: rgba(255,255,255,0.04); }
+  table.glossary-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.glossary-table td { padding: 9px 14px; vertical-align: top; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  table.glossary-table tr:last-child td { border-bottom: none; }
+  table.glossary-table tr:nth-child(even) td { background: rgba(255,255,255,0.04); }
+  table.glossary-table td:first-child { font-weight: 700; color: var(--terracotta); white-space: nowrap; width: 180px; }
+  table.glossary-table td:last-child { color: rgba(255,255,255,0.82); }
+  .quiz-footer { margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--line); text-align: center; }
+  .quiz-footer p { font-size: 13.5px; color: var(--ink-mute); margin: 0 0 16px; }
+  .quiz-btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px; border-radius: 999px; background: var(--terracotta); color: var(--white); font-size: 14.5px; font-weight: 600; text-decoration: none; box-shadow: 0 4px 14px rgba(217,118,74,0.3); }
+  .quiz-note { font-size: 12.5px; color: var(--ink-mute); margin-top: 14px; }
+  @media (max-width: 560px) { .content-card { padding: 26px 20px; } .summary-block { padding: 24px 20px; } }
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <a class="site-logo" href="../dashboard.html">Core <span>Learning</span></a>
+    <button class="nav-link" id="logout-btn">Log out</button>
+  </div>
+</nav>
+<div class="loading-state" id="loading-state"><div class="spinner"></div><span>Loading…</span></div>
+<div id="page-content">
+<div class="shell">
+  <div class="back-links">
+    <a class="back-link" href="../module-02.html">← Back to Module 02</a>
+    <a class="back-link" href="../dashboard.html">← Back to Dashboard</a>
+  </div>
+  <div class="lesson-head">
+    <p class="lesson-eyebrow">Module 02 — Intermediate</p>
+    <h1>Athlete Assessment &amp; Data Interpretation</h1>
+    <p class="lesson-sub">Written Guide + Quiz</p>
+  </div>
+  <div class="content-card">
+
+    <div class="why-box">
+      <p class="label">Why It Matters</p>
+      <p>Assessment turns opinion into evidence. Without a systematic testing battery you are coaching based on what you think is true about an athlete. With one, you are coaching based on what you can measure, track, and prove. Data-driven coaching also gives athletes something concrete — numbers that move over time, evidence that the work is working. That is enormously motivating, and it builds trust in your programme.</p>
+    </div>
+
+    <h2 class="section-title">Learning Objectives</h2>
+    <ul class="objectives-list">
+      <li>Describe the rationale and protocols for each component of a climbing-specific testing battery</li>
+      <li>Conduct standardised assessments for finger strength, pulling strength, antagonist strength, endurance, mobility, and anthropometrics</li>
+      <li>Interpret results relative to climbing grade and limiter profiles</li>
+      <li>Identify an athlete's primary performance limiters vs. secondary compensations</li>
+      <li>Track change over time and determine whether adaptations are meaningful</li>
+      <li>Write a clear, actionable athlete assessment report</li>
+    </ul>
+
+    <div class="section-block">
+      <h2 class="section-title">Section 1: Why Assess?</h2>
+      <p>Athlete assessment serves four distinct purposes in climbing coaching:</p>
+      <ol>
+        <li><strong>Baseline profiling</strong> — establishing where the athlete is now across all physical qualities</li>
+        <li><strong>Limiter identification</strong> — determining which qualities are restricting performance relative to the athlete's current grade</li>
+        <li><strong>Programme targeting</strong> — prioritising training resources toward the qualities that will generate the greatest performance return</li>
+        <li><strong>Progress tracking</strong> — confirming that the programme is producing the intended adaptations</li>
+      </ol>
+
+      <div class="callout callout-teal">
+        <p class="callout-label">Important Distinction</p>
+        <p>A limiter is a quality that, if improved, would directly improve climbing performance. A weakness is simply a quality below average. Not all weaknesses are limiters. A climber with below-average shoulder mobility may still be climbing well — their shoulder mobility is not currently limiting them. Focusing on non-limiting weaknesses is one of the most common errors in athlete programme design.</p>
+      </div>
+
+      <h3 class="subsection-title">1.1 Assessment Principles</h3>
+      <ul>
+        <li><strong>Standardise everything.</strong> Time of day, warm-up protocol, instructions, rest periods, equipment, order of tests. If conditions vary between tests, the data is not comparable.</li>
+        <li><strong>Assess fresh, not fatigued.</strong> Schedule testing at least 48 hours after any significant climbing or training load.</li>
+        <li><strong>Warm up consistently.</strong> A standardised 10-minute warm-up before every testing session.</li>
+        <li><strong>Record conditions.</strong> Temperature, equipment used, any athlete notes (poor sleep, minor injury). These contextualise outliers.</li>
+        <li><strong>Test before prescribing.</strong> Never design a programme without first knowing where the athlete starts.</li>
+      </ul>
+    </div>
+
+    <div class="section-block">
+      <h2 class="section-title">Section 2: The Testing Battery</h2>
+
+      <h3 class="subsection-title">2.1 Anthropometrics</h3>
+      <p>Anthropometric measures provide context for all other data. They do not drive programme decisions directly but help interpret performance relative to body dimensions.</p>
+      <div class="lesson-table-wrap">
+        <table class="lesson-table">
+          <tr><th>Measure</th><th>Method</th><th>Relevance</th></tr>
+          <tr><td>Height</td><td>Stadiometer, standing, no shoes</td><td>Contextualises reach and ape index</td></tr>
+          <tr><td>Wingspan</td><td>Fingertip to fingertip, arms horizontal</td><td>Ape index = wingspan minus height; positive = biomechanical advantage on many climbing movement types</td></tr>
+          <tr><td>Body mass</td><td>Digital scale, morning, fasted</td><td>Used in strength-to-weight ratios</td></tr>
+          <tr><td>Hand span</td><td>Ruler, thumb to little finger, spread</td><td>Affects crimp vs. open-hand position on small holds</td></tr>
+        </table>
+      </div>
+
+      <h3 class="subsection-title">2.2 Finger Strength</h3>
+      <p>Finger strength is the most strongly correlated individual physical quality with climbing performance at all levels above beginner. It is non-negotiable to assess.</p>
+
+      <p class="sub-label">Maximum Hang (Relative Finger Strength)</p>
+      <p>Protocol: 20mm edge (or 18mm for advanced athletes), half-crimp position, 10-second hang, body weight plus added load. Result expressed as % body weight (body weight + added load, divided by body weight × 100).</p>
+      <ul>
+        <li>Warm up thoroughly — 3-4 progressively heavier warm-up hangs before testing</li>
+        <li>Test both hands separately and combined</li>
+        <li>Record the maximum load at which the athlete can complete the full 10 seconds with correct form</li>
+        <li>Asymmetry &gt;10% between hands warrants attention in programme design</li>
+      </ul>
+
+      <p class="sub-label">Force-Endurance (Repeaters Protocol)</p>
+      <p>Protocol: 7 seconds on, 3 seconds off × 6 repetitions = 1 set. Load = 60% of maximum hang. Record total time before failure or significant form breakdown. Alternatively, use a Tindeq or similar force gauge to capture a force-time curve across the set.</p>
+
+      <div class="callout callout-teal">
+        <p class="callout-label">Equipment Note</p>
+        <p>A Tindeq Progressor or similar isometric force gauge dramatically improves the quality of finger strength data. It allows you to capture peak force, rate of force development, and endurance curves rather than simply pass/fail on a timed hang. If you have access to one, integrate it into the battery from the start.</p>
+      </div>
+
+      <h3 class="subsection-title">2.3 Pulling Strength</h3>
+      <div class="lesson-table-wrap">
+        <table class="lesson-table">
+          <tr><th>Test</th><th>Protocol</th><th>What It Measures</th></tr>
+          <tr><td>Max pull-up (bodyweight)</td><td>Shoulder-width, pronated grip, dead hang start, chin above bar. Max reps with controlled tempo (2 sec up, 1 sec hold, 2 sec down).</td><td>Relative pulling endurance</td></tr>
+          <tr><td>Weighted pull-up (1RM)</td><td>As above with added load. Find maximum load for 1 clean repetition.</td><td>Absolute pulling strength</td></tr>
+          <tr><td>Lock-off (90° elbow)</td><td>Isometric hold at 90° elbow flexion. Time to failure at bodyweight, then assess at 90% bodyweight.</td><td>Shoulder/elbow isometric strength — directly relevant to lock-off positions on the wall</td></tr>
+        </table>
+      </div>
+
+      <h3 class="subsection-title">2.4 Antagonist Strength</h3>
+      <p>Pulling-dominant sport specificity in climbing creates predictable strength imbalances: shoulder internal rotators over external rotators, finger flexors over finger extensors, chest over upper back. Antagonist assessment identifies asymmetries that elevate injury risk.</p>
+      <div class="lesson-table-wrap">
+        <table class="lesson-table">
+          <tr><th>Test</th><th>Protocol</th><th>Target Ratio</th></tr>
+          <tr><td>Push-up max</td><td>Controlled tempo, chest to 5cm from floor. Max reps.</td><td>Push-up:Pull-up ratio should approach 1:1 for shoulder health</td></tr>
+          <tr><td>Shoulder ER:IR</td><td>Dynamometer or cable machine. Measure external rotation vs internal rotation force at 90° abduction.</td><td>ER:IR ratio &gt;0.75 considered acceptable; &lt;0.60 warrants targeted ER work</td></tr>
+          <tr><td>Finger extension</td><td>Rubber band or dynamometer. Assess ability to extend fingers against resistance over 3 sets of 20 reps without fatigue.</td><td>No normative target — track change over time and symmetry between hands</td></tr>
+        </table>
+      </div>
+
+      <h3 class="subsection-title">2.5 Mobility Assessment</h3>
+      <div class="lesson-table-wrap">
+        <table class="lesson-table">
+          <tr><th>Test</th><th>Protocol</th><th>Minimum Standard for Climbing</th></tr>
+          <tr><td>Hip internal rotation</td><td>Prone, knee at 90°, let lower leg fall outward. Measure angle from vertical.</td><td>≥35° each side; &lt;25° significantly limits drop-knee and hip-turn movement</td></tr>
+          <tr><td>Hip external rotation</td><td>Seated figure-4 — knee to floor. Note angle and symmetry.</td><td>Assess symmetry; asymmetry &gt;15° warrants single-leg targeted work</td></tr>
+          <tr><td>Shoulder flexion</td><td>Standing, arms overhead without lumbar extension. Measure angle from body.</td><td>Full overhead reach (180°) symmetrically</td></tr>
+          <tr><td>Thoracic extension</td><td>Foam roller under thoracic spine. Assess passive thoracic extension range.</td><td>Adequate extension to reach overhead without compensatory lumbar hyperextension</td></tr>
+          <tr><td>Wrist extension</td><td>Forearm on table, hand hanging off edge. Passive wrist extension range.</td><td>≥60° — reduced wrist extension affects slopers, volumes, and mantling</td></tr>
+        </table>
+      </div>
+
+      <h3 class="subsection-title">2.6 Climbing-Specific Endurance</h3>
+      <p><strong>ARC Test (Aerobic Restoration and Capillarisation):</strong> Continuous climbing at an easy grade (40-50% effort, conversational pace) for 20-30 minutes without stopping. Record whether the athlete can maintain this, note grade used. A well-trained aerobic base allows this comfortably on a grade 2-3 numbers below maximum.</p>
+      <p><strong>Boulder Problem Repeats:</strong> Repeat a moderate problem (70-75% of max grade) with 2:1 work:rest ratio for 20 minutes. Track how many successful completions occur in each 5-minute block. A declining completion rate across blocks indicates poor endurance relative to current strength level.</p>
+    </div>
+
+    <div class="section-block">
+      <h2 class="section-title">Section 3: Interpreting Results</h2>
+
+      <h3 class="subsection-title">3.1 Relative Strength Benchmarks by Grade</h3>
+      <p>The following benchmarks are derived from published climbing performance research and represent approximate ranges. Use these as directional guides, not rigid targets — individual profiles vary considerably.</p>
+      <div class="lesson-table-wrap">
+        <table class="lesson-table">
+          <tr><th>Climbing Grade (Lead)</th><th>Max Hang (% BW, half-crimp, 20mm)</th><th>Pull-up Max (reps, controlled)</th><th>Primary Limiter at this Level</th></tr>
+          <tr><td>6a–6b</td><td>80–100%</td><td>8–12</td><td>Technique, movement efficiency</td></tr>
+          <tr><td>6c–7a</td><td>100–120%</td><td>12–18</td><td>Finger strength increasingly limiting</td></tr>
+          <tr><td>7b–7c</td><td>120–145%</td><td>18–25</td><td>Finger strength, force-endurance</td></tr>
+          <tr><td>8a–8b</td><td>145–165%</td><td>25–30+</td><td>Force-endurance, sport-specific endurance</td></tr>
+          <tr><td>8c+</td><td>165%+</td><td>30+ (often weighted)</td><td>Multi-factorial — no single clear limiter</td></tr>
+        </table>
+      </div>
+
+      <h3 class="subsection-title">3.2 Identifying Limiters vs. Compensations</h3>
+      <p>When reading a full assessment profile, look for the gap — the quality that is significantly below what you would expect for the athlete's current climbing level. That gap is your primary coaching target.</p>
+      <p>Common limiter patterns in intermediate climbers:</p>
+      <ul>
+        <li><strong>High technique, low finger strength</strong> — climber exceeds grade expectations on technique-dependent routes, fails on steep power problems. Training target: systematic fingerboard work.</li>
+        <li><strong>High strength, poor endurance</strong> — climber crushes moves but cannot string a route together, falls pumped. Training target: aerobic base and force-endurance work.</li>
+        <li><strong>Good upper body, poor hip mobility</strong> — climber avoids hip-turn and drop-knee moves, appears stiff and rigid on the wall. Training target: hip mobility and movement pattern drilling.</li>
+        <li><strong>Good physical profile, underperforms on grade</strong> — no single physical limiter. This is a signal that technique, tactical, or psychological factors are restricting performance.</li>
+      </ul>
+
+      <h3 class="subsection-title">3.3 Tracking Change Over Time</h3>
+      <p>Re-test every 8-12 weeks, depending on training block length. When comparing data points:</p>
+      <ul>
+        <li>Changes in max hang of &lt;3% are likely within measurement error — not meaningful</li>
+        <li>Changes of 5%+ are considered training adaptations worth noting</li>
+        <li>Always look at the full profile, not single metrics in isolation</li>
+        <li>Log any contextual notes that could affect comparability (new edge, different time of day, minor illness)</li>
+      </ul>
+    </div>
+
+    <div class="section-block">
+      <h2 class="section-title">Section 4: Writing the Athlete Assessment Report</h2>
+
+      <p>An assessment report is a coaching tool, not a scientific paper. It should give the athlete clarity, motivation, and direction. Structure it as follows:</p>
+
+      <ol>
+        <li><strong>Athlete profile summary</strong> — name, date, current grade, years climbing, training history, goals</li>
+        <li><strong>Test results table</strong> — all measures recorded, with comparison to previous test date if applicable</li>
+        <li><strong>Strength summary</strong> — what the athlete does well, relative to their grade and goals</li>
+        <li><strong>Primary limiter</strong> — the one quality most restricting performance progression</li>
+        <li><strong>Secondary targets</strong> — 1-2 other areas worth attention over the medium term</li>
+        <li><strong>Programme recommendations</strong> — specific, concrete, and directly derived from the data</li>
+        <li><strong>Next re-test date</strong> — scheduled, not vague</li>
+      </ol>
+
+      <div class="callout callout-terracotta">
+        <p class="callout-label">Report Writing Tip</p>
+        <p>Write the report for the athlete, not for yourself. Avoid jargon unless you define it. Lead with what they are good at before discussing what needs work. Frame limiters as development opportunities, not deficits. The athlete should leave the report conversation feeling clear about where to focus and confident that their coach has a plan.</p>
+      </div>
+    </div>
+
+    <div class="summary-block">
+      <h2>Module Summary</h2>
+      <p class="summary-sub">Athlete Assessment &amp; Data Interpretation</p>
+      <h3>Key Takeaways</h3>
+      <ul class="takeaway-list">
+        <li>Assessment turns coaching opinion into evidence. Without it, you are guessing what an athlete needs.</li>
+        <li>Standardise everything — conditions, protocols, equipment, timing. Inconsistency makes data incomparable.</li>
+        <li>The full battery covers finger strength, pulling strength, antagonist balance, mobility, anthropometrics, and endurance. No single metric tells the full story.</li>
+        <li>Limiter identification — finding the gap — is the most important output of an assessment. Not all weaknesses are limiters.</li>
+        <li>Benchmarks by grade give directional guidance, not rigid targets. Individual profiles vary substantially.</li>
+        <li>An athlete report should give clarity and direction, not overwhelm. Lead with strengths, one primary limiter, concrete recommendations.</li>
+      </ul>
+      <div class="looking-ahead">
+        <p class="label">Coming Up — Module 03</p>
+        <p>Module 03 brings the assessment data to the wall — using video analysis to systematically evaluate movement quality and deliver coaching feedback that athletes can actually act on.</p>
+      </div>
+      <h3>Glossary</h3>
+      <div class="glossary-wrap">
+        <table class="glossary-table">
+          <tr><td>Performance Limiter</td><td>A quality that, if improved, would directly improve climbing performance at the athlete's current level</td></tr>
+          <tr><td>Ape Index</td><td>Wingspan minus height; positive values indicate longer arms relative to height</td></tr>
+          <tr><td>Max Hang</td><td>Maximum load sustainable for a 10-second isometric hang on a standardised edge, expressed as % body weight</td></tr>
+          <tr><td>Force-Endurance</td><td>The ability to sustain repeated sub-maximal force output over time — the forearm-specific endurance quality most limiting on longer routes</td></tr>
+          <tr><td>Half-Crimp</td><td>Finger position with interphalangeal joints at approximately 90°; the standard position for maximum hang testing</td></tr>
+          <tr><td>Antagonist Strength</td><td>Strength of the muscles that oppose the primary climbing muscles — pushing vs. pulling, extending vs. flexing</td></tr>
+          <tr><td>ARC Training</td><td>Aerobic Restoration and Capillarisation — continuous low-intensity climbing to develop aerobic endurance base</td></tr>
+          <tr><td>Tindeq Progressor</td><td>Isometric force gauge used to measure finger strength with high precision; allows force-time curve capture</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="quiz-footer">
+      <p>When you're ready, complete the quiz to progress to Module 03. You need 80% to unlock the next module.</p>
+      <a class="quiz-btn" href="../module-02-quiz.html">Take the Quiz →</a>
+      <p class="quiz-note">The quiz covers all four sections of this lesson.</p>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<footer style="background: var(--navy); color: rgba(255,255,255,0.55); padding: 32px 24px; text-align: center; font-size: 13px;">
+  <p>Core Learning — part of the Core brand family. <a href="mailto:info@corelearning.co.za" style="color: rgba(255,255,255,0.75);">info@corelearning.co.za</a></p>
+</footer>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+  const firebaseConfig = { apiKey: "AIzaSyAN9BVXDo15Mav2zketm5jhKRoBjs2yYX8", authDomain: "core-coaching-login.firebaseapp.com", projectId: "core-coaching-login", storageBucket: "core-coaching-login.firebasestorage.app", messagingSenderId: "184932860937", appId: "1:184932860937:web:83da63f1453eff8ca824d8", measurementId: "G-N7WNPL47WQ" };
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app); const db = getFirestore(app);
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) { window.location.href = "../index.html"; return; }
+    let data = {};
+    try { const snap = await getDoc(doc(db, "users", user.uid)); if (snap.exists()) data = snap.data(); } catch(e) {}
+    const unlockedModules = Array.isArray(data.unlockedModules) ? data.unlockedModules : [];
+    if (!unlockedModules.includes(2)) { window.location.href = "../dashboard.html"; return; }
+    document.getElementById("loading-state").style.display = "none";
+    document.getElementById("page-content").style.display = "block";
+  });
+  document.getElementById("logout-btn").addEventListener("click", () => signOut(auth).then(() => window.location.href = "../index.html"));
+</script>
+</body>
+</html>

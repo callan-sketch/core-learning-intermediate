@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 03 — Movement Analysis &amp; Video Coaching | Core Learning Intermediate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --navy: #1b2a3a; --teal: #3a8a8c; --teal-soft: #e8f2f2; --terracotta: #d9764a; --terracotta-soft: #fbe8dd; --cream: #f7f5f1; --ink: #2a2f35; --ink-mute: #6b7480; --line: #e2e0da; --white: #ffffff; --radius: 14px; --shadow: 0 1px 2px rgba(27,42,58,0.06), 0 8px 24px rgba(27,42,58,0.08); }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--cream); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; line-height: 1.65; }
+  h1, h2, h3, h4 { font-family: 'Fraunces', Georgia, serif; font-weight: 600; letter-spacing: -0.01em; color: var(--navy); }
+  a { color: var(--teal); }
+  .loading-state { display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 14px; color: var(--ink-mute); padding: 100px 24px; }
+  .spinner { width: 16px; height: 16px; border: 2px solid var(--line); border-top-color: var(--teal); border-radius: 50%; animation: spin 0.7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  #page-content { display: none; }
+  .site-nav { background: var(--navy); padding: 0 24px; }
+  .site-nav-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .site-logo { color: var(--white); font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: 19px; text-decoration: none; }
+  .site-logo span { color: var(--terracotta); }
+  .nav-link { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; font-weight: 500; background: none; border: none; cursor: pointer; font-family: inherit; }
+  .shell { max-width: 780px; margin: 0 auto; padding: 36px 24px 90px; }
+  .back-links { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-bottom: 24px; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 600; color: var(--ink-mute); text-decoration: none; }
+  .back-link:hover { color: var(--navy); }
+  .lesson-eyebrow { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); font-weight: 700; margin: 0 0 8px; }
+  .lesson-head h1 { font-size: 28px; margin: 0 0 6px; line-height: 1.2; }
+  .lesson-sub { color: var(--ink-mute); font-size: 14.5px; margin: 0 0 32px; }
+  .content-card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 36px 40px; }
+  .why-box { background: var(--teal-soft); border-radius: 10px; padding: 18px 20px; margin-bottom: 28px; }
+  .why-box p { color: #205c5d; margin: 0; font-size: 14px; }
+  .why-box .label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #205c5d; margin: 0 0 8px; }
+  .objectives-list { margin: 0 0 28px; padding-left: 22px; }
+  .objectives-list li { font-size: 14.5px; margin-bottom: 6px; }
+  .section-block { margin-bottom: 40px; }
+  .section-title { font-size: 20px; padding-bottom: 10px; margin: 0 0 20px; border-bottom: 2px solid var(--teal); }
+  .subsection-title { font-size: 16px; margin: 24px 0 10px; }
+  .sub-label { font-size: 14px; font-weight: 700; color: var(--navy); margin: 18px 0 6px; }
+  .content-card p { font-size: 14.5px; color: var(--ink); margin: 0 0 14px; }
+  .content-card ul, .content-card ol { margin: 0 0 14px; padding-left: 22px; }
+  .content-card li { font-size: 14.5px; margin-bottom: 6px; }
+  .content-card li strong { color: var(--navy); }
+  .lesson-table-wrap { overflow-x: auto; margin: 0 0 20px; border-radius: 10px; border: 1px solid var(--line); }
+  table.lesson-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  table.lesson-table th { background: var(--navy); color: var(--white); text-align: left; padding: 10px 14px; font-weight: 600; font-size: 12.5px; }
+  table.lesson-table td { padding: 10px 14px; border-bottom: 1px solid var(--line); color: var(--ink); vertical-align: top; }
+  table.lesson-table tr:last-child td { border-bottom: none; }
+  table.lesson-table tr:nth-child(even) td { background: var(--cream); }
+  table.lesson-table td:first-child { font-weight: 600; color: var(--navy); }
+  .callout { border-radius: 10px; padding: 18px 20px; margin: 20px 0; }
+  .callout-teal { background: var(--teal-soft); }
+  .callout-terracotta { background: var(--terracotta-soft); }
+  .callout-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 8px; }
+  .callout-teal .callout-label { color: #205c5d; }
+  .callout-terracotta .callout-label { color: #a24e2a; }
+  .callout p { margin: 0; font-size: 14px; }
+  .callout-teal p { color: #205c5d; }
+  .callout-terracotta p { color: #712b13; }
+  .summary-block { background: var(--navy); border-radius: var(--radius); padding: 32px 36px; margin-top: 44px; }
+  .summary-block h2 { color: var(--white); font-size: 22px; margin: 0 0 4px; }
+  .summary-block .summary-sub { color: rgba(255,255,255,0.6); font-size: 13px; margin: 0 0 22px; }
+  .summary-block h3 { color: var(--white); font-size: 15px; margin: 26px 0 12px; }
+  .takeaway-list { margin: 0; padding-left: 20px; }
+  .takeaway-list li { color: rgba(255,255,255,0.85); font-size: 13.5px; line-height: 1.6; margin-bottom: 10px; }
+  .looking-ahead { background: rgba(255,255,255,0.08); border-radius: 10px; padding: 16px 20px; margin-top: 24px; }
+  .looking-ahead .label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--terracotta); margin: 0 0 8px; }
+  .looking-ahead p { color: rgba(255,255,255,0.85); margin: 0; font-size: 13.5px; }
+  .glossary-wrap { border-radius: 10px; overflow: hidden; margin-bottom: 8px; background: rgba(255,255,255,0.04); }
+  table.glossary-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.glossary-table td { padding: 9px 14px; vertical-align: top; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  table.glossary-table tr:last-child td { border-bottom: none; }
+  table.glossary-table tr:nth-child(even) td { background: rgba(255,255,255,0.04); }
+  table.glossary-table td:first-child { font-weight: 700; color: var(--terracotta); white-space: nowrap; width: 180px; }
+  table.glossary-table td:last-child { color: rgba(255,255,255,0.82); }
+  .quiz-footer { margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--line); text-align: center; }
+  .quiz-footer p { font-size: 13.5px; color: var(--ink-mute); margin: 0 0 16px; }
+  .quiz-btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px; border-radius: 999px; background: var(--terracotta); color: var(--white); font-size: 14.5px; font-weight: 600; text-decoration: none; box-shadow: 0 4px 14px rgba(217,118,74,0.3); }
+  .quiz-note { font-size: 12.5px; color: var(--ink-mute); margin-top: 14px; }
+  @media (max-width: 560px) { .content-card { padding: 26px 20px; } .summary-block { padding: 24px 20px; } }
+</style>
+</head>
+<body>
+<nav class="site-nav"><div class="site-nav-inner"><a class="site-logo" href="../dashboard.html">Core <span>Learning</span></a><button class="nav-link" id="logout-btn">Log out</button></div></nav>
+<div class="loading-state" id="loading-state"><div class="spinner"></div><span>Loading…</span></div>
+<div id="page-content">
+<div class="shell">
+  <div class="back-links"><a class="back-link" href="../module-03.html">← Back to Module 03</a><a class="back-link" href="../dashboard.html">← Back to Dashboard</a></div>
+  <div class="lesson-head">
+    <p class="lesson-eyebrow">Module 03 — Intermediate</p>
+    <h1>Movement Analysis &amp; Video Coaching</h1>
+    <p class="lesson-sub">Written Guide + Quiz</p>
+  </div>
+  <div class="content-card">
+
+    <div class="why-box">
+      <p class="label">Why It Matters</p>
+      <p>Most coaches watch their athletes climb and form opinions. Systematic movement analysis replaces opinions with observations — specific, repeatable, evidence-based observations that can be tracked over time. Video adds precision that live observation cannot: you can pause, slow down, compare left and right, and show the athlete exactly what you are seeing. That changes both the quality of feedback and the athlete's ability to act on it.</p>
+    </div>
+
+    <h2 class="section-title">Learning Objectives</h2>
+    <ul class="objectives-list">
+      <li>Set up effective filming conditions for movement analysis</li>
+      <li>Apply a joint-by-joint movement analysis framework to climbing video</li>
+      <li>Identify the most common movement compensation patterns in intermediate climbers</li>
+      <li>Distinguish between primary movement faults and secondary compensations</li>
+      <li>Deliver video-based feedback that athletes can understand and act on</li>
+      <li>Design a movement analysis session workflow from filming to feedback</li>
+    </ul>
+
+    <div class="section-block">
+      <h2 class="section-title">Section 1: Filming Setup</h2>
+      <p>The quality of your analysis is limited by the quality of your footage. Time spent on filming setup is not wasted — poor footage produces ambiguous observations that lead to imprecise feedback.</p>
+
+      <h3 class="subsection-title">1.1 Camera Position</h3>
+      <div class="lesson-table-wrap">
+        <table class="lesson-table">
+          <tr><th>Camera Angle</th><th>What It Reveals</th><th>Limitations</th></tr>
+          <tr><td>Front-on (perpendicular to wall)</td><td>Hip-shoulder alignment, body position relative to wall, arm angle during reaches, foot placement width</td><td>Masks depth (how close hips are to wall)</td></tr>
+          <tr><td>Side-on (parallel to wall, 90° to climber)</td><td>Hip-to-wall distance, back angle, knee angle over foot, weight distribution front-to-back</td><td>Masks left-right asymmetry</td></tr>
+          <tr><td>45° diagonal</td><td>Compromise — reveals both dimensions with less precision on each</td><td>Most useful for general movement quality when only one camera is available</td></tr>
+          <tr><td>Overhead (from above)</td><td>Foot placement patterns, hip rotation, body rotation during moves</td><td>Difficult to set up; best for analysing specific sequences on a bouldering wall</td></tr>
+        </table>
+      </div>
+      <p>For most movement analysis work, film two passes: one front-on and one side-on. The two angles together give you a complete picture.</p>
+
+      <h3 class="subsection-title">1.2 Practical Setup Checklist</h3>
+      <ul>
+        <li>Use a tripod or stable surface — handheld footage makes analysis very difficult</li>
+        <li>Film at 60fps minimum if your phone supports it; 120fps for slow-motion analysis of contact events (foothold placement, hand contact)</li>
+        <li>Ensure the climber fills at least 60% of the frame — too distant and joint angles are hard to assess</li>
+        <li>Check background contrast — a climber in a dark top against a dark wall is very difficult to analyse</li>
+        <li>Film multiple attempts of the same sequence — look for consistency vs. variability in the fault you are observing</li>
+        <li>Film fresh and fatigued — movement faults often emerge or worsen under fatigue, which is diagnostically important</li>
+      </ul>
+
+      <div class="callout callout-teal">
+        <p class="callout-label">Free Tools</p>
+        <p>Coach's Eye, Hudl Technique, and Dartfish Express are low-cost or free apps that allow frame-by-frame playback, drawing tools, and side-by-side comparison. For most climbing coaching contexts, the basic free tiers of these tools are sufficient. The phone in your pocket is a capable movement analysis tool — the limiting factor is usually coaching knowledge, not technology.</p>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <h2 class="section-title">Section 2: The Joint-by-Joint Movement Analysis Framework</h2>
+      <p>Systematic analysis requires a structure. Without one, coaches tend to notice the most obvious thing — which is often a secondary compensation rather than the primary fault. The joint-by-joint framework works from the ground up, ensuring you assess each segment before drawing conclusions.</p>
+
+      <h3 class="subsection-title">2.1 Analysis Sequence</h3>
+      <p>Analyse in this order: feet → ankles → knees → hips → spine → shoulders → elbows → wrists/hands. Ground up. This matters because faults at distal segments (feet, hands) are often caused by proximal segment dysfunction (hips, spine).</p>
+
+      <div class="lesson-table-wrap">
+        <table class="lesson-table">
+          <tr><th>Segment</th><th>What to Assess</th><th>Common Faults in Intermediate Climbers</th></tr>
+          <tr><td>Feet</td><td>Precision of foot placement, edge vs. smear vs. heel/toe hook selection, weight through foot</td><td>Drifting footholds, using the wrong part of the shoe, loading through the arch rather than the tip</td></tr>
+          <tr><td>Ankles</td><td>Dorsiflexion range on footholds, heel hook angle, toe hook tension</td><td>Limited dorsiflexion causing toe-out on steep terrain; passive heel hooks with no hip engagement</td></tr>
+          <tr><td>Knees</td><td>Knee tracking over second toe during stepping, drop-knee angle, flagging position</td><td>Knee collapse inward on high steps; drop-knee not taken far enough to open the hip</td></tr>
+          <tr><td>Hips</td><td>Hip-to-wall distance, hip rotation (turn), external rotation range on drop-knee, hip height relative to feet</td><td>Hips pushed away from wall; insufficient hip turn reducing reach; not using hip elevation on high steps</td></tr>
+          <tr><td>Spine</td><td>Degree of spinal extension vs. flexion, side-bending during reaches, trunk rotation</td><td>Excessive lumbar lordosis when reaching overhead; loss of trunk tension on steep terrain</td></tr>
+          <tr><td>Shoulders</td><td>Shoulder position during reach (protraction/retraction), shoulder height during lock-off, arm angle at contact</td><td>Elevated shoulder on the hanging arm; insufficient shoulder depression on rest positions</td></tr>
+          <tr><td>Elbows</td><td>Elbow angle during pulling moves, arm extension on rest positions, lock-off height</td><td>Unnecessary arm bend on rest positions (wasting energy); locking off too low or too high</td></tr>
+          <tr><td>Hands/Wrists</td><td>Grip type selection for hold type, wrist angle, two-pad vs. full-hand contact on crimps</td><td>Open-handing holds that need a crimp; gripping sloper volumes from above rather than from the side</td></tr>
+        </table>
+      </div>
+
+      <h3 class="subsection-title">2.2 Identifying the Primary Fault</h3>
+      <p>When you see multiple things happening, your job is to identify the one that is causing the others. This is the primary fault. Secondary compensations are the things the body does to manage or work around the primary fault.</p>
+      <p>Example: A climber appears to push their hips away from the wall (secondary), which causes them to overload their fingers (secondary), which causes them to fall off — but the actual driver is insufficient hip mobility preventing the hip-turn that would allow them to get close to the wall (primary). Cueing 'get your hips closer' addresses the secondary. Addressing the primary fault means working on hip mobility and hip-turn movement pattern.</p>
+
+      <div class="callout callout-terracotta">
+        <p class="callout-label">Diagnostic Question</p>
+        <p>When you see a movement fault, ask: 'If this was fixed, would the other faults I'm seeing disappear?' If yes, it's the primary fault. If no — if fixing it would leave other problems — look further up or down the chain for the driver.</p>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <h2 class="section-title">Section 3: Common Movement Compensation Patterns</h2>
+
+      <h3 class="subsection-title">3.1 The Stiff Mover</h3>
+      <p><strong>Presentation:</strong> Rigid body, minimal hip rotation, moves look mechanical and blocky. Struggles on route types requiring body position changes.</p>
+      <p><strong>Primary driver:</strong> Usually limited hip mobility (internal or external rotation) combined with over-reliance on upper body. Sometimes fear-driven — stiff movers often have higher anxiety on the wall.</p>
+      <p><strong>Coaching approach:</strong> Hip mobility work off the wall. On-wall drills emphasising hip turn — flag first, then drop-knee. Climbing with deliberate over-rotation to break the pattern. Movement quality, not grade.</p>
+
+      <h3 class="subsection-title">3.2 The Arm-Dependent Climber</h3>
+      <p><strong>Presentation:</strong> Good upper body strength, over-pulls on moves that don't require it, feet are secondary. Gets pumped quickly. Good on powerful bouldering, poor endurance.</p>
+      <p><strong>Primary driver:</strong> Footwork is underdeveloped relative to upper body. Confidence and control is in the hands, not the feet. This is a technique pattern that becomes entrenched because strength covers for it at lower grades.</p>
+      <p><strong>Coaching approach:</strong> Silent feet drills, spot-stepping practice. Climbing slab. Deliberate footwork games (climb without hands on sections). Reducing hold difficulty to force attention to feet.</p>
+
+      <h3 class="subsection-title">3.3 The Gravity Fighter</h3>
+      <p><strong>Presentation:</strong> Hips consistently behind and below the feet, centre of mass poorly positioned. Looks effortful. Everything is muscle, no position.</p>
+      <p><strong>Primary driver:</strong> Failure to understand or use centre of mass positioning. Often combined with fear of committing weight over feet.</p>
+      <p><strong>Coaching approach:</strong> Slab climbing. Exercises that force weight over feet (stepping onto a high foothold while maintaining hip position). CLA constraints that make staying close to the wall the only viable strategy.</p>
+
+      <h3 class="subsection-title">3.4 The Fatigued Mover Pattern</h3>
+      <p>Under fatigue, athletes tend to: rely more heavily on their stronger movement patterns, reduce range of motion, increase arm bend on rests, and lose foot precision. Filming both fresh and fatigued reveals which faults are technique-based (present always) and which are endurance-based (emerge under load). This distinction drives very different programme responses.</p>
+    </div>
+
+    <div class="section-block">
+      <h2 class="section-title">Section 4: Delivering Video Feedback</h2>
+
+      <h3 class="subsection-title">4.1 The Feedback Session Structure</h3>
+      <ol>
+        <li><strong>Ask first.</strong> Before showing the athlete anything, ask what they noticed. 'What did that feel like?' 'What do you think happened at that move?' This activates self-monitoring and sets the stage for a learning conversation rather than a correction session.</li>
+        <li><strong>Show the successful attempt first.</strong> If you have one — show what good looks like before showing what needs work. Athletes need to see themselves moving well.</li>
+        <li><strong>One thing at a time.</strong> Identify one primary focus for the session. Don't present three things and expect all three to improve. Cognitive load is real.</li>
+        <li><strong>Show, don't just tell.</strong> Use the frame-by-frame. Draw on it. Point to the hip position, the foot drift, the shoulder elevation. Seeing beats hearing.</li>
+        <li><strong>End with what to try next.</strong> Translate the observation into one specific action: 'Next time, try turning your left hip before you reach.' Not 'work on your hip position.'</li>
+      </ol>
+
+      <h3 class="subsection-title">4.2 Language That Lands</h3>
+      <div class="lesson-table-wrap">
+        <table class="lesson-table">
+          <tr><th>Instead of…</th><th>Try…</th><th>Why It's Better</th></tr>
+          <tr><td>'Your footwork is bad'</td><td>'Your left foot drifted off the hold at the second clip — let's look at it'</td><td>Specific and observable; not a character judgment</td></tr>
+          <tr><td>'You need to get your hips closer to the wall'</td><td>'Before you reach for that hold, can you feel your hip touching the wall?'</td><td>Sensory cue; external attention focus</td></tr>
+          <tr><td>'You're climbing stiffly'</td><td>'Try this — make your hip turn bigger than you think it needs to be'</td><td>Gives a concrete action; avoids labelling</td></tr>
+          <tr><td>'You fell because you got pumped'</td><td>'Your arms were bent on the two rests before the crux — straight arms would have saved energy'</td><td>Gives actionable information, not just cause of failure</td></tr>
+        </table>
+      </div>
+
+      <h3 class="subsection-title">4.3 Athlete Consent and Comfort</h3>
+      <p>Always ask permission before filming athletes, especially in group settings. Some athletes are self-conscious about their movement on camera. Normalise it as a standard coaching tool — something all serious athletes use, not a remedial activity. If an athlete is uncomfortable with the footage being shared or stored, honour that.</p>
+    </div>
+
+    <div class="summary-block">
+      <h2>Module Summary</h2>
+      <p class="summary-sub">Movement Analysis &amp; Video Coaching</p>
+      <h3>Key Takeaways</h3>
+      <ul class="takeaway-list">
+        <li>Filming setup determines analysis quality — two angles, stable camera, adequate resolution.</li>
+        <li>Analyse joint by joint from the ground up. Feet before hands; proximal before you blame distal.</li>
+        <li>Always look for the primary fault — the driver. Secondary compensations are symptoms, not causes.</li>
+        <li>Common intermediate patterns: stiff mover, arm-dependent, gravity fighter. Each has a different primary driver and coaching response.</li>
+        <li>Film both fresh and fatigued to separate technique faults from endurance-based breakdown.</li>
+        <li>Feedback structure: ask first, show success first, one thing at a time, end with a specific action.</li>
+        <li>Language matters. Specific and observable beats global and evaluative.</li>
+      </ul>
+      <div class="looking-ahead">
+        <p class="label">Coming Up — Module 04</p>
+        <p>Module 04 applies everything — building full programmes that integrate climbing volume, S&amp;C, and periodisation, with a library of drills and workouts and what each one actually develops.</p>
+      </div>
+      <h3>Glossary</h3>
+      <div class="glossary-wrap">
+        <table class="glossary-table">
+          <tr><td>Primary Fault</td><td>The root movement dysfunction that is driving other observable problems — the thing to fix first</td></tr>
+          <tr><td>Secondary Compensation</td><td>A movement pattern the body adopts to manage around a primary fault — fixing it alone is symptomatic treatment</td></tr>
+          <tr><td>Joint-by-Joint Analysis</td><td>Systematic movement assessment from distal to proximal or ground-up, ensuring all segments are evaluated before conclusions are drawn</td></tr>
+          <tr><td>External Attentional Focus</td><td>Directing an athlete's attention to the effect of their movement (hold, wall, outcome) rather than to their body parts</td></tr>
+          <tr><td>60fps</td><td>Sixty frames per second — minimum recommended frame rate for meaningful slow-motion movement analysis</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="quiz-footer">
+      <p>When you're ready, complete the quiz to progress to Module 04. You need 80% to unlock the next module.</p>
+      <a class="quiz-btn" href="../module-03-quiz.html">Take the Quiz →</a>
+      <p class="quiz-note">The quiz covers all four sections of this lesson.</p>
+    </div>
+
+  </div>
+</div>
+</div>
+<footer style="background: var(--navy); color: rgba(255,255,255,0.55); padding: 32px 24px; text-align: center; font-size: 13px;"><p>Core Learning — part of the Core brand family. <a href="mailto:info@corelearning.co.za" style="color: rgba(255,255,255,0.75);">info@corelearning.co.za</a></p></footer>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+  const firebaseConfig = { apiKey: "AIzaSyAN9BVXDo15Mav2zketm5jhKRoBjs2yYX8", authDomain: "core-coaching-login.firebaseapp.com", projectId: "core-coaching-login", storageBucket: "core-coaching-login.firebasestorage.app", messagingSenderId: "184932860937", appId: "1:184932860937:web:83da63f1453eff8ca824d8", measurementId: "G-N7WNPL47WQ" };
+  const app = initializeApp(firebaseConfig); const auth = getAuth(app); const db = getFirestore(app);
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) { window.location.href = "../index.html"; return; }
+    let data = {};
+    try { const snap = await getDoc(doc(db, "users", user.uid)); if (snap.exists()) data = snap.data(); } catch(e) {}
+    if (!(Array.isArray(data.unlockedModules) && data.unlockedModules.includes(3))) { window.location.href = "../dashboard.html"; return; }
+    document.getElementById("loading-state").style.display = "none";
+    document.getElementById("page-content").style.display = "block";
+  });
+  document.getElementById("logout-btn").addEventListener("click", () => signOut(auth).then(() => window.location.href = "../index.html"));
+</script>
+</body>
+</html>
