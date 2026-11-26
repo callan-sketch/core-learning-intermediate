@@ -51,6 +51,8 @@
   #module-content { display: none; }
   @media (max-width: 560px) { .lesson-card { flex-direction: column; } .lesson-thumb { width: 100%; height: 160px; } }
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/fontawesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/brands.min.css">
 </head>
 <body>
 <nav class="site-nav">
@@ -90,7 +92,7 @@
         <p class="desc">Running a full testing battery, interpreting results relative to climbing limiter profiles, tracking change over time, and writing athlete reports that drive programme decisions.</p>
         <div class="resource-row">
           <a class="resource-pill" href="lessons/module-02.html" target="_blank" rel="noopener">📄 Lesson content</a>
-          <a class="resource-pill" href="lessons/module-02.pdf" target="_blank" rel="noopener">⬇️ Download PDF</a>
+          <!-- PDF link: add back when lessons/module-02.pdf exists -->
         </div>
         <a class="quiz-btn" href="module-02-quiz.html">Take the quiz →</a>
       </div>
@@ -98,22 +100,25 @@
   </div>
 </div>
 <footer class="site-footer">
-  <p>Core Learning — part of the Core brand family. <a href="mailto:info@corelearning.co.za">info@corelearning.co.za</a></p>
+  <p>Core Learning — part of the Core brand family. <a href="mailto:info@corelearning.co.za">info@corelearning.co.za</a> · <a class="ig-link" style="color:inherit;" href="https://www.instagram.com/core_learning_hub/" target="_blank" rel="noopener" aria-label="Core Learning on Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i> <span>@core_learning_hub</span></a></p>
 </footer>
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
   import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
   import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
   const firebaseConfig = { apiKey: "AIzaSyAN9BVXDo15Mav2zketm5jhKRoBjs2yYX8", authDomain: "core-coaching-login.firebaseapp.com", projectId: "core-coaching-login", storageBucket: "core-coaching-login.firebasestorage.app", messagingSenderId: "184932860937", appId: "1:184932860937:web:83da63f1453eff8ca824d8", measurementId: "G-N7WNPL47WQ" };
+  const COURSE_ID = "climbingintermediate";
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app); const db = getFirestore(app);
   onAuthStateChanged(auth, async (user) => {
-    if (!user) { window.location.href = "index.html"; return; }
+    if (!user) { window.location.href = "login.html"; return; }
     let data = {};
     try { const snap = await getDoc(doc(db, "users", user.uid)); if (snap.exists()) data = snap.data(); } catch(e) {}
-    const unlockedModules = Array.isArray(data.unlockedModules) ? data.unlockedModules : [];
+    const course = (data.courses && data.courses[COURSE_ID]) || {};
+    if (!course.paid) { window.location.href = "dashboard.html"; return; }
+    const unlockedModules = Array.isArray(course.unlockedModules) && course.unlockedModules.length ? course.unlockedModules : [1];
     if (!unlockedModules.includes(2)) { window.location.href = "dashboard.html"; return; }
-    const mp = (data.moduleProgress && data.moduleProgress["module02"]) || {};
+    const mp = (course.moduleProgress && course.moduleProgress["module02"]) || {};
     const statusEl = document.getElementById("lesson-status");
     if (statusEl) { if (mp.completed) { statusEl.textContent = "✓ Complete"; statusEl.classList.add("done"); } else { statusEl.textContent = "In progress"; } }
     document.getElementById("loading-state").style.display = "none";
