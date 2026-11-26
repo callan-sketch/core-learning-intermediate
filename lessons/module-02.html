@@ -82,6 +82,9 @@
   .quiz-note { font-size: 12.5px; color: var(--ink-mute); margin-top: 14px; }
   @media (max-width: 560px) { .content-card { padding: 26px 20px; } .summary-block { padding: 24px 20px; } }
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/fontawesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/brands.min.css">
+<script src="../dev.js"></script>
 </head>
 <body>
 <nav class="site-nav">
@@ -316,7 +319,7 @@
 </div>
 
 <footer style="background: var(--navy); color: rgba(255,255,255,0.55); padding: 32px 24px; text-align: center; font-size: 13px;">
-  <p>Core Learning — part of the Core brand family. <a href="mailto:info@corelearning.co.za" style="color: rgba(255,255,255,0.75);">info@corelearning.co.za</a></p>
+  <p>Core Learning — part of the Core brand family. <a href="mailto:info@corelearning.co.za" style="color: rgba(255,255,255,0.75);">info@corelearning.co.za</a> · <a class="ig-link" style="color:inherit;" href="https://www.instagram.com/core_learning_hub/" target="_blank" rel="noopener" aria-label="Core Learning on Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i> <span>@core_learning_hub</span></a></p>
 </footer>
 
 <script type="module">
@@ -324,13 +327,17 @@
   import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
   import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
   const firebaseConfig = { apiKey: "AIzaSyAN9BVXDo15Mav2zketm5jhKRoBjs2yYX8", authDomain: "core-coaching-login.firebaseapp.com", projectId: "core-coaching-login", storageBucket: "core-coaching-login.firebasestorage.app", messagingSenderId: "184932860937", appId: "1:184932860937:web:83da63f1453eff8ca824d8", measurementId: "G-N7WNPL47WQ" };
+  const COURSE_ID = "climbingintermediate";
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app); const db = getFirestore(app);
   onAuthStateChanged(auth, async (user) => {
-    if (!user) { window.location.href = "../index.html"; return; }
+    if (window.CI_DEV) { document.getElementById("loading-state").style.display = "none"; document.getElementById("page-content").style.display = "block"; return; } // DEV SHORTCUT — remove before go-live (see dev.js)
+    if (!user) { window.location.href = "../login.html"; return; }
     let data = {};
     try { const snap = await getDoc(doc(db, "users", user.uid)); if (snap.exists()) data = snap.data(); } catch(e) {}
-    const unlockedModules = Array.isArray(data.unlockedModules) ? data.unlockedModules : [];
+    const course = (data.courses && data.courses[COURSE_ID]) || {};
+    if (!course.paid) { window.location.href = "../dashboard.html"; return; }
+    const unlockedModules = Array.isArray(course.unlockedModules) && course.unlockedModules.length ? course.unlockedModules : [1];
     if (!unlockedModules.includes(2)) { window.location.href = "../dashboard.html"; return; }
     document.getElementById("loading-state").style.display = "none";
     document.getElementById("page-content").style.display = "block";

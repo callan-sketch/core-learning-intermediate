@@ -66,6 +66,9 @@
   #module-content { display: none; }
   @media (max-width: 560px) { .lesson-card { flex-direction: column; } .lesson-thumb { width: 100%; height: 160px; } }
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/fontawesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/brands.min.css">
+<script src="dev.js"></script>
 </head>
 <body>
 
@@ -115,7 +118,7 @@
         <p class="desc">From knowing your content to knowing how to coach: evidence-based practice, motor learning theory applied, constraints-led coaching, and building your reflective coaching identity.</p>
         <div class="resource-row">
           <a class="resource-pill" href="lessons/module-01.html" target="_blank" rel="noopener">📄 Lesson content</a>
-          <a class="resource-pill" href="lessons/module-01.pdf" target="_blank" rel="noopener">⬇️ Download PDF</a>
+          <!-- PDF link: add back when lessons/module-01.pdf exists -->
         </div>
         <a class="quiz-btn" href="module-01-quiz.html">Take the quiz →</a>
       </div>
@@ -125,7 +128,7 @@
 </div>
 
 <footer class="site-footer">
-  <p>Core Learning — part of the Core brand family. <a href="mailto:info@corelearning.co.za">info@corelearning.co.za</a></p>
+  <p>Core Learning — part of the Core brand family. <a href="mailto:info@corelearning.co.za">info@corelearning.co.za</a> · <a class="ig-link" style="color:inherit;" href="https://www.instagram.com/core_learning_hub/" target="_blank" rel="noopener" aria-label="Core Learning on Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i> <span>@core_learning_hub</span></a></p>
 </footer>
 
 <script type="module">
@@ -143,6 +146,7 @@
     measurementId: "G-N7WNPL47WQ"
   };
 
+  const COURSE_ID = "climbingintermediate";
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const db = getFirestore(app);
@@ -151,7 +155,8 @@
   const MODULE_KEY = "module01";
 
   onAuthStateChanged(auth, async (user) => {
-    if (!user) { window.location.href = "index.html"; return; }
+    if (window.CI_DEV) { document.getElementById("loading-state").style.display = "none"; document.getElementById("module-content").style.display = "block"; return; } // DEV SHORTCUT — remove before go-live (see dev.js)
+    if (!user) { window.location.href = "login.html"; return; }
 
     let data = {};
     try {
@@ -159,10 +164,12 @@
       if (snap.exists()) data = snap.data();
     } catch (err) { console.error("Failed to load user progress:", err); }
 
-    const unlockedModules = Array.isArray(data.unlockedModules) ? data.unlockedModules : [];
+    const course = (data.courses && data.courses[COURSE_ID]) || {};
+    if (!course.paid) { window.location.href = "dashboard.html"; return; }
+    const unlockedModules = Array.isArray(course.unlockedModules) && course.unlockedModules.length ? course.unlockedModules : [1];
     if (!unlockedModules.includes(MODULE_NUMBER)) { window.location.href = "dashboard.html"; return; }
 
-    const moduleProgress = (data.moduleProgress && data.moduleProgress[MODULE_KEY]) || {};
+    const moduleProgress = (course.moduleProgress && course.moduleProgress[MODULE_KEY]) || {};
     const isCompleted = !!moduleProgress.completed;
 
     const statusEl = document.getElementById("lesson-status");
