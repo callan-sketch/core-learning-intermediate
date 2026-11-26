@@ -86,6 +86,7 @@
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/fontawesome.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/brands.min.css">
+<script src="../dev.js"></script>
 </head>
 <body>
 <nav class="site-nav"><div class="site-nav-inner"><a class="site-logo" href="../dashboard.html">Core <span>Learning</span></a><button class="nav-link" id="logout-btn">Log out</button></div></nav>
@@ -343,6 +344,7 @@
   const COURSE_ID = "climbingintermediate";
   const app = initializeApp(firebaseConfig); const auth = getAuth(app); const db = getFirestore(app);
   onAuthStateChanged(auth, async (user) => {
+    if (window.CI_DEV) { document.getElementById("loading-state").style.display = "none"; document.getElementById("page-content").style.display = "block"; return; } // DEV SHORTCUT — remove before go-live (see dev.js)
     if (!user) { window.location.href = "../login.html"; return; }
     let data = {};
     try { const snap = await getDoc(doc(db, "users", user.uid)); if (snap.exists()) data = snap.data(); } catch(e) {}

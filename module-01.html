@@ -68,6 +68,7 @@
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/fontawesome.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/brands.min.css">
+<script src="dev.js"></script>
 </head>
 <body>
 
@@ -154,6 +155,7 @@
   const MODULE_KEY = "module01";
 
   onAuthStateChanged(auth, async (user) => {
+    if (window.CI_DEV) { document.getElementById("loading-state").style.display = "none"; document.getElementById("module-content").style.display = "block"; return; } // DEV SHORTCUT — remove before go-live (see dev.js)
     if (!user) { window.location.href = "login.html"; return; }
 
     let data = {};

@@ -163,6 +163,7 @@
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/fontawesome.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/brands.min.css">
+<script src="dev.js"></script>
 </head>
 <body>
 
@@ -286,6 +287,13 @@ try {
   getDoc = fsMod.getDoc;
 
   onAuthStateChanged(auth, async (user) => {
+    if (window.CI_DEV){ // DEV SHORTCUT — remove before go-live (see dev.js)
+      document.getElementById('loadingScreen').style.display = 'none';
+      document.getElementById('mainContent').classList.add('ready');
+      document.getElementById('paidView').style.display = 'block';
+      renderModules({ unlockedModules: MODULES.map(m => m.n), moduleProgress: {} });
+      return;
+    }
     if (!user){
       window.location.href = 'login.html';
       return;
@@ -334,7 +342,7 @@ function renderModules(courseData){
 
   const isDone = (n) => !!((moduleProgress[n] && moduleProgress[n].completed) ||
     (moduleProgress['module' + String(n).padStart(2, '0')] && moduleProgress['module' + String(n).padStart(2, '0')].completed) ||
-    (n < MODULES.length && unlockedModules.includes(n + 1)));
+    (!window.CI_DEV && n < MODULES.length && unlockedModules.includes(n + 1)));
   const completedCount = MODULES.filter(m => isDone(m.n)).length;
 
   // Progress ring + fraction

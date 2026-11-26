@@ -466,6 +466,7 @@ if (!IS_CONFIGURED) {
 // so every event listener attached below can safely check FIREBASE_READY
 // regardless of whether the Firebase load (further down) has finished yet.
 let auth, db, currentUser = null;
+let existingProfile = {}; // the user's doc before this sign-up (may hold Fundamentals fields)
 let FIREBASE_READY = false;
 
 /* ============================================================
@@ -541,6 +542,7 @@ async function afterAuthSuccess(user){
       const snap = await window._fb.getDoc(window._fb.doc(db, 'users', user.uid));
       if (snap.exists()){
         const data = snap.data();
+        existingProfile = data;
         if (data.name) document.getElementById('fullName').value = data.name;
         const courseData = data.courses && data.courses[COURSE_ID];
         if (courseData && courseData.paid){
@@ -643,16 +645,25 @@ document.getElementById('onboardForm').addEventListener('submit', async (e) => {
     return;
   }
 
-  const profile = {
-    name: document.getElementById('fullName').value.trim(),
-    email: currentUser ? currentUser.email : document.getElementById('onboardEmail').value,
+  // The users/{uid} doc is shared with the Fundamentals course, which keeps
+  // name, age, email, experience, gym and termsAccepted* at the top level.
+  // Never overwrite those: Intermediate answers live under courses.<COURSE_ID>.profile,
+  // and top-level name/email are only filled in when the doc has none yet.
+  const fullName = document.getElementById('fullName').value.trim();
+  const userEmail = currentUser ? currentUser.email : document.getElementById('onboardEmail').value;
+  const courseProfile = {
+    name: fullName,
+    email: userEmail,
     profession: document.getElementById('profession').value,
-    yearsQualified: document.getElementById('yearsQualified').value || null,
+    yearsCoaching: document.getElementById('yearsQualified').value || null,
     country: document.getElementById('country').value.trim(),
     gym: document.getElementById('gym').value.trim() || null,
     termsAccepted: true,
     termsAcceptedAt: new Date().toISOString()
   };
+  const topLevel = {};
+  if (!existingProfile.name) topLevel.name = fullName;
+  if (!existingProfile.email) topLevel.email = userEmail;
 
   if (!FIREBASE_READY){
     showError('onboardError', 'Still connecting — please wait a moment and try again.');
@@ -663,9 +674,10 @@ document.getElementById('onboardForm').addEventListener('submit', async (e) => {
   try {
     const userRef = window._fb.doc(db, 'users', currentUser.uid);
     await window._fb.setDoc(userRef, {
-      ...profile,
+      ...topLevel,
       courses: {
         [COURSE_ID]: {
+          profile: courseProfile,
           paid: false,
           unlockedModules: [],
           moduleProgress: {}
