@@ -88,6 +88,20 @@
   .quiz-footer p { font-size: 13.5px; color: var(--ink-mute); margin: 0 0 16px; }
   .quiz-btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px; border-radius: 999px; background: var(--terracotta); color: var(--white); font-size: 14.5px; font-weight: 600; text-decoration: none; box-shadow: 0 4px 14px rgba(217,118,74,0.3); }
   .quiz-note { font-size: 12.5px; color: var(--ink-mute); margin-top: 14px; }
+  .task-relevance { border: 2px dashed var(--teal); border-radius: 10px; padding: 18px 20px; margin: 0 0 36px; scroll-margin-top: 20px; }
+  .task-relevance .label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #205c5d; margin: 0 0 8px; }
+  .task-relevance p { font-size: 14px; }
+  .task-relevance p:last-child { margin-bottom: 0; }
+  .practice-task { background: var(--cream); border-left: 4px solid var(--teal); border-radius: 10px; padding: 18px 20px; margin: 28px 0 8px; }
+  .practice-task .task-label { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal); margin: 0 0 10px; }
+  .practice-task p, .practice-task li { font-size: 14px; }
+  .practice-task .task-link { margin: 6px 0 0; font-size: 13px; }
+  .practice-task .task-link a { font-weight: 600; text-decoration: none; }
+  .practice-task .task-link a:hover { text-decoration: underline; }
+  .the-science { font-weight: 700; color: var(--teal); }
+  .type-def { display: block; font-size: 12.5px; font-style: italic; color: var(--ink-mute); margin-top: 4px; }
+  .type-def strong { font-style: normal; color: var(--ink); }
+  table.lesson-table td:first-child .type-def { font-weight: 400; }
   @media (max-width: 560px) { .content-card { padding: 26px 20px; } .summary-block { padding: 24px 20px; } }
 </style>
 </head>
@@ -120,10 +134,11 @@
   </div>
 
   <div class="content-card">
-
     <div class="why-box">
       <p class="label">Why It Matters</p>
-      <p>Completing the Foundations course gave you the content knowledge — anatomy, biomechanics, physiology, training principles. This module is about shifting how you use that knowledge. Great coaches aren't defined by what they know; they're defined by how they translate knowledge into athlete change. That translation is a skill set of its own, one grounded in learning science, coaching philosophy, and evidence-based practice.</p>
+      <p>Completing the Foundations course gave you the content knowledge — anatomy, biomechanics, physiology, training principles. This module is about shifting how you use that knowledge.</p>
+      <p><strong>Great coaches aren't defined by what they know; they're defined by how they translate knowledge into athlete change.</strong></p>
+      <p>That translation is a skill set of its own, one grounded in learning science, coaching philosophy, and evidence-based practice.</p>
     </div>
 
     <h2 class="section-title">Learning Objectives</h2>
@@ -137,30 +152,37 @@
       <li>Articulate the foundations of your personal coaching philosophy</li>
     </ul>
 
+    <div class="task-relevance" id="task-relevance">
+      <p class="label">Practice Tasks: Relevance for Course Fulfilment</p>
+      <p>After each section that describes a coaching method, you'll find one or more <strong>Practice Tasks</strong>: short, climbing-specific activities for trialling that method with your own athletes or at your own wall.</p>
+      <p>The Practice Tasks are <strong>not compulsory</strong>. You don't have to submit them, and they are not needed to pass the quiz or complete the course. They are there for the benefit of your coaching practice, and we strongly encourage you to do them: trying a method with a real climber is where it moves from something you've read to something you can use.</p>
+      <p>Keep your notes from each task in a coaching journal. Section 5 shows you how to reflect on them.</p>
+    </div>
+
     <!-- SECTION 1 -->
     <div class="section-block">
-      <h2 class="section-title">Section 1: Evidence-Based Coaching in Practice</h2>
+      <h2 class="section-title" id="s1">Section 1: Evidence-Based Coaching in Practice</h2>
 
       <p>Evidence-based coaching (EBC) is not about replacing your coaching instincts with research papers. It is about disciplined integration — using the best available evidence alongside your professional expertise and your athlete's individual needs and preferences to make better coaching decisions.</p>
 
-      <h3 class="subsection-title">1.1 The Three Pillars of EBC</h3>
+      <h3 class="subsection-title" id="s1-1">1.1 The Three Pillars of EBC</h3>
       <div class="lesson-table-wrap">
         <table class="lesson-table">
           <tr><th>Pillar</th><th>What It Means in Practice</th></tr>
           <tr><td>Best Available Evidence</td><td>Peer-reviewed research, systematic reviews, and high-quality case studies relevant to your coaching question. Sport science journals, physiology literature, motor learning research.</td></tr>
-          <tr><td>Professional Expertise</td><td>Your accumulated coaching experience, pattern recognition, and contextual judgment. Research can't replace time on the wall watching athletes.</td></tr>
-          <tr><td>Athlete Values &amp; Context</td><td>The individual athlete's goals, preferences, life situation, and what matters to them. The best programme is the one the athlete will actually follow.</td></tr>
+          <tr><td>Professional Expertise</td><td>Your accumulated personal climbing experiences and coaching experience, pattern recognition, and contextual judgment. <strong>Research can't replace time on the wall and watching athletes.</strong></td></tr>
+          <tr><td>Athlete Values &amp; Context</td><td>The individual athlete's goals, preferences, life situation, and what matters to them. <strong>The best programme is the one the athlete will actually follow.</strong></td></tr>
         </table>
       </div>
 
-      <p>In climbing coaching, EBC means being able to explain <em>why</em> you're prescribing a protocol — not just 'this is what worked for me' but 'here's the rationale, here's the evidence, and here's how I've adapted it to your situation.' That level of professional clarity builds trust with athletes and sets you apart.</p>
+      <p>In climbing coaching, EBC means being able to explain <strong><em>why</em></strong> you're prescribing a protocol — not just 'this is what worked for me' but rather, 'here's the rationale, here's the evidence, and here's how I've adapted it to your situation.' That level of professional clarity builds trust with athletes and sets you apart. There are many coaching myths presently, especially with the unmoderated content on social media. Evidence-based coaching helps dispel these myths.</p>
 
-      <h3 class="subsection-title">1.2 Common Coaching Myths Worth Questioning</h3>
+      <h3 class="subsection-title" id="s1-2">1.2 Common Coaching Myths Worth Questioning With Science</h3>
       <ul>
-        <li><strong>"More volume always builds more fitness."</strong> Volume without recovery degrades rather than improves performance. The dose-response relationship depends heavily on training history and individual recovery capacity.</li>
-        <li><strong>"Pain during training is a sign of hard work."</strong> Discomfort and productive overload are distinct from injury-generating stress. Coaches who cannot distinguish these create chronically injured athletes.</li>
-        <li><strong>"Technique must be perfect before adding intensity."</strong> Some technical refinement happens best under moderate load. Waiting for perfect technique before challenging an athlete can itself prevent development.</li>
-        <li><strong>"Mental toughness is a fixed trait."</strong> Psychological skills are trainable. Framing mental toughness as fixed removes the coach's agency — and the athlete's.</li>
+        <li><strong>"More volume always builds more fitness."</strong><br><span class="the-science">The science:</span> Volume without recovery degrades rather than improves performance. The dose-response relationship depends heavily on training history and individual recovery capacity.</li>
+        <li><strong>"Pain during training is a sign of hard work."</strong><br><span class="the-science">The science:</span> Discomfort and productive overload are distinct from injury-generating stress. Coaches who cannot distinguish these create chronically injured athletes.</li>
+        <li><strong>"Technique must be perfect before adding intensity."</strong><br><span class="the-science">The science:</span> Some technical refinement happens best under moderate load. Waiting for perfect technique before challenging an athlete can itself prevent development.</li>
+        <li><strong>"Mental toughness is a fixed trait."</strong><br><span class="the-science">The science:</span> Psychological skills are trainable. Framing mental toughness as fixed removes the coach's agency — and the athlete's.</li>
       </ul>
 
       <div class="callout callout-teal">
@@ -168,35 +190,49 @@
         <p>Think of one coaching decision you make regularly — a drill you use, a cue you default to, a protocol you prescribe. What is the evidence base for it? Could you explain it to a sceptical colleague? Could you explain it to a scientist? Both tests are worth running.</p>
       </div>
 
-      <h3 class="subsection-title">1.3 Hierarchy of Evidence</h3>
-      <p>Not all evidence is equal. When evaluating research relevant to climbing coaching, it helps to understand the hierarchy:</p>
+      <h3 class="subsection-title" id="s1-3">1.3 Hierarchy of Evidence</h3>
+      <p>Not all scientific evidence is equal. When evaluating research relevant to climbing coaching, it helps to understand the hierarchy of where the evidence comes from:</p>
       <div class="lesson-table-wrap">
         <table class="lesson-table">
           <tr><th>Level</th><th>Type</th><th>Strength</th></tr>
-          <tr><td>1</td><td>Systematic reviews and meta-analyses</td><td>Highest — synthesise many studies</td></tr>
-          <tr><td>2</td><td>Randomised controlled trials (RCTs)</td><td>High — controlled conditions</td></tr>
-          <tr><td>3</td><td>Cohort and case-control studies</td><td>Moderate — observational</td></tr>
-          <tr><td>4</td><td>Case studies and expert opinion</td><td>Lower — but often most accessible in climbing</td></tr>
-          <tr><td>5</td><td>Anecdote and tradition</td><td>Lowest — but historically dominant in climbing coaching</td></tr>
+          <tr><td>1</td><td>Systematic reviews and meta-analyses<span class="type-def">Research studies that systematically analyse and combine results from multiple studies to provide a comprehensive, evidence-based conclusion.</span></td><td>Highest — analyse many studies</td></tr>
+          <tr><td>2</td><td>Randomised controlled trials (RCTs)<span class="type-def">Studies that randomly assign participants to different treatment groups to compare outcomes and determine the effectiveness of an intervention.</span></td><td>High — very controlled conditions so only the relevant variable gets tested</td></tr>
+          <tr><td>3</td><td>Cohort and case-control studies<span class="type-def"><strong>Cohort studies:</strong> follow groups of people over time to investigate the relationship between exposures and outcomes.</span><span class="type-def"><strong>Case-control studies:</strong> compare people with a specific condition to those without it to identify potential risk factors or causes.</span></td><td>Moderate — observational, cannot control all variables having an effect on the study</td></tr>
+          <tr><td>4</td><td>Case studies and expert opinion<span class="type-def"><strong>Case studies:</strong> detailed reports of individual patients or small groups, describing specific conditions, treatments and outcomes.</span><span class="type-def"><strong>Expert opinion:</strong> recommendations or conclusions based on professional experience and clinical knowledge rather than controlled research.</span></td><td>Lower — but often most accessible in climbing. Small groups studied may not be relevant to your athlete's "group"</td></tr>
+          <tr><td>5</td><td>Anecdote and tradition<span class="type-def"><strong>Anecdote:</strong> personal experiences or individual observations used as evidence, without systematic research.</span><span class="type-def"><strong>Tradition:</strong> practices or beliefs based on longstanding use or accepted convention rather than scientific evidence.</span></td><td>Lowest — but historically dominant in climbing coaching. Reliance on hearsay</td></tr>
         </table>
       </div>
       <p>Climbing-specific research is still developing. Much foundational sport science comes from adjacent disciplines (gymnastics, tennis, weightlifting). Your job is to bridge the gap — taking high-quality general evidence and applying it intelligently to the specific demands of climbing.</p>
+
+      <div class="practice-task" id="task-1">
+        <p class="task-label">Practice Task 1 · Put one of your go-to drills through the evidence test</p>
+        <p>Choose one thing you regularly prescribe to climbers: a hangboard protocol, a warm-up routine, a footwork drill or a recovery habit.</p>
+        <ol>
+          <li><strong>State the claim.</strong> In one sentence, what do you believe it does for the climber?</li>
+          <li><strong>Trace the source.</strong> Where did you learn it (a coach, a video, a book, a paper)? Place that source on the hierarchy of evidence above (Level 1 to 5).</li>
+          <li><strong>Look for better evidence.</strong> Spend 20 minutes searching for a review or trial on the topic, from climbing or an adjacent sport. Note what you find, and note if you find nothing.</li>
+          <li><strong>Run the three pillars.</strong> For one real athlete, write how the evidence, your own expertise and that athlete's goals and context each shape how you'd use it.</li>
+          <li><strong>Decide.</strong> Keep it, adapt it or drop it, and write down the one sentence you would use to explain <em>why</em> to that athlete.</li>
+        </ol>
+        <p class="task-link"><a href="#task-relevance">Task relevance for course fulfilment ↑</a></p>
+      </div>
     </div>
 
     <!-- SECTION 2 -->
     <div class="section-block">
-      <h2 class="section-title">Section 2: Motor Learning Theory Applied</h2>
+      <h2 class="section-title" id="s2">Section 2: Motor Learning Theory Applied</h2>
 
-      <p>Motor learning is the study of how movement skills are acquired, retained, and transferred. It is arguably the most practically relevant field of science for a climbing coach, because climbing is fundamentally a movement skill domain. Understanding how learning actually works changes what you do in every session.</p>
+      <p>Motor learning theory is the study of how movement skills are acquired, retained, and transferred. It is arguably the most practically relevant field of science for a climbing coach, because climbing is fundamentally a movement skill.</p>
+      <p>Understanding how learning actually works changes what you do in every session. Below we discuss various aspects and concepts of motor learning.</p>
 
-      <h3 class="subsection-title">2.1 Stages of Motor Learning</h3>
-      <p>Fitts and Posner's three-stage model remains the most useful framework for coaches:</p>
+      <h3 class="subsection-title" id="s2-1">2.1 Stages of Motor Learning</h3>
+      <p>Fitts and Posner's three-stage model, as presented in the Foundational Coaches Course, remains the most useful framework for coaches:</p>
       <div class="lesson-table-wrap">
         <table class="lesson-table">
-          <tr><th>Stage</th><th>Characteristics</th><th>Coaching Implications</th></tr>
-          <tr><td>Cognitive (Beginner)</td><td>High cognitive load, inconsistent performance, frequent errors, thinking through each movement consciously</td><td>Explicit instruction appropriate here. Clear verbal cues, demonstrations, error correction. Keep the task simple. Expect high variability.</td></tr>
-          <tr><td>Associative (Intermediate)</td><td>Reduced errors, more consistent, beginning to self-detect errors, less conscious effort required</td><td>Shift from external error-correction to guiding self-evaluation. Use questioning over telling. Begin introducing variability.</td></tr>
-          <tr><td>Autonomous (Advanced)</td><td>Movement largely automatic, low conscious demand, stable performance under pressure</td><td>Explicit instruction can disrupt automaticity. Use task constraints and variability rather than verbal instruction. Focus on tactical and contextual elements.</td></tr>
+          <tr><th>Stage</th><th>Characteristics</th><th>Coaching Implications</th><th>Climbing Example</th></tr>
+          <tr><td>Cognitive (Beginner)</td><td>High cognitive load, inconsistent performance, frequent errors, thinking through each movement consciously</td><td>Explicit instruction appropriate here. Clear verbal cues, demonstrations, error correction. Keep the task simple. Expect high variability.</td><td>A beginner learning to perform a flagging movement. They consciously think about foot placement, hip position and shifting their weight to maintain balance. They frequently make errors and need clear demonstrations and verbal cues from the coach.</td></tr>
+          <tr><td>Associative (Intermediate)</td><td>Reduced errors, more consistent, beginning to self-detect errors, less conscious effort required</td><td>Shift from external error-correction to guiding self-evaluation. Use questioning over telling. Begin introducing variability.</td><td>An intermediate climber practising flagging on different routes. They are becoming more consistent, recognise when their hips are poorly positioned and begin correcting their own movements. The coach uses questions and feedback to develop self-awareness and problem-solving.</td></tr>
+          <tr><td>Autonomous (Advanced)</td><td>Movement largely automatic, low conscious demand, stable performance under pressure</td><td>Explicit instruction can disrupt automaticity. Use task constraints and variability rather than verbal instruction. Focus on tactical and contextual elements.</td><td>An advanced climber automatically uses flagging, drop-knees and precise footwork while climbing a difficult sequence. They no longer need to consciously think about each movement and can focus on route reading, pacing, decision-making and adapting to changing holds or conditions.</td></tr>
         </table>
       </div>
 
@@ -205,19 +241,19 @@
         <p>Coaches often apply cognitive-stage interventions (explicit correction, verbal instruction) to autonomous-stage athletes. Telling an experienced climber exactly what to do with their feet can actually interfere with their automated movement — a phenomenon called 'reinvestment'. The more skilled the athlete, the less explicit instruction is usually warranted.</p>
       </div>
 
-      <h3 class="subsection-title">2.2 Practice Design: Massed vs. Distributed</h3>
+      <h3 class="subsection-title" id="s2-2">2.2 Practice Design: Massed Practice vs. Distributed Practice</h3>
       <p><strong>Massed practice</strong> involves extended repetition of a skill with minimal rest. Performance during massed practice often looks better than it actually is — fatigue and repetition artificially inflate short-term performance while reducing long-term retention.</p>
-      <p><strong>Distributed practice</strong> spaces repetitions with rest periods or different tasks between them. It tends to feel slower — the athlete appears to forget and relearn — but produces better long-term retention and transfer.</p>
+      <p><strong>Distributed practice</strong> spaces repetitions of a skill with rest periods or different tasks between them. It tends to feel slower — the athlete appears to forget and relearn — but produces better long-term retention and transfer.</p>
       <p>For climbing coaching, this means that drilling a movement repeatedly in one session may feel productive but yields less durable learning than returning to the same movement across multiple sessions with other work in between.</p>
 
-      <h3 class="subsection-title">2.3 Blocked vs. Variable Practice</h3>
+      <h3 class="subsection-title" id="s2-3">2.3 Blocked Practice vs. Variable Practice</h3>
       <ul>
         <li><strong>Blocked practice</strong> — repeat the same movement/task until it is reliable, then move on. Good for early-stage learning where consistency is the goal.</li>
         <li><strong>Variable practice</strong> — mix movement types, hold types, sequences. Creates interference, which slows short-term acquisition but dramatically improves transfer to novel situations.</li>
       </ul>
-      <p>The implication for route-setting and session design: for beginners, some blocked repetition on specific movement patterns makes sense. For intermediate and advanced athletes, variable practice that challenges them to solve novel problems is more effective at building real-world climbing skill.</p>
+      <p>The implication for coaching, route-setting and session design: for beginners, some blocked repetition on specific movement patterns makes sense. For intermediate and advanced athletes, variable practice that challenges them to solve novel problems is more effective at building real-world climbing skills.</p>
 
-      <h3 class="subsection-title">2.4 Feedback: Timing, Frequency, and Type</h3>
+      <h3 class="subsection-title" id="s2-4">2.4 Feedback: Timing, Frequency, and Type</h3>
       <div class="lesson-table-wrap">
         <table class="lesson-table">
           <tr><th>Feedback Variable</th><th>Research Finding</th><th>Practical Application</th></tr>
@@ -227,18 +263,53 @@
           <tr><td>Type (KP vs KR)</td><td>Knowledge of performance (how) complements knowledge of results (outcome).</td><td>'Your hips swung out' (KP) gives more learning value than 'you fell off' (KR) alone.</td></tr>
         </table>
       </div>
+
+      <div class="practice-task" id="task-2a">
+        <p class="task-label">Practice Task 2A · Stage your climbers</p>
+        <p>Watch three climbers of different levels attempt the same movement, such as a flag or a drop-knee, on problems suited to their grade.</p>
+        <ul>
+          <li>Using the table in 2.1, decide which stage of learning each climber is in for <em>that movement</em>, and write down what you saw that told you.</li>
+          <li>For each climber, pick one coaching implication from the table and use it in your next session with them.</li>
+          <li>Note whether any climber is at a different stage for this movement than their grade would suggest. Stage belongs to the skill, not the climber.</li>
+        </ul>
+        <p class="task-link"><a href="#task-relevance">Task relevance for course fulfilment ↑</a></p>
+      </div>
+
+      <div class="practice-task" id="task-2b">
+        <p class="task-label">Practice Task 2B · Blocked vs. variable drop-knee trial</p>
+        <p>Work with two climbers of similar level who are both still learning the drop-knee.</p>
+        <ul>
+          <li><strong>Climber A (blocked):</strong> practises the drop-knee on one problem, about six attempts in a row.</li>
+          <li><strong>Climber B (variable):</strong> practises the drop-knee on three different problems (different angles and hold types), mixed with other moves, for the same total number of attempts.</li>
+          <li>Note how each climber looked <em>during</em> the session. Climber A will often look better on the day.</li>
+          <li>One week later, without warming up on the practice problems, give both a new problem that needs a drop-knee. Compare how readily each one finds and uses the move.</li>
+        </ul>
+        <p>Two climbers is a demonstration, not a study, but it lets you see the difference between short-term performance and longer-term learning for yourself.</p>
+        <p class="task-link"><a href="#task-relevance">Task relevance for course fulfilment ↑</a></p>
+      </div>
+
+      <div class="practice-task" id="task-2c">
+        <p class="task-label">Practice Task 2C · Feedback audit</p>
+        <p>In one coaching session, ask a co-coach or a phone voice recording to capture what you say. Afterwards, count:</p>
+        <ul>
+          <li>How many feedback statements you gave, and how often you gave them right after a movement versus after the climber had a moment to reflect.</li>
+          <li>How many of your cues were internal (body parts) and how many external (the hold, the wall, the effect).</li>
+        </ul>
+        <p>In your next session with the same climber, ask "What did you notice?" before every piece of feedback, aim to halve the number of feedback statements, and rewrite your three most-used internal cues as external ones. Compare the two sessions.</p>
+        <p class="task-link"><a href="#task-relevance">Task relevance for course fulfilment ↑</a></p>
+      </div>
     </div>
 
     <!-- SECTION 3 -->
     <div class="section-block">
-      <h2 class="section-title">Section 3: Implicit vs. Explicit Instruction</h2>
+      <h2 class="section-title" id="s3">Section 3: Implicit Instruction vs. Explicit Instruction</h2>
 
       <p>One of the most consequential decisions a coach makes is whether to tell an athlete what to do or to design an environment in which they discover it themselves. This is the implicit–explicit spectrum.</p>
 
-      <h3 class="subsection-title">3.1 Explicit Instruction</h3>
+      <h3 class="subsection-title" id="s3-1">3.1 Explicit Instruction</h3>
       <p>Explicit instruction involves directly communicating rules, techniques, or movement patterns to the athlete. It is efficient for early-stage learning, works well under low-pressure conditions, and allows rapid correction of dangerous errors. The limitation: explicitly learned skills are more susceptible to breakdown under pressure, fatigue, and anxiety — because they depend on conscious attention, which is compromised in competition.</p>
 
-      <h3 class="subsection-title">3.2 Implicit Instruction</h3>
+      <h3 class="subsection-title" id="s3-2">3.2 Implicit Instruction</h3>
       <p>Implicit learning occurs when athletes acquire movement patterns without conscious awareness of the rules governing them. It happens through trial, error, and task constraints rather than verbal instruction. Implicitly acquired skills are more robust under pressure — the athlete does not have to 'think' about what they are doing, so fatigue and anxiety have less impact.</p>
 
       <p>Techniques for promoting implicit learning in climbing coaching include:</p>
@@ -249,7 +320,7 @@
         <li>Discovery learning — 'find three ways to do this move' rather than 'do it this way'</li>
       </ul>
 
-      <h3 class="subsection-title">3.3 Choosing Your Approach</h3>
+      <h3 class="subsection-title" id="s3-3">3.3 Choosing Your Approach For Your Climbing Athlete</h3>
       <div class="lesson-table-wrap">
         <table class="lesson-table">
           <tr><th>Situation</th><th>Preferred Approach</th></tr>
@@ -260,63 +331,106 @@
           <tr><td>Athlete learning a new move type (e.g. heel hook)</td><td>Explicit first, then fade toward implicit as the pattern establishes</td></tr>
         </table>
       </div>
+
+      <div class="practice-task" id="task-3a">
+        <p class="task-label">Practice Task 3A · One move, four implicit methods</p>
+        <p>Pick a move an intermediate climber is working on, such as a heel hook on a steep wall. Over one or two sessions, coach it once with each of the four implicit techniques in 3.2, and give no technical instruction:</p>
+        <ul>
+          <li><strong>Analogy:</strong> for example, "pull with your heel like you're dragging a chair towards you".</li>
+          <li><strong>Errorless learning:</strong> start on a big, positive heel-hook hold close to the hands, then make the hold smaller or further away as the climber succeeds.</li>
+          <li><strong>External focus:</strong> "make the hold take your weight" rather than "bend your knee and pull with your hamstring".</li>
+          <li><strong>Discovery:</strong> "find three different ways to get to that top hold" on a problem where the heel hook is one good option.</li>
+        </ul>
+        <p>Note which method the climber responded to best, and whether they can describe what they did (implicit learning often leaves them unable to explain it).</p>
+        <p class="task-link"><a href="#task-relevance">Task relevance for course fulfilment ↑</a></p>
+      </div>
+
+      <div class="practice-task" id="task-3b">
+        <p class="task-label">Practice Task 3B · Pressure-test it</p>
+        <p>Take a move one climber learned mainly through explicit instruction and one learned mainly implicitly. Add pressure: a timed attempt, a "one go only" rule, or the group watching. Note which move holds up better, then use the table in 3.3 to decide how you'd coach each climber's next new move.</p>
+        <p class="task-link"><a href="#task-relevance">Task relevance for course fulfilment ↑</a></p>
+      </div>
     </div>
 
     <!-- SECTION 4 -->
     <div class="section-block">
-      <h2 class="section-title">Section 4: The Constraints-Led Approach</h2>
+      <h2 class="section-title" id="s4">Section 4: The Constraints-Led Approach</h2>
 
-      <p>The constraints-led approach (CLA) draws from ecological dynamics and Newell's model of constraints. Rather than prescribing technique, the coach manipulates the task, environment, and athlete constraints to guide emergent movement solutions. The climber solves the problem; the coach designs the problem.</p>
+      <p>The constraints-led approach (CLA) draws from ecological dynamics and Newell's model of constraints (an approach to movement and skill development that views performance as an interaction between the individual, the environment and the task. Skills emerge through exploration and adaptation rather than being learned solely through prescribed techniques).</p>
+      <p>Rather than prescribing technique, the coach manipulates the task, environment, and athlete constraints to guide developing movement solutions.</p>
+      <p><strong>The climber solves the problem; the coach designs the problem.</strong></p>
 
-      <h3 class="subsection-title">4.1 Newell's Three Constraint Categories</h3>
+      <h3 class="subsection-title" id="s4-1">4.1 Newell's Three Constraint Categories</h3>
       <div class="lesson-table-wrap">
         <table class="lesson-table">
           <tr><th>Constraint Type</th><th>Definition</th><th>Climbing Examples</th></tr>
-          <tr><td>Organism (Athlete)</td><td>Physical, psychological, and information-processing characteristics of the athlete</td><td>Wingspan, strength, fear level, fatigue, experience, attention</td></tr>
-          <tr><td>Task</td><td>The goal, rules, or requirements of the movement task</td><td>Hold type, angle, sequence requirements, time pressure, feet-on rules</td></tr>
+          <tr><td>Organism (Athlete)</td><td>Physical, psychological, and information-processing characteristics of the athlete</td><td>Wingspan, strength, fear level, fatigue, experience, ability to hold attention</td></tr>
+          <tr><td>Task</td><td>The goal, rules, or requirements of the movement task</td><td>Hold type, angle, sequence requirements, time pressure</td></tr>
           <tr><td>Environment</td><td>Physical and social context surrounding the task</td><td>Wall angle, hold spacing, ambient noise, presence of others watching</td></tr>
         </table>
       </div>
 
-      <h3 class="subsection-title">4.2 Designing Constraints-Led Sessions</h3>
+      <h3 class="subsection-title" id="s4-2">4.2 Designing Constraints-Led Sessions</h3>
       <p>Instead of telling an athlete 'keep your hips close to the wall', a CLA coach might:</p>
       <ul>
-        <li>Remove footholds that allow the climber to push away from the wall</li>
+        <li>Remove or change footholds that allow the climber to stand with ease on the wall</li>
         <li>Set a problem where the solution only works if the hips are close</li>
-        <li>Use a physical marker (a foam pad taped to the wall at hip height) that acts as tactile feedback</li>
+        <li>Use a physical device (a foam pad taped to the wall at hip height, or a band pulling away from the wall) that acts as tactile and sensory feedback</li>
         <li>Apply a rule: 'your stomach cannot touch this tape line'</li>
       </ul>
       <p>All of these achieve the same coaching goal — hip positioning — without a single verbal instruction about hips. The athlete discovers the solution through the constraint.</p>
 
       <div class="callout callout-teal">
         <p class="callout-label">CLA Design Principle</p>
-        <p>A well-designed constraint makes the desired movement the path of least resistance. The athlete does not need to be told what to do — the environment makes it obvious. When you find yourself correcting the same thing repeatedly, the cue is not the problem. The environment is. Redesign the task.</p>
+        <p><em>A well-designed constraint makes the desired movement the path of least resistance or easiest solution.</em></p>
+        <p>The athlete does not need to be told what to do — the environment makes it obvious.</p>
+        <p>When you find yourself correcting the same thing repeatedly, the cue is not the problem. The environment is. Redesign the task.</p>
       </div>
 
-      <h3 class="subsection-title">4.3 Representative Learning Design</h3>
-      <p>One of CLA's key principles is representative practice — training tasks should share the information-movement couplings of the performance environment. For climbing, this means:</p>
+      <h3 class="subsection-title" id="s4-3">4.3 Representative Learning Design</h3>
+      <p>One of CLA's key principles is representative practice — tasks during training should share the information-movement couplings of the environment during performance.</p>
+      <p>For climbing, this means:</p>
       <ul>
         <li>Training on routes or problems that match the style of competition or target goals</li>
         <li>Practising route-reading in conditions that match competition (timed, one look, chalk on)</li>
         <li>Simulating fatigue and pressure during skill work, not just during conditioning</li>
         <li>Avoiding over-use of artificial environments (hyper-perfect conditions) that don't transfer</li>
       </ul>
+
+      <div class="practice-task" id="task-4a">
+        <p class="task-label">Practice Task 4A · Replace a cue with a constraint</p>
+        <p>Pick a correction you find yourself giving the same climber again and again, such as "quiet feet", "straight arms" or "hips in".</p>
+        <ol>
+          <li>Design three constraints that target it without words, one from each category in 4.1. For "quiet feet", for example: a task rule (any audible foot placement means start again), an environment change (smaller footholds on a slab), and an organism constraint (climb it once more when slightly fatigued).</li>
+          <li>Run the session without giving the verbal cue at all.</li>
+          <li>Note which constraint changed the movement most, and whether the change carried over to the climber's next normal problem.</li>
+        </ol>
+        <p class="task-link"><a href="#task-relevance">Task relevance for course fulfilment ↑</a></p>
+      </div>
+
+      <div class="practice-task" id="task-4b">
+        <p class="task-label">Practice Task 4B · Build a representative session</p>
+        <p>For a climber with a specific goal (a competition, an outdoor project or a grade), plan one session that copies the conditions of that goal. For a competition climber, that might be four-minute boulder attempts with a timed route-reading window and rest periods to match the format. For an outdoor project, it might be problems with similar holds, angle and length. Run it, and note what the climber found harder than in their normal training.</p>
+        <p class="task-link"><a href="#task-relevance">Task relevance for course fulfilment ↑</a></p>
+      </div>
     </div>
 
     <!-- SECTION 5 -->
     <div class="section-block">
-      <h2 class="section-title">Section 5: Reflective Practice &amp; Coaching Philosophy</h2>
+      <h2 class="section-title" id="s5">Section 5: Reflective Practice &amp; Coaching Philosophy</h2>
 
-      <h3 class="subsection-title">5.1 Why Reflective Practice Matters</h3>
-      <p>Coaching experience alone does not produce coaching expertise. What produces expertise is <em>deliberate reflection on experience</em> — the structured process of examining what happened, why it happened, and what you would do differently. Coaches who do not reflect tend to repeat the same patterns regardless of their effectiveness.</p>
+      <p>Coaching experience alone does not produce coaching expertise. What produces expertise is <em>deliberate reflection on experience</em> — the structured process of examining what happened, why it happened, and what you would do differently.</p>
 
-      <p>Schön's model distinguishes two forms of reflection:</p>
+      <h3 class="subsection-title" id="s5-1">5.1 Why Reflective Practice Matters</h3>
+      <p>Coaches who do not reflect tend to repeat the same patterns regardless of their effectiveness.</p>
+
+      <p>Schön's model (a learning approach in which coaches improve their practice by reflecting on their experiences, analysing decisions and adapting their approach) distinguishes two forms of reflection:</p>
       <ul>
         <li><strong>Reflection-in-action</strong> — adjusting in real time during a session. Reading an athlete's body language, recognising a cue isn't working, shifting approach mid-drill.</li>
         <li><strong>Reflection-on-action</strong> — deliberate review after the session. Journalling, reviewing video, debriefing with a co-coach.</li>
       </ul>
 
-      <h3 class="subsection-title">5.2 A Simple Reflective Framework</h3>
+      <h3 class="subsection-title" id="s5-2">5.2 A Simple Reflective Framework</h3>
       <p>After each significant coaching session, work through these questions:</p>
       <ol>
         <li><strong>What happened?</strong> (Factual description — what did I do, what did the athlete do?)</li>
@@ -327,7 +441,19 @@
       </ol>
       <p>This does not need to be a lengthy process. Five minutes of focused reflection after a session, documented in a coaching journal, compounds dramatically over time.</p>
 
-      <h3 class="subsection-title">5.3 Building Your Coaching Philosophy</h3>
+      <div class="practice-task" id="task-5a">
+        <p class="task-label">Practice Task 5A · Two-week reflective log</p>
+        <p>For your next four coaching sessions, ideally the ones where you tried the Practice Tasks above:</p>
+        <ul>
+          <li>Straight after each session, answer the five questions in 5.2 in your coaching journal. Keep it to five minutes.</li>
+          <li>Write down one moment of reflection-in-action: a point where you noticed something wasn't working and changed course during the session.</li>
+          <li>Once a fortnight, film a few minutes of your coaching or debrief with a co-coach, and compare what you see with what you wrote.</li>
+        </ul>
+        <p>At the end of the two weeks, read the four entries together and note any pattern that repeats.</p>
+        <p class="task-link"><a href="#task-relevance">Task relevance for course fulfilment ↑</a></p>
+      </div>
+
+      <h3 class="subsection-title" id="s5-3">5.3 Building Your Coaching Philosophy</h3>
       <p>A coaching philosophy is not a mission statement. It is a set of deeply held beliefs about athletes, learning, and performance that guide your decisions — particularly when things are ambiguous or difficult. It answers questions like:</p>
       <ul>
         <li>What is my primary role as a coach?</li>
@@ -337,9 +463,10 @@
         <li>What won't I compromise, regardless of pressure?</li>
       </ul>
 
-      <div class="callout callout-terracotta">
-        <p class="callout-label">Practical Task</p>
+      <div class="practice-task" id="task-5b">
+        <p class="task-label">Practice Task 5B · Write your coaching philosophy</p>
         <p>Write a one-page coaching philosophy statement. It does not need to be polished. It needs to be honest. What do you actually believe about coaching? Where do you draw your lines? Return to it in six months and see what has changed. The evolution of that document is a record of your development as a coach.</p>
+        <p class="task-link"><a href="#task-relevance">Task relevance for course fulfilment ↑</a></p>
       </div>
     </div>
 
